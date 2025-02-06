@@ -9,7 +9,7 @@ Korte beschrijving van je project: Wat doet het en waarom is het nuttig?
 ## 📦 Installatie
 1. Clone de repository:
    ```sh
-   git clone https://github.com/jouw-gebruikersnaam/projectnaam.git
+  
 
 #Groepsnaam
 
