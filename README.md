@@ -8,7 +8,8 @@ Korte beschrijving van je project: Wat doet het en waarom is het nuttig?
 
 ## 📦 Installatie
 1. Clone de repository:
-   ```sh
+https://github.com/Githijs100/project-tech.git
+
   
 
 #Groepsnaam
