@@ -1,0 +1,25 @@
+{
+  "name": "project-tech",
+  "version": "1.0.0",
+  "description": "**Conceptualiseren**",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Githijs100/project-tech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Githijs100/project-tech/issues"
+  },
+  "homepage": "https://github.com/Githijs100/project-tech#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.1",
+    "nodemon": "^3.1.9"
+  }
+}
