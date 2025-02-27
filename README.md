@@ -37,6 +37,8 @@ Het project laat de gebruiker verdiepen in zijn hobby en laat hem nieuwe ideeën
 - 🔹 Belangrijke feature 13: Algergieën
 - 🔹 Belangrijke feature 14: Animaties
 - 🔹 Belangrijke feature 15: Out of the box filters (Is de fles mooi/logo/plaatje op de fles)
+- 🔹 Belangrijke feature 16: Prijzen en waar te verkrijgen
+
 
 
 
