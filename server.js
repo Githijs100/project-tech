@@ -11,7 +11,7 @@ app.get('/hello', (req, res) => {
 
 // Route voor de loginpagina
 app.get('/', (req, res) => {
-    res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
+    res.render('login', { title: "Login pagina", message: "Welkom op mijn website" });
 });
 
 // Start de server op poort 8000
