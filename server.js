@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bcrypt = require('bcrypt');
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
