@@ -5,6 +5,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+
 // Route voor de homepagina (Hello World)
 app.get('/hello', (req, res) => {
     res.send('<h1>Hello World</h1>');

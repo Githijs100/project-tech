@@ -1,107 +1,83 @@
-**Conceptualiseren**
+# Coding Standards
 
-#Brainstorm ideeën
-- Speciaal bieren
-- Nieuwe auto vinden
-- Date activiteiten
-- Voedingschema's
-- Games
-- Films/series
-- Nieuwe hobby's ontdekken
+## 1. Indentatie
+Gebruik **4 spaties** voor inspringing. Gebruik geen tabs.
 
-#Idee dat wij gaan uitwerken
+## 2. Variabelen en Functienamen
+- Gebruik `camelCase` voor variabelen en functies.
+- Gebruik `PascalCase` voor klassen.
+- Gebruik `SCREAMING_SNAKE_CASE` voor constante waarden.
 
-# 📌 SpecialNeeds
-Korte beschrijving van je project: Wat doet het en waarom is het nuttig?
+## 3. Bestandsindeling
+- Eén class per bestand.
+- Bestandsnamen moeten overeenkomen met de hoofdklasse (`MyClass.js` voor `class MyClass`).
 
-Het product filtert speciaal bieren op basis van voorkeuren/persoonlijkheid/stemming van de gebruiker. 
-Het is nuttig voor gebruikers die inspiratie willen opdoen voor speciaalbieren.
-Het project laat de gebruiker verdiepen in zijn hobby en laat hem nieuwe ideeën komen voor speciaal bieren.
-
-#Jobstories
-- Wanneer ik.. Wil ik.. Zodat ik..
-
-## 🚀 Requirementslist
-- 🔹 Belangrijke feature 1: Account aanmaken
-- 🔹 Belangrijke feature 2: Filters
-- 🔹 Belangrijke feature 3: Beschikbaarheid bieren (waar te vinden)
-- 🔹 Belangrijke feature 4: Wishlist
-- 🔹 Belangrijke feature 5: Rating
-- 🔹 Belangrijke feature 6: Zoekfunctie
-- 🔹 Belangrijke feature 7: Rangebalk (voor aantal % bijvoorbeeld)
-- 🔹 Belangrijke feature 8: Vriendenpagina
-- 🔹 Belangrijke feature 9: Opgeslagen bieren
-- 🔹 Belangrijke feature 10: Populaire bieren
-- 🔹 Belangrijke feature 11: Matching borrelplank / snacks bij soort bier
-- 🔹 Belangrijke feature 12: Alcoholvrije speciaalbieren
-- 🔹 Belangrijke feature 13: Algergieën
-- 🔹 Belangrijke feature 14: Animaties
-- 🔹 Belangrijke feature 15: Out of the box filters (Is de fles mooi/logo/plaatje op de fles)
-- 🔹 Belangrijke feature 16: Prijzen en waar te verkrijgen
+## 4. Commentaar
+Gebruik ** single-line comment (//) **-stijl voor functies:
+```js
+//
+ * Bereken de som van twee getallen.
+ * @param {number} a - Het eerste getal
+ * @param {number} b - Het tweede getal
+ * @returns {number} De som van a en b
+ //
+function sum(a, b) {
+  return a + b;
+}
 
 
+//
+ Klasse die een Gebruiker voorstelt.
+ //
+class User {
+  //
+   * Maak een nieuwe gebruiker aan.
+   * @param {string} name - De naam van de gebruiker.
+   * @param {number} age - De leeftijd van de gebruiker.
+   //
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
 
+  /**
+   * Haal de naam van de gebruiker op.
+   * @returns {string} De naam van de gebruiker.
+   */
+  getName() {
+    return this.name;
+  }
+}
 
+## 5 Asynchrone functie documenteren
 
-## 📦 Installatie
-1. Clone de repository:
-https://github.com/Githijs100/project-tech.git
+/**
+ * Haal gebruikersgegevens op via een API.
+ * @async
+ * @function fetchUserData
+ * @param {string} userId - De ID van de gebruiker.
+ * @returns {Promise<Object>} De gebruikersgegevens.
+ */
+async function fetchUserData(userId) {
+  const response = await fetch(`https://api.example.com/users/${userId}`);
+  return response.json();
+}
 
-  
+## 6 Documenteren van een object type
 
-#Groepsnaam
-SpecialNeeds
+//
+ * @typedef {Object} Product
+ * @property {string} name - De naam van het product.
+ * @property {number} price - De prijs van het product.
+ * @property {boolean} inStock - Geeft aan of het product op voorraad is.
+ //
 
-#Contact & team
-👥 Teamleden:
-
-Naam 1: Rafi IJssel
-Naam 2: Vince van Schagen
-Naam 3: Thijs Krook
-Naam 4:
-📧 Contact: 
-rafi.ijssel@hva.nl
-vincevanschagen@gmail.com
-Thijs.krook1@gmail.com
-
-
-#Doelgroep
-
-De doelgroep voor speciaalbieren bestaat vaak uit liefhebbers van ambachtelijk gebrouwen bier, mensen die op zoek zijn naar unieke smaken en ervaringen. Hieronder een analyse van deze doelgroep:
-
-**Kenmerken van de doelgroep**
-Leeftijd: Meestal tussen de 25 en 50 jaar.
-Interesses: Gastronomie, culinaire beleving, ambachtelijke producten, duurzaamheid en lokale brouwerijen.
-Lifestyle: Vaak bereid om wat meer te betalen voor kwaliteit, interesse in foodpairing en beleving rondom bier.
-Kennisniveau: Van casual drinkers tot echte bierkenners en verzamelaars.
-
-**Wat vinden ze leuk?**
-Unieke en verrassende smaken (bijvoorbeeld fruitige IPA’s, barrel-aged stouts).
-Kennis opdoen over bier (bijv. ingrediënten, brouwproces, biergeschiedenis).
-Events en tastings (zoals bierfestivals, proeverijen en brouwerijtours).
-Beleving rondom bier (mooie glazen, goed advies, storytelling over de brouwerij).
-Limited editions & exclusieve releases (bieren die niet overal verkrijgbaar zijn).
-
-**Welke functionaliteit verwachten ze?**
-Overzichtelijke en inspirerende informatie over speciaalbieren (reviews, bierstijlen, foodpairing-tips).
-Mogelijkheid om bieren te ontdekken en bestellen, eventueel met een abonnement.
-Interactie met andere bierliefhebbers (bijvoorbeeld via een community of ratingsysteem).
-Personalisatie, zoals aanbevelingen op basis van smaakvoorkeuren.
-
-**Wensen en uitdagingen**
-Wensen:
-Toegang tot bijzondere en exclusieve bieren.
-Gebruiksvriendelijke platforms (webshop, app) met goede filters en zoekopties.
-Inzicht in bierstijlen en foodpairing.
-Uitdagingen:
-
-Overweldigend aanbod: welke bieren moet je kiezen?
-Hoge prijzen van speciaalbieren.
-Soms beperkte beschikbaarheid van populaire bieren.
-
-#dit is een test voor de branche
-
-
+// @type {Product} //
+const laptop = {
+  name: "MacBook Pro",
+  price: 1499,
+  inStock: true
+};
 
 
 
