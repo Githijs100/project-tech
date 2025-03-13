@@ -3,6 +3,8 @@ const app = express();
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 
 // Route voor de homepagina (Hello World)
 app.get('/hello', (req, res) => {
@@ -10,7 +12,7 @@ app.get('/hello', (req, res) => {
 });
 
 // Route voor de loginpagina
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
 
