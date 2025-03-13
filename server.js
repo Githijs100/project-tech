@@ -12,7 +12,7 @@ app.get('/hello', (req, res) => {
 });
 
 // Route voor de loginpagina
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
 
