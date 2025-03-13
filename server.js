@@ -1,5 +1,40 @@
 const express = require('express');
 const app = express();
+const { MongoClient } = require ('mongodb');
+
+const uri = "mongodb://localhost:27017";
+const client = new MongoClient(uri);
+
+async function run() {
+    try {
+        await client.connect();
+        const db = client.db("mijnDatabase");
+        const collectie = db.collection("gebruikers");
+
+        await collectie.insertOne({
+            username,
+            email,
+            password,
+            leeftijd
+        });
+
+
+        res.send("Gebruiker succesvol geregistreerd!");
+    } catch (err) {
+        console.error("Fout bij registratie:", err);
+        res.status(500).send("Er is een fout opgetreden.");
+    } finally {
+        await client.close();
+    }
+};
+
+// Start de server
+app.listen(port, () => {
+    console.log(`Server draait op http://localhost:${port}`);
+});
+
+
+run().catch(console.error);
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
