@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body>
+    <header>
+        <%- include('partials/header'); %>
+    </header>
+    <main>
+        <div class="search-container">
+            <input type="search" class="search-input" placeholder="Ik weet al wat ik wil hebben!">
+            <button class="search-button"><i class="fas fa-search search-icon"></i></button>
+        </div>
+        <div class="random-container">
+            <button class="search-button">Verras mij!<i class="fas fa-random"></i></button>
+        </div>
+        <div class="quiz-container">
+            <p>Welk speciaalbiertje past bij jou?</p>
+            <button>Doe de quiz!</button>
+        </div>
+        <div class="populair">
+            <h3>Populaire bieren</h3>
+            <div class="populair-beers">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer'); %>
+    </footer>
+</body>
+</html>
