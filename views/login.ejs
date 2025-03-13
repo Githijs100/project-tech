@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nl">
+    <%- include('partials/head'); %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inloggen</title>
+</head>
+<body>
+
+<div class="login.container">
+    <h2>Inloggen</h2>
+    <form action="/login" method="POST">
+        <input type="text" name="username" placeholder="Gebruikersnaam" required>
+        <input type="password" name="password" placeholder="Wachtwoord" required>
+        <button type="submit">Inloggen</button>
+    </form>
+    <p>Nog geen account? <a href="http://localhost:8000/registreren">Registreren</a></p>
+</div>
+    
+<%- include('partials/footer'); %>
+</body>
+</html>
