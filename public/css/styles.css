@@ -1,0 +1,33 @@
+body{
+    margin: 0px;
+}
+
+.navbar{
+    position: fixed; /* Keep the nav fixed in the viewport */
+  bottom: 0;       /* Stick it to the bottom */
+  width: 100%
+}
+.navbar ul{
+    list-style-type: none;
+    background-color: darkgrey;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+}
+.navbar a{
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.navbar a:hover{
+    background-color: lightgrey;
+}
+
+.navbar li{
+    float: left;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

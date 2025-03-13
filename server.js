@@ -3,6 +3,8 @@ const app = express();
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 
 // Route voor de homepagina (Hello World)
 app.get('/hello', (req, res) => {
