@@ -12,40 +12,40 @@ const client = new MongoClient(uri);
 const port = 8000;
 
 app.post('/registreren', async (req, res) => {
-    // Haal de gegevens uit req.body
     const { username, email, password, date } = req.body;
-
-    console.log(username);  // Waarde van 'username' uit het formulier
-    console.log(email);     // Waarde van 'email' uit het formulier
-    console.log(date);      // Waarde van 'date' uit het formulier
+    
+    console.log(username, email, password, date);  // Controleer de ontvangen gegevens
 
     try {
-        // Verbinden met de MongoDB database
+        // Verbinding maken met MongoDB
         await client.connect();
         const db = client.db("mijnDatabase");
         const collectie = db.collection("gebruikers");
 
         // Document toevoegen aan de collectie
-        await collectie.insertOne({
+        const result = await collectie.insertOne({
             username,
             email,
             password,  // Vergeet niet om wachtwoorden veilig op te slaan, bijvoorbeeld met bcrypt
             date
         });
 
+        console.log("Document toegevoegd:", result); // Toont het resultaat van de insert
+
+        // Haal de gebruikers op
         const gebruikers = await collectie.find().toArray();
-
+        
         res.send('Registratie succesvol!');
-
         res.render('gebruikers', { gebruikers });
     } catch (err) {
         console.error("Fout bij het opslaan van de gegevens:", err);
         res.status(500).send('Er is iets mis gegaan bij het opslaan van je gegevens');
     } finally {
-        // Sluit de MongoDB verbinding
+        // Sluit de MongoDB-verbinding
         await client.close();
     }
 });
+
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
