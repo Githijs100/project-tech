@@ -1,40 +1,27 @@
 const express = require('express');
 const app = express();
-const { MongoClient } = require ('mongodb');
+const { MongoClient } = require('mongodb');
+
+// Middleware om formulierdata te parseren
+app.use(express.urlencoded({ extended: true }));
 
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
-async function run() {
-    try {
-        await client.connect();
-        const db = client.db("mijnDatabase");
-        const collectie = db.collection("gebruikers");
+// Stel de poort in (8000)
+const port = 8000;
 
-        await collectie.insertOne({
-            username,
-            email,
-            password,
-            leeftijd
-        });
+app.post('/registreren', (req, res) => {
+    // Haal de gegevens uit req.body
+    const { username, email, password, date } = req.body;
 
+    console.log(username);  // Waarde van 'username' uit het formulier
+    console.log(email);     // Waarde van 'email' uit het formulier
+    console.log(date);
 
-        res.send("Gebruiker succesvol geregistreerd!");
-    } catch (err) {
-        console.error("Fout bij registratie:", err);
-        res.status(500).send("Er is een fout opgetreden.");
-    } finally {
-        await client.close();
-    }
-};
-
-// Start de server
-app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
+    res.send('Registratie succesvol!');
 });
 
-
-run().catch(console.error);
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
@@ -49,7 +36,6 @@ app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
 
-
 // Route voor de registreerpagina
 app.get('/registreren', (req, res) => {
     res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" });
@@ -57,24 +43,14 @@ app.get('/registreren', (req, res) => {
 
 // Route om het registratieformulier te verwerken
 app.post('/registreren', (req, res) => {
+    // Zorg ervoor dat je hier de formuliervelden uit req.body haalt
     res.send("Registratie succesvol! (Hier kun je de gegevens opslaan in een database)");
 });
 
-
-// Stel EJS in als de template engine
-app.set('view engine', 'ejs');
-
-// Route voor de homepagina (Hello World)
-app.get('/hello', (req, res) => {
-    res.send('<h1>Hello World</h1>');
+// Start de server op de gedefinieerde poort
+app.listen(port, () => {
+    console.log(`Server draait op http://localhost:${port}`);
 });
 
-// Route voor de loginpagina
-app.get('/', (req, res) => {
-    res.render('login', { title: "Login pagina", message: "Welkom op mijn website" });
-});
-
-// Start de server op poort 8000
-app.listen(8000, () => {
-    console.log('Server draait op http://localhost:8000');
-});
+// Start de MongoDB run functie (om verbinding te maken met de database)
+run().catch(console.error);
