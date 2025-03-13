@@ -33,8 +33,11 @@ app.post('/registreren', async (req, res) => {
             date
         });
 
+        const gebruikers = await collectie.find().toArray();
+
         res.send('Registratie succesvol!');
 
+        res.render('gebruikers', { gebruikers });
     } catch (err) {
         console.error("Fout bij het opslaan van de gegevens:", err);
         res.status(500).send('Er is iets mis gegaan bij het opslaan van je gegevens');
