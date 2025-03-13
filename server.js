@@ -11,17 +11,38 @@ const client = new MongoClient(uri);
 // Stel de poort in (8000)
 const port = 8000;
 
-app.post('/registreren', (req, res) => {
+app.post('/registreren', async (req, res) => {
     // Haal de gegevens uit req.body
     const { username, email, password, date } = req.body;
 
     console.log(username);  // Waarde van 'username' uit het formulier
     console.log(email);     // Waarde van 'email' uit het formulier
-    console.log(date);
+    console.log(date);      // Waarde van 'date' uit het formulier
 
-    res.send('Registratie succesvol!');
+    try {
+        // Verbinden met de MongoDB database
+        await client.connect();
+        const db = client.db("mijnDatabase");
+        const collectie = db.collection("gebruikers");
+
+        // Document toevoegen aan de collectie
+        await collectie.insertOne({
+            username,
+            email,
+            password,  // Vergeet niet om wachtwoorden veilig op te slaan, bijvoorbeeld met bcrypt
+            date
+        });
+
+        res.send('Registratie succesvol!');
+
+    } catch (err) {
+        console.error("Fout bij het opslaan van de gegevens:", err);
+        res.status(500).send('Er is iets mis gegaan bij het opslaan van je gegevens');
+    } finally {
+        // Sluit de MongoDB verbinding
+        await client.close();
+    }
 });
-
 
 // Stel EJS in als de template engine
 app.set('view engine', 'ejs');
@@ -41,16 +62,7 @@ app.get('/registreren', (req, res) => {
     res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" });
 });
 
-// Route om het registratieformulier te verwerken
-app.post('/registreren', (req, res) => {
-    // Zorg ervoor dat je hier de formuliervelden uit req.body haalt
-    res.send("Registratie succesvol! (Hier kun je de gegevens opslaan in een database)");
-});
-
 // Start de server op de gedefinieerde poort
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
-
-// Start de MongoDB run functie (om verbinding te maken met de database)
-run().catch(console.error);
