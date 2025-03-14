@@ -7,8 +7,8 @@ app.use(express.static('public'));
 
 
 // Route voor de homepagina (Hello World)
-app.get('/hello', (req, res) => {
-    res.send('<h1>Hello World</h1>');
+app.get('/', (req, res) => {
+    res.render('index');
 });
 
 // Route voor de loginpagina
