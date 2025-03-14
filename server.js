@@ -1,74 +1,63 @@
+require('dotenv').config(); // Laad de omgevingsvariabelen
 const express = require('express');
-const app = express();
 const { MongoClient } = require('mongodb');
-const uri = process.env.URI;
-require ('dotenv').config();
 
-console.log('process.env');
+const app = express();
+const uri = process.env.URI;
+const client = new MongoClient(uri);
+const port = 8000;
+
+// Verbinden met MongoDB bij het starten van de server
+async function connectDB() {
+    try {
+        await client.connect();
+        console.log("Verbonden met MongoDB");
+    } catch (err) {
+        console.error("Kan niet verbinden met MongoDB:", err);
+        process.exit(1);
+    }
+}
+connectDB();
 
 // Middleware om formulierdata te parseren
 app.use(express.urlencoded({ extended: true }));
 
-const client = new MongoClient(uri);
-
-// Stel de poort in
-const port = 8000;
-
 app.post('/registreren', async (req, res) => {
-    const { username, email, password, date } = req.body;
-    
-    console.log(username, email, password, date);  // Controleer de ontvangen gegevens
-
     try {
-        // Verbinding maken met MongoDB
-        await client.connect();
         const db = client.db("mijnDatabase");
         const collectie = db.collection("gebruikers");
 
-        // Document toevoegen aan de collectie
-        const result = await collectie.insertOne({
-            username,
-            email,
-            password,  // Vergeet niet om wachtwoorden veilig op te slaan, bijvoorbeeld met bcrypt
-            date
-        });
+        const { username, email, password, date } = req.body;
+        console.log(username, email, password, date);
 
-        console.log("Document toegevoegd:", result); // Toont het resultaat van de insert
+        const result = await collectie.insertOne({ username, email, password, date });
+        console.log("Document toegevoegd:", result);
 
-        // Haal de gebruikers op
         const gebruikers = await collectie.find().toArray();
-        
-        res.send('Registratie succesvol!');
         res.render('gebruikers', { gebruikers });
     } catch (err) {
-        console.error("Fout bij het opslaan van de gegevens:", err);
-        res.status(500).send('Er is iets mis gegaan bij het opslaan van je gegevens');
-    } finally {
-        // Sluit de MongoDB-verbinding
-        await client.close();
+        console.error("Fout bij opslaan:", err);
+        res.status(500).send("Er is iets misgegaan.");
     }
 });
 
-
-// Stel EJS in als de template engine
+// Stel EJS in als template engine
 app.set('view engine', 'ejs');
 
-// Route voor de homepagina (Hello World)
+// Routes
 app.get('/hello', (req, res) => {
     res.send('<h1>Hello World</h1>');
 });
 
-// Route voor de loginpagina
 app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
 
-// Route voor de registreerpagina
 app.get('/registreren', (req, res) => {
     res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" });
 });
 
-// Start de server op de gedefinieerde poort
+// Start de server
 app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
+    console.log(`🚀 Server draait op http://localhost:${port}`);
 });
