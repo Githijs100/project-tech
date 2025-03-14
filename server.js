@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
-<<<<<<< HEAD
 const { MongoClient } = require('mongodb');
+const uri = mongodb+srv://<db_username>:<db_password>@project-tech.t59uu.mongodb.net/?retryWrites=true&w=majority&appName=Project-Tech
+require ('dotenv').config();
+
+console.log('process.env');
 
 // Middleware om formulierdata te parseren
 app.use(express.urlencoded({ extended: true }));
@@ -9,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
-// Stel de poort in (8000)
+// Stel de poort in
 const port = 8000;
 
 app.post('/registreren', async (req, res) => {
@@ -54,17 +57,6 @@ app.set('view engine', 'ejs');
 // Route voor de homepagina (Hello World)
 app.get('/hello', (req, res) => {
     res.send('<h1>Hello World</h1>');
-=======
-
-// Stel EJS in als de template engine
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-
-
-// Route voor de homepagina (Hello World)
-app.get('/', (req, res) => {
-    res.render('index');
->>>>>>> 76ad41e66a715a731ae3145e4c2f23cd63de0ab9
 });
 
 // Route voor de loginpagina
@@ -72,26 +64,12 @@ app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
 
-<<<<<<< HEAD
-=======
-// Start de server op poort 8000
-app.listen(8000, () => {
-    console.log('Server draait op http://localhost:8000');
-});
-
->>>>>>> 76ad41e66a715a731ae3145e4c2f23cd63de0ab9
 // Route voor de registreerpagina
 app.get('/registreren', (req, res) => {
     res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" });
 });
 
-<<<<<<< HEAD
 // Start de server op de gedefinieerde poort
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
-=======
-// Route om het registratieformulier te verwerken
-app.post('/registreren', (req, res) => {
-    res.send("Registratie succesvol! (Hier kun je de gegevens opslaan in een database)");
->>>>>>> 76ad41e66a715a731ae3145e4c2f23cd63de0ab9
 });
