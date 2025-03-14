@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://<db_username>:<db_password>@project-tech.t59uu.mongodb.net/?retryWrites=true&w=majority&appName=Project-Tech";
+const uri = process.env.URI;
 require ('dotenv').config();
 
 console.log('process.env');
@@ -9,7 +9,6 @@ console.log('process.env');
 // Middleware om formulierdata te parseren
 app.use(express.urlencoded({ extended: true }));
 
-uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
 // Stel de poort in
