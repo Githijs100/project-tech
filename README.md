@@ -3,6 +3,8 @@
 ## 1. Indentatie
 Gebruik **4 spaties** voor inspringing. Gebruik geen tabs.
 
+## Gebruik Iphone SE voor als template in de browser
+
 ## 2. Variabelen en Functienamen
 - Gebruik `camelCase` voor variabelen en functies.
 - Gebruik `PascalCase` voor klassen.
