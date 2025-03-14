@@ -1,7 +1,34 @@
+:root {
+    --primary-color: #47341F;
+    --secondary-color: #ED9B40;
+    --secondary-color-light: #F5C58F;
+    --background-color: #D9D9D9;
+    --text-color1: #2D2D2A;
+    --text-color2: #4C4C46;
+
+  }
+
 body{
     margin: 0px;
+    background-color: #a98e6f;
+    font-family: 'Roboto', sans-serif;  
+}
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
 }
 
+button{
+    background-color: #D2691E;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    font-size: small;
+    padding: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+
+}
 .navbarFooter{
     position: fixed; /* Keep the nav fixed in the viewport */
   bottom: 0;       /* Stick it to the bottom */
@@ -9,7 +36,7 @@ body{
 }
 .navbarFooter ul{
     list-style-type: none;
-    background-color: darkgrey;
+    background-color: #FFF5EE;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
@@ -34,7 +61,7 @@ body{
 
 .navbarHeader ul{
     list-style-type: none;
-    background-color: rgb(103, 103, 103);
+    background-color: #4A3C30;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
@@ -48,51 +75,46 @@ body{
 }
 .navbarHeader li{
     float: left;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
 }
 
 .navbarHeader ul li:first-child img {
-    width: 2rem; /* Adjust to your desired width */
+    width: 1.5rem; /* Adjust to your desired width */
     height: auto; /* Maintain aspect ratio */
   }
   
 .navbarHeader ul li:last-child img {
-    width: 1.5rem; /* Adjust to your desired width */
+    width: 1rem; /* Adjust to your desired width */
     height: auto; /* Maintain aspect ratio */
 }
 
-.search-container {
-    display: flex;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-top: 1rem;
-}
-
-.search-input {
-    width: 90%; /* Make input take remaining space */
-}
-
-.random-container{
-    display: flex;
-    justify-content: end;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
 
 .quiz-container{
-    background-color: lightgrey;
+    background-image: url(/images/biersap.jpeg);
+    background-size: cover;
     margin-left: 3rem;
     margin-right: 3rem;
-    padding: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     padding-top: 1rem;
     display: flex; 
     flex-direction: column;
     align-items: center; 
+    border-style: solid;
+    border-color: var(--primary-color);
 }
-
+.quiz-container h3{
+    font-size: 2rem;
+    color: black;
+}
+.quiz-container button{
+    width: 100%;
+    font-weight: bold;
+    font-size: 1rem;
+}
 .populair {
     text-align: center;
     overflow: hidden; 
@@ -105,6 +127,8 @@ body{
     scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
     gap: 10px; /* Optional: Space between images */
     padding-bottom: 10px; /* Optional: Space below images for scrollbar */
+    padding-bottom: 2rem;
+    background-color: #72583a;
 }
 
 .populair-beers img {
@@ -112,3 +136,27 @@ body{
     height: auto;
     scroll-snap-align: start; /* Optional: Snap alignment */
 }
+
+.populair h3{
+    background-color: #72583a;
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+    padding: .5rem;
+    color: black;
+}
+
+.search-container {
+    display: flex; /* Make it a flex container */
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.search-input {
+    flex-grow: 1; /* Allow input to grow and take available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
