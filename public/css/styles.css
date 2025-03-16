@@ -160,3 +160,53 @@ button{
     border: 1px solid #ccc;
 }
 
+.quiz-item{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    border-style: solid;
+}
+
+.quizes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.quizes .quiz-item:first-child{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-persoonlijkheid.jpeg);
+    background-size: cover;
+}
+.quizes .quiz-item:nth-child(2){
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-dieren.jpeg);
+    background-size: cover;
+}
+.quizes .quiz-item:nth-child(3){
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-history.jpeg);
+    background-size: cover;
+}
+.quizes .quiz-item:nth-child(4){
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-muziek.jpeg);
+    background-size: cover;
+}
+
+.arrow{
+    border:#2D2D2A;
+    border-style: solid;
+    border-radius: 100%;
+    padding-top: .25rem;
+    padding-bottom: .35rem;
+    padding-left: .55rem;
+    padding-right: .55rem;
+    background-color: white;
+
+}
+
+.content h2{
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+}
