@@ -4,9 +4,7 @@
   "description": "**Conceptualiseren**",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "devStart": "nodemon server.js"
   },
   "repository": {
     "type": "git",
