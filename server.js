@@ -15,13 +15,14 @@ const port = 8000;
 // Verbinden met MongoDB bij het starten van de server
 async function connectDB() {
     try {
-        await client.connect();
-        console.log("Verbonden met MongoDB");
+        await mongoose.connect(uri);
+        console.log("Verbonden met MongoDB via Mongoose");
     } catch (err) {
         console.error("Kan niet verbinden met MongoDB:", err);
         process.exit(1);
     }
 }
+
 connectDB();
 
 // Middleware om formulierdata te parseren
