@@ -10,9 +10,6 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.render('index');
 });
-app.get('/quizen', (req, res) => {
-    res.render('quizen');
-});
 
 // Route voor de loginpagina
 app.get('/login', (req, res) => {
