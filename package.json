@@ -17,5 +17,14 @@
   },
   "homepage": "https://github.com/Githijs100/project-tech#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongodb": "^6.14.2",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "eslint": "^9.22.0",
+    "globals": "^16.0.0"
   }
 }
