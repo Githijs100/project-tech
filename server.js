@@ -4,7 +4,7 @@ const uri = process.env.URI;
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(uri);
 const mongoose = require('mongoose');
-const User = require('./models/User');
+const User = require('./models/user');
 
 
 const bcrypt = require('bcrypt');
