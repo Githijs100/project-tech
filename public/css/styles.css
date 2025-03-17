@@ -1,0 +1,114 @@
+body{
+    margin: 0px;
+}
+
+.navbarFooter{
+    position: fixed; /* Keep the nav fixed in the viewport */
+  bottom: 0;       /* Stick it to the bottom */
+  width: 100%
+}
+.navbarFooter ul{
+    list-style-type: none;
+    background-color: darkgrey;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+}
+.navbarFooter a{
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.navbarFooter a:hover{
+    background-color: lightgrey;
+}
+
+.navbarFooter li{
+    float: left;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+
+.navbarHeader ul{
+    list-style-type: none;
+    background-color: rgb(103, 103, 103);
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between
+}
+.navbarHeader a{
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+}
+.navbarHeader li{
+    float: left;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.navbarHeader ul li:first-child img {
+    width: 2rem; /* Adjust to your desired width */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+.navbarHeader ul li:last-child img {
+    width: 1.5rem; /* Adjust to your desired width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.search-container {
+    display: flex;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 1rem;
+}
+
+.search-input {
+    width: 90%; /* Make input take remaining space */
+}
+
+.random-container{
+    display: flex;
+    justify-content: end;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.quiz-container{
+    background-color: lightgrey;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    padding: 2rem;
+    padding-top: 1rem;
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+}
+
+.populair {
+    text-align: center;
+    overflow: hidden; 
+}
+
+.populair-beers {
+    display: flex; /* Use flexbox for horizontal layout */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
+    gap: 10px; /* Optional: Space between images */
+    padding-bottom: 10px; /* Optional: Space below images for scrollbar */
+}
+
+.populair-beers img {
+    width: 10rem; /* Adjust image width as needed */
+    height: auto;
+    scroll-snap-align: start; /* Optional: Snap alignment */
+}
