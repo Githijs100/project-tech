@@ -14,6 +14,10 @@ app.get('/quizen', (req, res) => {
     res.render('quizen');
 });
 
+app.get('/quizen', (req, res) => {
+    res.render('quizen');
+});
+
 // Route voor de loginpagina
 app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });

@@ -10,11 +10,19 @@
 
 body{
     margin: 0px;
-    background-color: #a98e6f;
+    background-color: rgb(224, 224, 224);
     font-family: 'Roboto', sans-serif;  
+}
+main{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
 }
 h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
+}
+h1{
+    font-size: 16px;
 }
 
 button{
@@ -30,18 +38,22 @@ button{
 
 }
 .navbarFooter{
-    position: fixed; /* Keep the nav fixed in the viewport */
+position: fixed; /* Keep the nav fixed in the viewport */
   bottom: 0;       /* Stick it to the bottom */
-  width: 100%
+  width: 100%;
 }
 .navbarFooter ul{
     list-style-type: none;
-    background-color: #FFF5EE;
+    background-color: #D1D1D1;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
     display: flex;
     justify-content: space-around;
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
 }
 .navbarFooter a{
     text-decoration: none;
@@ -58,98 +70,102 @@ button{
     padding-bottom: 1rem;
 }
 
+.navbarFooter  ul li:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-color: white;
+    border-width: .25rem;
+    border-radius: 100%;
+    width: 5.2rem;
+    height: 3.5rem;
+    position: absolute; /* Position the icon relative to the footer container */
+    top: -40px; /* Adjust this value to raise the icon (negative value) */
+    left: 50%; /* Center the icon horizontally */
+    transform: translateX(-50%); /* Center the icon perfectly */
+    background-color: #D1D1D1;
 
+
+}
+.navbarFooter  ul li:nth-child(2) img{
+    width: 3rem;
+
+
+}
 .navbarHeader ul{
     list-style-type: none;
-    background-color: #4A3C30;
+    background-color: #D2B48C;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
     display: flex;
-    justify-content: space-between
+    justify-content: flex-end;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
-.navbarHeader a{
-    color: white;
+.navbarHeader i{
+    color: rgb(0, 0, 0);
     text-decoration: none;
-    padding: 1rem;
-}
-.navbarHeader li{
-    float: left;
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-}
-
-.navbarHeader ul li:first-child img {
-    width: 1.5rem; /* Adjust to your desired width */
-    height: auto; /* Maintain aspect ratio */
-  }
-  
-.navbarHeader ul li:last-child img {
-    width: 1rem; /* Adjust to your desired width */
-    height: auto; /* Maintain aspect ratio */
+    padding: .5rem;
 }
 
 
-.quiz-container{
-    background-image: url(/images/biersap.jpeg);
+.quiz-container{    
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(/images/achtergrond-bier.png);
     background-size: cover;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-bottom: 2rem;
-    padding-left: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    border-style: solid;
+    border-color: rgb(201, 201, 201);
+    border-left: 0;
+    border-right: 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 1rem;
     display: flex; 
     flex-direction: column;
     align-items: center; 
-    border-style: solid;
-    border-color: var(--primary-color);
 }
 .quiz-container h3{
-    font-size: 2rem;
-    color: black;
+    font-size: 16px;
+    color: rgba(75, 40, 0);
+    background-color: white;
 }
 .quiz-container button{
-    width: 100%;
+    width: 9rem;
     font-weight: bold;
     font-size: 1rem;
+    margin-bottom: 2rem;
 }
-.populair {
-    text-align: center;
+.carousel {
     overflow: hidden; 
 }
-
-.populair-beers {
+.carouselText{
+    display: flex;
+}
+.featured-beers {
     display: flex; /* Use flexbox for horizontal layout */
     overflow-x: auto; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
     scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
     gap: 10px; /* Optional: Space between images */
-    padding-bottom: 10px; /* Optional: Space below images for scrollbar */
-    padding-bottom: 2rem;
-    background-color: #72583a;
+    padding-bottom: .5rem;
 }
 
-.populair-beers img {
-    width: 10rem; /* Adjust image width as needed */
+.featured-beers img {
+    width: 8rem; /* Adjust image width as needed */
     height: auto;
     scroll-snap-align: start; /* Optional: Snap alignment */
 }
 
-.populair h3{
-    background-color: #72583a;
-    padding: 0;
-    margin: 0;
-    margin-top: 1rem;
-    padding: .5rem;
+.carousel h3{
     color: black;
 }
 
 .search-container {
     display: flex; /* Make it a flex container */
-    margin-left: 3rem;
-    margin-right: 3rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -158,6 +174,8 @@ button{
     flex-grow: 1; /* Allow input to grow and take available space */
     padding: 10px;
     border: 1px solid #ccc;
+    border-radius: 5px;
+
 }
 
 .quiz-item{
@@ -203,10 +221,7 @@ button{
     padding-right: .55rem;
     background-color: white;
 
-}
 
 .content h2{
     margin-left: 2rem;
     margin-right: 2rem;
-
-}
