@@ -10,6 +10,9 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.render('index');
 });
+app.get('/quizen', (req, res) => {
+    res.render('quizen');
+});
 
 app.get('/quizen', (req, res) => {
     res.render('quizen');
