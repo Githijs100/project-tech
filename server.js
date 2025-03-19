@@ -12,8 +12,21 @@ app.get('/', (req, res) => {
 });
 
 app.get('/quizen', (req, res) => {
-    res.render('quizen');
+    const quizzes = [
+        { title: 'Persoonlijkheid' },
+        { title: 'Spirit-Animal' },
+        { title: 'Historisch figuur' },
+        { title: 'Muzieksmaak' },
+      ];
+      res.render('quizen', { quizzes: quizzes });
 });
+app.get('/profiel', (req, res) => {
+    res.render('profiel');
+});
+app.get('/feed', (req, res) => {
+    res.render('feed');
+});
+
 
 // Route voor de loginpagina
 app.get('/login', (req, res) => {
