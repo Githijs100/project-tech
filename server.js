@@ -49,8 +49,6 @@ app.get('/hello', (req, res) => {
     res.send('<h1>Hello World</h1>');
 });
 
-<<<<<<< HEAD
-=======
 app.get('/quizen', (req, res) => {
     const quizzes = [
         { title: 'Persoonlijkheid' },
@@ -69,7 +67,6 @@ app.get('/feed', (req, res) => {
 
 
 // Route voor de loginpagina
->>>>>>> 4392796a36ecf8a0fbd4fd8c7616231fd1612bd8
 app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
