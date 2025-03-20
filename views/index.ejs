@@ -8,25 +8,36 @@
         <%- include('partials/header'); %>
     </header>
     <main>
+        <h1>Het is dorstig weer, proost!</h1>
         <div class="search-container">
-            <input type="search" class="search-input" placeholder="Ik weet al wat ik wil hebben!">
-            <button class="search-button"><i class="fas fa-search search-icon"></i></button>
-        </div>
-        <div class="random-container">
-            <button class="search-button">Verras mij!<i class="fas fa-random"></i></button>
+            <input type="search" class="search-input" placeholder="Ik weet al wat ik wil hebben">
+            <button class="search-button"><i class="fas fa-random"></i></button>
         </div>
         <div class="quiz-container">
-            <p>Welk speciaalbiertje past bij jou?</p>
-            <button>Doe de quiz!</button>
+            <h3>Welk speciaalbiertje past bij jou?</h3>
+            <a href="/quizen" class="quiz-button">Doe de quiz!</a>        </div>
+        <div class="carousel">
+            <div class="carouselText">
+                <h3>Populaire bieren</h3>
+            </div>
+            <div class="featured-beers">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+            </div>
         </div>
-        <div class="populair">
-            <h3>Populaire bieren</h3>
-            <div class="populair-beers">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
+        <div class="carousel">
+            <div class="carouselText">
+                <h3>Nieuwe binnenkomers</h3>
+            </div>
+            <div class="featured-beers">
+                <img src="images/new-beer.png" alt="">
+                <img src="images/new-beer.png" alt="">
+                <img src="images/new-beer.png" alt="">
+                <img src="images/new-beer.png" alt="">
+                <img src="images/new-beer.png" alt="">
             </div>
         </div>
     </main>

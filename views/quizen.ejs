@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body>
+    <header>
+        <%- include('partials/header'); %>
+    </header>
+    <main>    
+        <h1>Beschikbare quizen</h1>
+        <p>Ondek op een leuke manier biertjes waarvan je nooit had geweten deze lekker te vinden! Doe 1 van onze quizes en kom wat te leren over jezelf & je smaak in bier </p>
+
+        <div class="quiz-selection">
+            <div class="quizes">
+                <% quizzes.forEach(quiz => { %>
+                    <div class="quiz-item">
+                        <h3><%= quiz.title %></h3>
+                        <div class="arrow">&gt;</div>
+                    </div>
+                <% }); %>
+
+            </div>
+        </div>
+        <div class="quiz-vdmaand">
+            <h2>Quiz van de maand (maand partial)</h2>
+            <div class="quiz-item">
+                <h3>quiz partial</h3>
+                <div class="arrow">&gt;</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    <%- include('partials/footer'); %>
+    </footer>
+</body>
+</html>

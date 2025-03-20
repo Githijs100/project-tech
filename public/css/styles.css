@@ -1,20 +1,76 @@
+:root {
+    --primary-color: #47341F;
+    --secondary-color: #ED9B40;
+    --secondary-color-light: #F5C58F;
+    --background-color: #D9D9D9;
+    --text-color1: #2D2D2A;
+    --text-color2: #4C4C46;
+
+  }
+
 body{
     margin: 0px;
+    background-color: rgb(224, 224, 224);
+    font-family: 'Roboto', sans-serif;  
 }
-
+main{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+}
+h1{
+    font-size: 16px;
+}
+h2{
+    font-size: 15px;
+}
+p{
+    font-size: 12px;
+}
+button{
+    background-color: #D2691E;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    font-size: small;
+    padding: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+.quiz-container a{
+  background-color: #D2691E; /* Approximate background color */
+  border-color: white;
+  color: white;
+  padding: .5rem 1rem; /* Adjust padding as needed */
+  font-size: 18px; /* Adjust font size as needed */
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  font-weight: bold; /* Make the text bold */
+  text-decoration: none; /* Remove underline if it's a link */
+  margin-bottom: .5rem;
+}
 .navbarFooter{
-    position: fixed; /* Keep the nav fixed in the viewport */
+position: fixed; /* Keep the nav fixed in the viewport */
   bottom: 0;       /* Stick it to the bottom */
-  width: 100%
+  width: 100%;
 }
 .navbarFooter ul{
     list-style-type: none;
-    background-color: darkgrey;
+    background-color: #D1D1D1;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
     display: flex;
     justify-content: space-around;
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
 }
 .navbarFooter a{
     text-decoration: none;
@@ -31,84 +87,249 @@ body{
     padding-bottom: 1rem;
 }
 
+.navbarFooter  ul li:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-color: white;
+    border-width: .25rem;
+    border-radius: 100%;
+    width: 5.2rem;
+    height: 3.5rem;
+    position: absolute; /* Position the icon relative to the footer container */
+    top: -40px; /* Adjust this value to raise the icon (negative value) */
+    left: 50%; /* Center the icon horizontally */
+    transform: translateX(-50%); /* Center the icon perfectly */
+    background-color: #D1D1D1;
 
+
+}
+.navbarFooter  ul li:nth-child(2) img{
+    width: 3rem;
+
+
+}
 .navbarHeader ul{
     list-style-type: none;
-    background-color: rgb(103, 103, 103);
+    background-color: #D2B48C;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
     display: flex;
-    justify-content: space-between
+    justify-content: flex-end;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
-.navbarHeader a{
-    color: white;
+.navbarHeader i{
+    color: rgb(0, 0, 0);
     text-decoration: none;
-    padding: 1rem;
-}
-.navbarHeader li{
-    float: left;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: .5rem;
 }
 
-.navbarHeader ul li:first-child img {
-    width: 2rem; /* Adjust to your desired width */
-    height: auto; /* Maintain aspect ratio */
-  }
-  
-.navbarHeader ul li:last-child img {
-    width: 1.5rem; /* Adjust to your desired width */
-    height: auto; /* Maintain aspect ratio */
-}
 
-.search-container {
-    display: flex;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-top: 1rem;
-}
-
-.search-input {
-    width: 90%; /* Make input take remaining space */
-}
-
-.random-container{
-    display: flex;
-    justify-content: end;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-.quiz-container{
-    background-color: lightgrey;
-    margin-left: 3rem;
-    margin-right: 3rem;
-    padding: 2rem;
+.quiz-container{    
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(/images/achtergrond-bier.png);
+    background-size: cover;
+    border-style: solid;
+    border-color: rgb(201, 201, 201);
+    border-left: 0;
+    border-right: 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 1rem;
     display: flex; 
     flex-direction: column;
     align-items: center; 
 }
-
-.populair {
-    text-align: center;
+.quiz-container h3{
+    font-size: 16px;
+    color: rgba(75, 40, 0);
+    background-color: white;
+}
+.quiz-container button{
+    width: 9rem;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+.carousel {
     overflow: hidden; 
 }
-
-.populair-beers {
+.carouselText{
+    display: flex;
+}
+.featured-beers {
     display: flex; /* Use flexbox for horizontal layout */
     overflow-x: auto; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
     scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
     gap: 10px; /* Optional: Space between images */
-    padding-bottom: 10px; /* Optional: Space below images for scrollbar */
+    padding-bottom: .5rem;
 }
 
-.populair-beers img {
-    width: 10rem; /* Adjust image width as needed */
+.featured-beers img {
+    width: 8rem; /* Adjust image width as needed */
     height: auto;
     scroll-snap-align: start; /* Optional: Snap alignment */
+}
+
+.carousel h3{
+    color: black;
+}
+
+.search-container {
+    display: flex; /* Make it a flex container */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.search-input {
+    flex-grow: 1; /* Allow input to grow and take available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.quiz-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: 5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    border-style: solid;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+}
+
+.quizes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.quizes .quiz-item:first-child{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-persoonlijkheid.jpeg);
+    background-size: cover;
+}
+.quizes .quiz-item:nth-child(2){
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-dieren.jpeg);
+    background-size: cover;
+}
+.quizes .quiz-item:nth-child(3){
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-history.jpeg);
+    background-size: cover;
+}
+.quizes .quiz-item:nth-child(4){
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-muziek.jpeg);
+    background-size: cover;
+}
+.quiz-vdmaand .quiz-item{
+    justify-content: space-around;
+    width: 90%;
+    height: 8rem;
+    background-color: wheat;
+}
+
+.arrow{
+    border:#2D2D2A;
+    border-style: solid;
+    border-radius: 100%;
+    padding-top: .25rem;
+    padding-bottom: .35rem;
+    padding-left: .55rem;
+    padding-right: .55rem;
+    background-color: white;
+
+}
+
+.quiz-selection{
+    background-color: rgba(255, 255, 255, 0.492);
+    border-style: solid;
+    border-color: lightgray;
+    border-radius: 5px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    height: 11.5rem;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    white-space: nowrap; /* Prevent items from wrapping to the next line */
+}
+
+.quiz-container h2{
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+}
+
+.profile{
+    border-style: solid;
+    border-color: rgb(201, 201, 201);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-left: 0;
+    border-right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.profile img{
+    width: 3.5rem;
+}
+.profile div:first-child{
+    display: flex;
+    align-items: center;
+}
+.profile p{
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+.profile > div:first-child > div > p:nth-child(2) {
+    font-size: .8rem;  
+}
+.stats{
+    background-color: lightgrey;
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.stats p{
+    font-size: 1rem;
+    margin: 0;
+}
+.stats p:nth-child(2){
+    font-size: .8rem;
+}
+hr{
+    border-style: dashed;
+    border-color: rgb(170, 170, 170);
+    width: 100%;
+}
+
+.stats > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+}
+.stats span{
+    background-color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }

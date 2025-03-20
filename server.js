@@ -49,6 +49,27 @@ app.get('/hello', (req, res) => {
     res.send('<h1>Hello World</h1>');
 });
 
+<<<<<<< HEAD
+=======
+app.get('/quizen', (req, res) => {
+    const quizzes = [
+        { title: 'Persoonlijkheid' },
+        { title: 'Spirit-Animal' },
+        { title: 'Historisch figuur' },
+        { title: 'Muzieksmaak' },
+      ];
+      res.render('quizen', { quizzes: quizzes });
+});
+app.get('/profiel', (req, res) => {
+    res.render('profiel');
+});
+app.get('/feed', (req, res) => {
+    res.render('feed');
+});
+
+
+// Route voor de loginpagina
+>>>>>>> 4392796a36ecf8a0fbd4fd8c7616231fd1612bd8
 app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
