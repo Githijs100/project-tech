@@ -97,10 +97,10 @@ position: fixed; /* Keep the nav fixed in the viewport */
     border-radius: 100%;
     width: 5.2rem;
     height: 3.5rem;
-    position: absolute; /* Position the icon relative to the footer container */
-    top: -40px; /* Adjust this value to raise the icon (negative value) */
-    left: 50%; /* Center the icon horizontally */
-    transform: translateX(-50%); /* Center the icon perfectly */
+    position: absolute; 
+    top: -40px; 
+    left: 50%;
+    transform: translateX(-50%); 
     background-color: #D1D1D1;
 
 
@@ -195,48 +195,38 @@ position: fixed; /* Keep the nav fixed in the viewport */
 
 }
 
-.quiz-item{
+.quiz{
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 70%;
-    height: 5rem;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
-    border-style: solid;
-    padding-left: 1rem;
-    padding-right: 1rem;
-
-}
-
-.quizes{
-    display: flex;
     flex-direction: column;
-    align-items: center;
 }
-.quizes .quiz-item:first-child{
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-persoonlijkheid.jpeg);
-    background-size: cover;
+.quiz img{
+    margin-top: 3rem;
+    width: 6rem;
 }
-.quizes .quiz-item:nth-child(2){
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-dieren.jpeg);
-    background-size: cover;
-}
-.quizes .quiz-item:nth-child(3){
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-history.jpeg);
-    background-size: cover;
-}
-.quizes .quiz-item:nth-child(4){
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-muziek.jpeg);
-    background-size: cover;
-}
-.quiz-vdmaand .quiz-item{
+.quiz div:first-child div:last-child{
+    display: flex;
     justify-content: space-around;
-    width: 90%;
-    height: 8rem;
-    background-color: wheat;
 }
 
+.quiz div:first-child div:last-child button{
+    background-color: white;
+}
+.quiz div:first-child{
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 0rem 1rem 1rem 1rem;
+}
+.quiz div:first-child div:first-child{
+    display: flex;
+    justify-content: center;
+}
+.quiz .answer-option{
+    background-color: rgb(226, 226, 226);
+    margin-bottom: 1rem;
+    border-radius: 10px;
+
+}
 .arrow{
     border:#2D2D2A;
     border-style: solid;
