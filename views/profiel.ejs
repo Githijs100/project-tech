@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body>
+    <header>
+        <%- include('partials/header'); %>
+    </header>
+    <main>    
+        <h1>Profiel</h1>
+        <div class="profile">
+            <div>
+                <img src="images/user2-logo.png" alt="profiel">
+                <div>
+                    <p>profielnaam</p>
+                    <p>emailadress</p>
+                </div>
+            </div>
+            <div class="followers">
+                <p>Volgers: 0</p>
+                <p> Volgend: 0</p>
+            </div>
+        </div>
+        <div class="stats">
+            <div>
+                <div>
+                    <p>Gemiddeld aantal bpd<p3>
+                    <p>(bier per dag)</p>
+                </div>
+                <span>3</span>
+            </div>
+            <hr>
+            <div> 
+                <div>
+                    <p>Aantal gedronken biertjes</p>
+                </div>
+                <span>32</span>        
+            </div>
+        </div>
+
+    
+        <div class="carousel">
+            <div class="carouselText">
+                <h3>Recent gedronken biertjes</h3>
+            </div>
+            <div class="featured-beers">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+                <img src="images/grand-prestige.webp" alt="">
+            </div>
+        </div>
+    </main>
+    <footer>
+    <%- include('partials/footer'); %>
+    </footer>
+</body>
+</html>
