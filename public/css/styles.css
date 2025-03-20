@@ -24,7 +24,12 @@ h1, h2, h3 {
 h1{
     font-size: 16px;
 }
-
+h2{
+    font-size: 15px;
+}
+p{
+    font-size: 12px;
+}
 button{
     background-color: #D2691E;
     border-radius: 5px;
@@ -35,7 +40,19 @@ button{
     padding: 1rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
-
+}
+.quiz-container a{
+  background-color: #D2691E; /* Approximate background color */
+  border-color: white;
+  color: white;
+  padding: .5rem 1rem; /* Adjust padding as needed */
+  font-size: 18px; /* Adjust font size as needed */
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  font-weight: bold; /* Make the text bold */
+  text-decoration: none; /* Remove underline if it's a link */
+  margin-bottom: .5rem;
 }
 .navbarFooter{
 position: fixed; /* Keep the nav fixed in the viewport */
@@ -180,13 +197,16 @@ position: fixed; /* Keep the nav fixed in the viewport */
 
 .quiz-item{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 70%;
     height: 5rem;
     margin-top: .5rem;
     margin-bottom: .5rem;
     border-style: solid;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
 }
 
 .quizes{
@@ -210,6 +230,12 @@ position: fixed; /* Keep the nav fixed in the viewport */
     background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-muziek.jpeg);
     background-size: cover;
 }
+.quiz-vdmaand .quiz-item{
+    justify-content: space-around;
+    width: 90%;
+    height: 8rem;
+    background-color: wheat;
+}
 
 .arrow{
     border:#2D2D2A;
@@ -221,7 +247,89 @@ position: fixed; /* Keep the nav fixed in the viewport */
     padding-right: .55rem;
     background-color: white;
 
+}
 
-.content h2{
+.quiz-selection{
+    background-color: rgba(255, 255, 255, 0.492);
+    border-style: solid;
+    border-color: lightgray;
+    border-radius: 5px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    height: 11.5rem;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    white-space: nowrap; /* Prevent items from wrapping to the next line */
+}
+
+.quiz-container h2{
     margin-left: 2rem;
     margin-right: 2rem;
+
+}
+
+.profile{
+    border-style: solid;
+    border-color: rgb(201, 201, 201);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-left: 0;
+    border-right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.profile img{
+    width: 3.5rem;
+}
+.profile div:first-child{
+    display: flex;
+    align-items: center;
+}
+.profile p{
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+.profile > div:first-child > div > p:nth-child(2) {
+    font-size: .8rem;  
+}
+.stats{
+    background-color: lightgrey;
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.stats p{
+    font-size: 1rem;
+    margin: 0;
+}
+.stats p:nth-child(2){
+    font-size: .8rem;
+}
+hr{
+    border-style: dashed;
+    border-color: rgb(170, 170, 170);
+    width: 100%;
+}
+
+.stats > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+}
+.stats span{
+    background-color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
