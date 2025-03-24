@@ -6,7 +6,6 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 require('dotenv').config(); // Laad de omgevingsvariabelen
-const express = require('express');
 const uri = process.env.URI;
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(uri);
@@ -16,7 +15,6 @@ const User = require('./models/user');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const app = express();
 const port = 8000;
 
 // Verbinden met MongoDB bij het starten van de server
