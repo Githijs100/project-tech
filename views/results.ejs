@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head'); %>
+</head>
+<body>
+    <header>
+        <%- include('partials/header'); %>
+    </header>
+    <main>
+        <h1>Zoekresultaten voor "<%= query %>"</h1>
+        <div class="results-container">
+            <% if (beers && beers.length > 0) { %>
+                <% beers.forEach(beer => { %>
+                    <div class="beer-item">
+                        <h2><%= beer.name %></h2>
+                        <p><%= beer.style %></p>
+                        <img src="<%= beer.image || 'images/new-beer.png' %>" alt="<%= beer.name %>">
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Geen resultaten gevonden...</p>
+            <% } %>
+        </div>
+    </main>
+    <footer>
+        <%- include('partials/footer'); %>
+    </footer>
+</body>
+</html>
