@@ -11,14 +11,8 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/quizen', (req, res) => {
-    const quizzes = [
-        { title: 'Persoonlijkheid' },
-        { title: 'Spirit-Animal' },
-        { title: 'Historisch figuur' },
-        { title: 'Muzieksmaak' },
-      ];
-      res.render('quizen', { quizzes: quizzes });
+app.get('/quiz', (req, res) => {
+      res.render('quiz');
 });
 app.get('/profiel', (req, res) => {
     res.render('profiel');
