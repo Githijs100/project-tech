@@ -10,7 +10,6 @@
 
 body{
     margin: 0px;
-    background-color: rgb(224, 224, 224);
     font-family: 'Roboto', sans-serif;  
 }
 main{
@@ -22,16 +21,21 @@ h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
 }
 h1{
-    font-size: 16px;
+    font-size: 1.25rem;
 }
 h2{
-    font-size: 15px;
+    font-size: 1.5rem;
+    font-family: "Bangers", system-ui;
+
+}
+h3{
+    font-size: 1rem;
 }
 p{
     font-size: 12px;
 }
 button{
-    background-color: #D2691E;
+    background-color: #80669d;
     border-radius: 5px;
     border-width: 2px;
     border-color: white;
@@ -41,19 +45,7 @@ button{
     padding-top: .5rem;
     padding-bottom: .5rem;
 }
-.quiz-container a{
-  background-color: #D2691E; /* Approximate background color */
-  border-color: white;
-  color: white;
-  padding: .5rem 1rem; /* Adjust padding as needed */
-  font-size: 18px; /* Adjust font size as needed */
-  border-style: solid;
-  border-radius: 5px;
-  border-width: 2px;
-  font-weight: bold; /* Make the text bold */
-  text-decoration: none; /* Remove underline if it's a link */
-  margin-bottom: .5rem;
-}
+
 .navbarFooter{
 position: fixed; /* Keep the nav fixed in the viewport */
   bottom: 0;       /* Stick it to the bottom */
@@ -61,7 +53,7 @@ position: fixed; /* Keep the nav fixed in the viewport */
 }
 .navbarFooter ul{
     list-style-type: none;
-    background-color: #D1D1D1;
+    background-color: #D2B48C;
     padding: 0px;
     margin: 0px;
     overflow: hidden;
@@ -97,11 +89,11 @@ position: fixed; /* Keep the nav fixed in the viewport */
     border-radius: 100%;
     width: 5.2rem;
     height: 3.5rem;
-    position: absolute; /* Position the icon relative to the footer container */
-    top: -40px; /* Adjust this value to raise the icon (negative value) */
-    left: 50%; /* Center the icon horizontally */
-    transform: translateX(-50%); /* Center the icon perfectly */
-    background-color: #D1D1D1;
+    position: absolute; 
+    top: -40px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    background-color: #D2B48C;
 
 
 }
@@ -128,33 +120,42 @@ position: fixed; /* Keep the nav fixed in the viewport */
 
 
 .quiz-container{    
-    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url(/images/achtergrond-bier.png);
-    background-size: cover;
     border-style: solid;
     border-color: rgb(201, 201, 201);
     border-left: 0;
     border-right: 0;
-    margin-left: -1rem;
-    margin-right: -1rem;
+    border-radius: 20px;
     margin-top: 2rem;
-    margin-bottom: .5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
     padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex; 
     flex-direction: column;
     align-items: center; 
 }
-.quiz-container h3{
-    font-size: 16px;
-    color: rgba(75, 40, 0);
-    background-color: white;
-}
+.quiz-container a{
+    width: 15rem;
+    background-color: #80669d; 
+    border-color: white;
+    color: white;
+    padding: .5rem 1rem; /* Adjust padding as needed */
+    font-size: 18px; /* Adjust font size as needed */
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    font-weight: bold; /* Make the text bold */
+    text-decoration: none; /* Remove underline if it's a link */
+    margin-bottom: .5rem;
+  }
 .quiz-container button{
     width: 9rem;
     font-weight: bold;
     font-size: 1rem;
     margin-bottom: 2rem;
+}
+.quiz-container h2{
+    color: #550F06;
 }
 .carousel {
     overflow: hidden; 
@@ -195,46 +196,37 @@ position: fixed; /* Keep the nav fixed in the viewport */
 
 }
 
-.quiz-item{
+.quiz{
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 70%;
-    height: 5rem;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
-    border-style: solid;
-    padding-left: 1rem;
-    padding-right: 1rem;
-
-}
-
-.quizes{
-    display: flex;
     flex-direction: column;
-    align-items: center;
 }
-.quizes .quiz-item:first-child{
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-persoonlijkheid.jpeg);
-    background-size: cover;
+.quiz img{
+    margin-top: 3rem;
+    width: 6rem;
 }
-.quizes .quiz-item:nth-child(2){
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-dieren.jpeg);
-    background-size: cover;
-}
-.quizes .quiz-item:nth-child(3){
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-history.jpeg);
-    background-size: cover;
-}
-.quizes .quiz-item:nth-child(4){
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url(/images/quiz-muziek.jpeg);
-    background-size: cover;
-}
-.quiz-vdmaand .quiz-item{
+.quiz div:first-child div:last-child{
+    display: flex;
     justify-content: space-around;
-    width: 90%;
-    height: 8rem;
-    background-color: wheat;
+}
+
+.quiz div:first-child{
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 0rem 1rem 1rem 1rem;
+}
+.quiz div:first-child div:first-child{
+    display: flex;
+    justify-content: center;
+}
+.quiz .answer-option{
+    background-color: rgb(226, 226, 226);
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+.quiz div:first-child div:last-child button{
+    background-color: white;
 }
 
 .arrow{
@@ -332,4 +324,12 @@ hr{
     display: flex;
     justify-content: center; 
     align-items: center; 
+}
+
+.vraag {
+    display: none;
+}
+
+.vraag.actief {
+    display: block;
 }
