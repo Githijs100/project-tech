@@ -47,8 +47,8 @@ button{
 }
 
 .navbarFooter{
-position: fixed; /* Keep the nav fixed in the viewport */
-  bottom: 0;       /* Stick it to the bottom */
+position: fixed;
+  bottom: 0;      
   width: 100%;
 }
 .navbarFooter ul{
@@ -139,13 +139,13 @@ position: fixed; /* Keep the nav fixed in the viewport */
     background-color: #80669d; 
     border-color: white;
     color: white;
-    padding: .5rem 1rem; /* Adjust padding as needed */
-    font-size: 18px; /* Adjust font size as needed */
+    padding: .5rem 1rem; 
+    font-size: 18px; 
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
-    font-weight: bold; /* Make the text bold */
-    text-decoration: none; /* Remove underline if it's a link */
+    font-weight: bold;
+    text-decoration: none; 
     margin-bottom: .5rem;
   }
 .quiz-container button{
@@ -164,18 +164,18 @@ position: fixed; /* Keep the nav fixed in the viewport */
     display: flex;
 }
 .featured-beers {
-    display: flex; /* Use flexbox for horizontal layout */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
-    scroll-snap-type: x mandatory; /* Optional: Snap scrolling */
-    gap: 10px; /* Optional: Space between images */
+    display: flex; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+    scroll-snap-type: x mandatory; 
+    gap: 10px; 
     padding-bottom: .5rem;
 }
 
 .featured-beers img {
-    width: 8rem; /* Adjust image width as needed */
+    width: 8rem;
     height: auto;
-    scroll-snap-align: start; /* Optional: Snap alignment */
+    scroll-snap-align: start; 
 }
 
 .carousel h3{
@@ -183,13 +183,13 @@ position: fixed; /* Keep the nav fixed in the viewport */
 }
 
 .search-container {
-    display: flex; /* Make it a flex container */
+    display: flex; 
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
 .search-input {
-    flex-grow: 1; /* Allow input to grow and take available space */
+    flex-grow: 1; 
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -249,9 +249,9 @@ position: fixed; /* Keep the nav fixed in the viewport */
     padding-top: 1rem;
     padding-bottom: 1rem;
     height: 11.5rem;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
-    white-space: nowrap; /* Prevent items from wrapping to the next line */
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    white-space: nowrap; 
 }
 
 .quiz-container h2{
@@ -332,4 +332,5 @@ hr{
 
 .vraag.actief {
     display: block;
-}
+}  
+
