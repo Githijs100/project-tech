@@ -18,6 +18,15 @@ dotenv.config()
 const apiKey = process.env.API_KEY;
 console.log("API key:", apiKey)
 
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path;
+    res.locals.navItems = [
+      { path: '/feed', label: 'Feed', activeImage: 'images/feed-act.png', inactiveImage: 'images/feed-inact.png' },
+      { path: '/', label: 'Home', activeImage: 'images/home-act.png', inactiveImage: 'images/home-inact.png' },
+      { path: '/profiel', label: 'Profile', activeImage: 'images/profile-act.png', inactiveImage: 'images/profile-inact.png' }
+    ];
+    next();
+  });
 
 // Route voor de homepagina (Hello World)
 app.get('/', (req, res) => {
@@ -25,6 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/quiz', (req, res) => {
+    res.render('index');
       res.render('quiz');
 });
 app.get('/profiel', (req, res) => {
@@ -34,6 +44,11 @@ app.get('/feed', (req, res) => {
     res.render('feed');
 });
 
+
+
+
+  
+  
 
 // Route voor de loginpagina
 app.get('/login', (req, res) => {
