@@ -38,6 +38,9 @@ connectDB();
 
 // ✅ Routes
 app.get('/', (req, res) => res.render('index'));
+app.get('/quiz', (req, res) => res.render('quiz'));
+app.get('/profiel', (req, res) => res.render('profiel'));
+app.get('/feed', (req, res) => res.render('feed'));
 app.get('/login', (req, res) => res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" }));
 app.get('/registreren', (req, res) => res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" }));
 
