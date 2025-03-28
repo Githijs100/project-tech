@@ -8,15 +8,16 @@
         <%- include('partials/header'); %>
     </header>
     <main>
-        <h1>Het is dorstig weer, proost!</h1>
         <div class="search-container">
             <input type="search" class="search-input" placeholder="Ik weet al wat ik wil hebben">
             <button class="search-button"><i class="fas fa-random"></i></button>
         </div>
+        <hr>
         <div class="quiz-container">
             <h2>Welk speciaalbiertje past bij jou?</h2>
-            <a href="/quizen" class="quiz-button">Doe de quiz!</a>       
+            <a href="/quizen">Doe de quiz!</a>       
         </div>
+        <hr>
         <div class="carousel">
             <div class="carouselText">
                 <h3>Populaire bieren</h3>
@@ -44,24 +45,6 @@
     </main>
     <footer>
         <%- include('partials/footer'); %>
-    </footer>
-    <script>
-        document.querySelector('.search-button').addEventListener('click', () => {
-            const query = document.querySelector('.search-input').value;
-            if (query.trim() !== "") {
-                window.location.href = `/search?query=${encodeURIComponent(query)}`;
-            }
-        });
-    
-        document.querySelector('.search-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const query = e.target.value;
-                if (query.trim() !== "") {
-                    window.location.href = `/search?query=${encodeURIComponent(query)}`;
-                }
-            }
-        });
-    </script>
-    
+    </footer>    
 </body>
 </html>
