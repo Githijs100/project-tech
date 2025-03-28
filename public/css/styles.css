@@ -196,7 +196,6 @@ a.active{
     align-items: center; 
 }
 .quiz-container a{
-
     background-color: #ED9B40;
     border-radius: 5px;
     border-width: 2px;
@@ -398,9 +397,14 @@ a.active{
     margin: 0;
     margin-top: .5rem;
     margin-bottom: .5rem;
-
-
-
+}
+.dunneLijn{
+    border-style: solid;
+    border-color: #C9C9C9;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: 0;
+    border-width: .01rem;
 }
 
 .stats > div{
@@ -428,5 +432,134 @@ a.active{
 .vraag.actief {
     display: block;
 }  
+
+
+
+.user{
+    display: flex;
+    padding-top: 1rem;
+}
+.user i{
+    color: #DCDCDC;
+    background-color: #B3B3B3;
+    border-radius: 100%;
+    padding: .8rem;
+    font-size: 1.5rem;
+}
+.user div{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+.user div p{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.user div p:first-of-type{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.user div p:last-of-type{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: lighter;
+}
+
+.post div:first-of-type{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -.5rem;
+}
+.post p:first-of-type{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.post-subtext{
+    margin-left: .4rem;
+    margin-right: .4rem;
+
+}
+.post-subtext p{
+    font-weight: lighter;
+    font-size: .9rem;
+    margin-top: .3rem;
+}
+.post-subtext i{
+    font-size: 1.5rem;
+    color: #B3B3B3;
+    margin-top: .4rem;
+    margin-right: .5rem;
+    
+}
+.post .rating i{
+    color: gold;
+}
+.post img{
+    width: 100%;
+    border-radius: 1rem;
+    position: relative; /* Needed for absolute positioning of icons/button */
+
+}
+.post-image i{
+    position: absolute;
+    top: 15rem;
+    right: 2rem; 
+    font-size: 2em; 
+    color: white; 
+}
+
+.post-image a{
+    position: absolute;
+    top: 24rem; /* Example positioning from the top */
+    right: 2rem; /* Example positioning from the right */
+    background-color: #ED9B40;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #CCCCCC;
+    color: white;
+    font-size: small;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    border-style: solid;
+    text-decoration: none;
+    font-family: "Jaini Purva", system-ui;
+    font-size: 1.5rem;
+}
+
+
+.bordered-star {
+    font-size: 1rem; /* Adjust size as needed */
+    color: white;
+    text-shadow:
+      -1px -1px 0 black, /* Simulate border */
+      1px -1px 0 black,
+      -1px 1px 0 black,
+      1px 1px 0 black;
+  }
+  .bordered-half-star {
+    font-size: 1rem; /* Adjust size as needed */
+    color: yellow; /* Fill color */
+    text-shadow:
+      -1px -1px 0 black, /* Simulate border */
+      1px -1px 0 black,
+      -1px 1px 0 black,
+      1px 1px 0 black;  
+  }.bordered-star-filled {
+    font-size: 1rem; /* Adjust size as needed */
+    color: yellow; /* Fill color */
+    text-shadow:
+      -1px -1px 0 black, /* Simulate border */
+      1px -1px 0 black,
+      -1px 1px 0 black,
+      1px 1px 0 black;
+  }
+
 
 
