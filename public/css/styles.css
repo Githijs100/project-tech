@@ -12,7 +12,53 @@
     --footer-stroke: #A1A1A1;
     
 }
+body{
+    margin: 0px;
+    font-family: 'Roboto', sans-serif; 
+    background-color: var(--background-color); 
+}
+main{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 4.086875rem;
+    margin-bottom: 3.75rem;
 
+}
+
+h1{
+    font-size: 1.7rem;
+    color: var(--h1-color);
+    font-family: "Just Another Hand", cursive;
+    font-weight: 100;
+    margin: 0;
+}
+h2{
+    font-size: 1.1rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+}
+h3{
+    font-size: 1.5rem;
+    color: #555555;
+    font-family: "Jaini Purva", system-ui;
+    font-weight: 100;
+
+}
+p{
+    font-size: 12px;
+}
+button{
+    background-color: #ED9B40;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #CCCCCC;
+    color: white;
+    font-size: small;
+    padding: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-style: solid;
+}
 .navbarHeader{
     background-color: var(--header-color);
     padding: .7rem;
@@ -120,52 +166,6 @@ a.active{
 
 
 
-body{
-    margin: 0px;
-    font-family: 'Roboto', sans-serif; 
-    background-color: var(--background-color); 
-}
-main{
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: 4.086875rem;
-
-}
-
-h1{
-    font-size: 1.7rem;
-    color: var(--h1-color);
-    font-family: "Just Another Hand", cursive;
-    font-weight: 100;
-    margin: 0;
-}
-h2{
-    font-size: 1.1rem;
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
-}
-h3{
-    font-size: 1.5rem;
-    color: #3B3B3B;
-    font-family: "Jaini Purva", system-ui;
-}
-p{
-    font-size: 12px;
-}
-button{
-    background-color: #ED9B40;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: #CCCCCC;
-    color: white;
-    font-size: small;
-    padding: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    border-style: solid;
-}
-
-
 
 .quiz-container{    
     background-image: url(/images/flessen-bg.png);
@@ -217,13 +217,13 @@ button{
     overflow-x: auto;
     -webkit-overflow-scrolling: touch; 
     scroll-snap-type: x mandatory; 
-    gap: 10px; 
     padding: 1rem;
     background-color: #E8E5E0;
     border-radius: .5rem .5rem 0 0;
 }
 
 .featured-beers img {
+    padding-left: 1rem;
     width: 8rem;
     height: auto;
     scroll-snap-align: start; 
