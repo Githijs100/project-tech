@@ -26,6 +26,12 @@ main{
 }
 
 h1{
+    font-size: 1.4rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    margin-bottom: .3rem;
+}
+.navbarHeader h1{
     font-size: 1.7rem;
     color: var(--h1-color);
     font-family: "Just Another Hand", cursive;
@@ -59,6 +65,14 @@ button{
     padding-bottom: .5rem;
     border-style: solid;
 }
+hr{
+    border-style: solid;
+    border-color: #C9C9C9;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: 0;
+}
+
 .navbarHeader{
     background-color: var(--header-color);
     padding: .7rem;
@@ -203,6 +217,8 @@ a.active{
     font-size: 1rem;
     margin-bottom: 2rem;
 }
+
+
 .carousel {
     overflow: hidden;
 }
@@ -211,6 +227,12 @@ a.active{
 }
 .carouselText{
     display: flex;
+    align-items: center;
+}
+.carouselText i{
+    color: #9F9F9F;
+    margin: .2rem;
+    margin-bottom: 0;
 }
 .featured-beers {
     display: flex; 
@@ -221,13 +243,31 @@ a.active{
     background-color: #E8E5E0;
     border-radius: .5rem .5rem 0 0;
 }
-
 .featured-beers img {
     padding-left: 1rem;
     width: 8rem;
     height: auto;
     scroll-snap-align: start; 
 }
+
+.featured-beersProfile {
+    display: flex; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+    scroll-snap-type: x mandatory; 
+    padding: 1rem;
+    background-color: #E8E5E0;
+    border-radius: .5rem .5rem 0 0;
+}
+.featured-beersProfile img {
+    padding-left: 1rem;
+    width: 5rem;
+    height: auto;
+    scroll-snap-align: start; 
+}
+
+
+
 
 .search-container {
     display: flex; 
@@ -336,7 +376,8 @@ a.active{
     font-size: .8rem;  
 }
 .stats{
-    background-color: lightgrey;
+    background-color: #E1E1E1;
+    border-radius: .7rem;
     margin: 1rem;
     padding: 1rem;
     display: flex;
@@ -350,17 +391,16 @@ a.active{
     font-size: .8rem;
 }
 
-hr{
-    border-style: solid;
-    border-color: #C9C9C9;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-top: 0;
-}
+
 .striped{
     border-style: dashed;
     border-color: rgb(170, 170, 170);
-    width: 100%;
+    margin: 0;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+
+
 }
 
 .stats > div{
@@ -388,4 +428,5 @@ hr{
 .vraag.actief {
     display: block;
 }  
+
 
