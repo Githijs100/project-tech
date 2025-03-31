@@ -25,7 +25,6 @@ app.listen(8000, () => {
 const dotenv = require("dotenv")
 dotenv.config()
 
-const apiKey = process.env.API_KEY;
 console.log("API key:", apiKey)
 
 app.use((req, res, next) => {
@@ -64,7 +63,6 @@ app.get('/feed', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
 });
-=======
 // ✅ Sessiemiddleware instellen
 app.use(session({
     secret: 'geheim', // Zorg ervoor dat je een veilige key gebruikt in productie!
@@ -130,7 +128,7 @@ app.get('/profiel', async (req, res) => {
     }
 });
 
-// ✅ Start de server
-app.listen(port, () => {
-    console.log(`🚀 Server draait op http://localhost:${port}`);
-});
+// // ✅ Start de server
+// app.listen(port, () => {
+//     console.log(`🚀 Server draait op http://localhost:${port}`);
+// });
