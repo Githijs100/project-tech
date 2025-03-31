@@ -56,7 +56,7 @@ connectDB();
 
 // Routes
 app.get('/', (req, res) => res.render('index'));
-app.get('/quiz', (req, res) => res.render('quiz'));
+app.get('/testquiz', (req, res) => res.render('testquiz'));
 app.get('/profiel', async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login');
