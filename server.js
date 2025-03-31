@@ -75,6 +75,11 @@ app.get('/registreren', (req, res) => {
     res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" });
 });
 
+
+app.get('/testquiz', (req, res) => {
+    res.render('testquiz', { title: "TestQuiz", message: "Doe de Quiz!" });
+});
+
 // Start de server
 app.listen(port, () => {
     console.log(`🚀 Server draait op http://localhost:${port}`);
