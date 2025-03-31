@@ -24,6 +24,7 @@ app.listen(8000, () => {
 
 const dotenv = require("dotenv")
 dotenv.config()
+console.log("API key:", apiKey)
 
 app.use((req, res, next) => {
     res.locals.currentPath = req.path;
