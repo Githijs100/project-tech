@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadBeers() {
         try {
-            const response = await fetch("bieren.json"); // ✅ Correct pad
+            const response = await fetch("bieren.json");
             beerData = await response.json();
             showQuestion();
         } catch (error) {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 text: "Uit welk land wil je dat het biertje komt?",
-                options: [...new Set(beerData.map(beer => beer.country))], // ✅ Correcte key
+                options: [...new Set(beerData.map(beer => beer.country))], 
                 key: "country"
             },
             {
@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 text: "Welke biersoort wil je proberen?",
-                options: [...new Set(beerData.map(beer => beer.sub_category_3))], // ✅ Correcte key
+                options: [...new Set(beerData.map(beer => beer.sub_category_3))], 
+                
                 key: "sub_category_3"
             }
         ];
