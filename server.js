@@ -11,6 +11,63 @@ const apiKey = process.env.API_KEY;
 const User = require('./models/user');
 const saltRounds = 10;
 
+// Stel EJS in als template engine
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
+// Start de server op poort 8000
+app.listen(8000, () => {
+    console.log('Server draait op http://localhost:8000');
+});
+
+const dotenv = require("dotenv")
+dotenv.config()
+console.log("API key:", apiKey)
+
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path;
+    res.locals.navItems = [
+      { path: '/feed', label: 'Feed', activeImage: 'images/feed-act.png', inactiveImage: 'images/feed-inact.png' },
+      { path: '/', label: 'Home', activeImage: 'images/home-act.png', inactiveImage: 'images/home-inact.png' },
+      { path: '/profiel', label: 'Profile', activeImage: 'images/profile-act.png', inactiveImage: 'images/profile-inact.png' }
+    ];
+    next();
+  });
+
+// Route voor de homepagina (Hello World)
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.get('/quiz', (req, res) => {
+    res.render('index');
+      res.render('quiz');
+});
+app.get('/profiel', (req, res) => {
+    res.render('profiel');
+});
+app.get('/feed', (req, res) => {
+    res.render('feed');
+});
+
+
+
+
+  
+  
+
+// Route voor de loginpagina
+app.get('/login', (req, res) => {
+    res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
+});
+// ✅ Sessiemiddleware instellen
+app.use(session({
+    secret: 'geheim', // Zorg ervoor dat je een veilige key gebruikt in productie!
+    resave: false,
+    saveUninitialized: false
+}));
+
 // ✅ Verbinden met MongoDB
 async function connectDB() {
     try {
@@ -157,3 +214,7 @@ app.get('/search', async (req, res) => {
 app.listen(port, () => {
     console.log(`🚀 Server draait op http://localhost:${port}`);
 });
+// // ✅ Start de server
+// app.listen(port, () => {
+//     console.log(`🚀 Server draait op http://localhost:${port}`);
+// });
