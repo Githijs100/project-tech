@@ -66,7 +66,8 @@ app.get('/profiel', async (req, res) => {
     } catch (err) {
         console.error('❌ Fout bij ophalen profiel:', err);
         res.status(500).send('Er is een fout opgetreden.');
-
+    }
+});
 // ✅ Login Route
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
