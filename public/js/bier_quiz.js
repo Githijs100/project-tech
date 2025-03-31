@@ -1,21 +1,3 @@
-const express = require('express');
-const path = require('path');
-
-const app = express();
-
-// Zorg dat de server statische bestanden (JS, JSON, CSS) kan laden
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Route voor testquiz
-app.get('/testquiz', (req, res) => {
-    res.render('testquiz');
-})
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     let beerData = [];
     let currentStep = 0;
@@ -23,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadBeers() {
         try {
-            const response = await fetch("bieren.json"); // Laadt het JSON-bestand
+            const response = await fetch("bieren.json"); // ✅ Correct pad
             beerData = await response.json();
             showQuestion();
         } catch (error) {
@@ -38,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const questionData = [
             {
                 text: "Wat voor eten heb je zin in?",
-                options: ["Vlees", "Vis", "Vega"],
-                key: "foodPairing"
+                options: ["Spicy chicken wings", "Grilled shrimp tacos", "Margherita pizza"],
+                key: "food_pairing"
             },
             {
                 text: "Uit welk land wil je dat het biertje komt?",
-                options: [...new Set(beerData.map(beer => beer.land))],
-                key: "land"
+                options: [...new Set(beerData.map(beer => beer.country))], // ✅ Correcte key
+                key: "country"
             },
             {
                 text: "Wil je een mild (<7%) of een sterk biertje (>7%)?",
@@ -53,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 text: "Welke biersoort wil je proberen?",
-                options: [...new Set(beerData.map(beer => beer.categorie))],
-                key: "categorie"
+                options: [...new Set(beerData.map(beer => beer.sub_category_3))], // ✅ Correcte key
+                key: "sub_category_3"
             }
         ];
 
@@ -84,23 +66,19 @@ document.addEventListener("DOMContentLoaded", function () {
         quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3>";
 
         let filteredBeers = beerData.filter(beer =>
-            (!userChoices.foodPairing || beer.foodPairing.includes(userChoices.foodPairing)) &&
-            (!userChoices.land || beer.land === userChoices.land) &&
-            (!userChoices.alcohol || (userChoices.alcohol === "Mild" ? beer.alcohol < 7 : beer.alcohol >= 7)) &&
-            (!userChoices.categorie || beer.categorie === userChoices.categorie)
+            (!userChoices.food_pairing || beer.food_pairing.includes(userChoices.food_pairing)) &&
+            (!userChoices.country || beer.country === userChoices.country) &&
+            (!userChoices.alcohol || (userChoices.alcohol === "Mild" ? parseFloat(beer.abv) < 7 : parseFloat(beer.abv) >= 7)) && // ✅ Fix string naar nummer
+            (!userChoices.sub_category_3 || beer.sub_category_3 === userChoices.sub_category_3)
         );
 
         if (filteredBeers.length > 0) {
             const recommendedBeer = filteredBeers[Math.floor(Math.random() * filteredBeers.length)];
-            quizContainer.innerHTML += `<p>${recommendedBeer.naam} uit ${recommendedBeer.land} - ${recommendedBeer.alcohol}% - ${recommendedBeer.categorie}</p>`;
+            quizContainer.innerHTML += `<p>${recommendedBeer.name} uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_3}</p>`;
         } else {
             quizContainer.innerHTML += "<p>Geen passende bieren gevonden. Probeer andere keuzes!</p>";
         }
     }
 
     loadBeers();
-});
-
-app.listen(8000, () => {
-    console.log('Server draait op http://localhost:8000');
 });

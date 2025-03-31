@@ -6,6 +6,14 @@ const app = express();
 const uri = process.env.URI;
 const client = new MongoClient(uri);
 const port = 8000;
+const path = require('path');
+
+// Zorg dat de server statische bestanden serveert
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 
 // Verbinden met MongoDB bij het starten van de server
 async function connectDB() {
@@ -75,7 +83,7 @@ app.get('/registreren', (req, res) => {
     res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" });
 });
 
-
+// Route voor de quizpagina
 app.get('/testquiz', (req, res) => {
     res.render('testquiz', { title: "TestQuiz", message: "Doe de Quiz!" });
 });
