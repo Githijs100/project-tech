@@ -1,3 +1,21 @@
+const express = require('express');
+const path = require('path');
+
+const app = express();
+
+// Zorg dat de server statische bestanden (JS, JSON, CSS) kan laden
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Route voor testquiz
+app.get('/testquiz', (req, res) => {
+    res.render('testquiz');
+})
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     let beerData = [];
     let currentStep = 0;
@@ -83,3 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
     loadBeers();
 });
 
+app.listen(8000, () => {
+    console.log('Server draait op http://localhost:8000');
+});
