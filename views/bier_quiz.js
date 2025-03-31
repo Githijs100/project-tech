@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadBeers() {
         try {
-            const response = await fetch("bieren.json"); // Zorg dat dit bestand correct is!
+            const response = await fetch("bieren.json"); // Laadt het JSON-bestand
             beerData = await response.json();
             showQuestion();
         } catch (error) {
