@@ -9,6 +9,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 const uri = process.env.URI;
+const apiKey = process.env.API_KEY;
 const User = require('./models/user');
 const saltRounds = 10;
 
@@ -65,6 +66,75 @@ app.get('/profiel', async (req, res) => {
     } catch (err) {
         console.error('❌ Fout bij ophalen profiel:', err);
         res.status(500).send('Er is een fout opgetreden.');
+
+// ✅ Login Route
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).send("❌ Ongeldige inloggegevens");
+        }
+        req.session.userId = user._id;
+        res.redirect('/profiel');
+    } catch (err) {
+        res.status(500).send("❌ Fout bij inloggen: " + err.message);
+    }
+});
+
+// ✅ Uitlog Route
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    });
+});
+
+
+app.get('/search', async (req, res) => {
+    const query = req.query.query;
+
+    if (!query || !query.trim()) {
+        return res.render('results', { beers: [], query: 'Geen zoekterm opgegeven' });
+    }
+
+    const url = `https://beer9.p.rapidapi.com/?name=${encodeURIComponent(query)}`;
+
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': apiKey,
+            'x-rapidapi-host': 'beer9.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`API gaf een fout: ${response.status}`);
+        }
+        
+
+        const result = await response.json();
+        console.log('API Response:', JSON.stringify(result, null, 2));
+
+        // Check of de data goed is en haal de echte beer data eruit
+        const beers = result.data && Array.isArray(result.data) ? result.data : [];
+
+        if (beers.length === 0) {
+            console.log("Geen resultaten gevonden");
+            return res.render('results', { beers: [], query });
+        }
+
+        console.log('Beers data:', beers);
+
+        // Render de resultatenpagina met de data
+        res.render('results', { beers, query });
+
+    } catch (error) {
+        console.error('API error:', error.message);
+        res.status(500).send('Er ging iets mis bij het ophalen van de bieren...');
     }
 });
 
@@ -91,3 +161,6 @@ app.post('/registreren', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
+
+
+
