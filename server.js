@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
@@ -15,8 +16,10 @@ const saltRounds = 10;
 
 // Middleware
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+
 
 // Sessieconfiguratie
 app.use(session({
@@ -88,6 +91,11 @@ app.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/login');
     });
+});
+
+// Route voor de quizpagina
+app.get('/testquiz', (req, res) => {
+    res.render('testquiz', { title: "TestQuiz", message: "Doe de Quiz!" });
 });
 
 
