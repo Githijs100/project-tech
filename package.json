@@ -17,14 +17,15 @@
   },
   "homepage": "https://github.com/Githijs100/project-tech#readme",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "mongodb": "^6.14.2",
     "mongoose": "^8.12.2",
-    "node-fetch": "^2.7.0",
+    "mongoose": "^8.13.0",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.9",
     "validator": "^13.12.0"
   },
