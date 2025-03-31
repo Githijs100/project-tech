@@ -5,6 +5,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
 
+
 dotenv.config();
 
 const app = express();
@@ -93,11 +94,10 @@ app.get('/logout', (req, res) => {
     });
 });
 
-// Route voor de quizpagina
+
 app.get('/testquiz', (req, res) => {
     res.render('testquiz', { title: "TestQuiz", message: "Doe de Quiz!" });
 });
-
 
 app.get('/search', async (req, res) => {
     const query = req.query.query;
@@ -170,5 +170,4 @@ app.post('/registreren', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
-
 
