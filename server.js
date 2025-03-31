@@ -1,127 +1,71 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8000;
+const uri = process.env.URI;
 const apiKey = process.env.API_KEY;
 const User = require('./models/user');
 const saltRounds = 10;
 
-// Stel EJS in als template engine
+// Middleware
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-// Start de server op poort 8000
-app.listen(8000, () => {
-    console.log('Server draait op http://localhost:8000');
-});
+// Sessieconfiguratie
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'geheim', // Gebruik een veilige secret in productie
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: process.env.NODE_ENV === 'production' } // Secure cookie in productie
+}));
 
-const dotenv = require("dotenv")
-dotenv.config()
-console.log("API key:", apiKey)
-
+// Navigatie Middleware
 app.use((req, res, next) => {
     res.locals.currentPath = req.path;
     res.locals.navItems = [
-      { path: '/feed', label: 'Feed', activeImage: 'images/feed-act.png', inactiveImage: 'images/feed-inact.png' },
-      { path: '/', label: 'Home', activeImage: 'images/home-act.png', inactiveImage: 'images/home-inact.png' },
-      { path: '/profiel', label: 'Profile', activeImage: 'images/profile-act.png', inactiveImage: 'images/profile-inact.png' }
+        { path: '/feed', label: 'Feed', activeImage: 'images/feed-act.png', inactiveImage: 'images/feed-inact.png' },
+        { path: '/', label: 'Home', activeImage: 'images/home-act.png', inactiveImage: 'images/home-inact.png' },
+        { path: '/profiel', label: 'Profile', activeImage: 'images/profile-act.png', inactiveImage: 'images/profile-inact.png' }
     ];
     next();
-  });
-
-// Route voor de homepagina (Hello World)
-app.get('/', (req, res) => {
-    res.render('index');
 });
 
-app.get('/quiz', (req, res) => {
-    res.render('index');
-      res.render('quiz');
-});
-app.get('/profiel', (req, res) => {
-    res.render('profiel');
-});
-app.get('/feed', (req, res) => {
-    res.render('feed');
-});
-
-
-
-
-  
-  
-
-// Route voor de loginpagina
-app.get('/login', (req, res) => {
-    res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" });
-});
-// ✅ Sessiemiddleware instellen
-app.use(session({
-    secret: 'geheim', // Zorg ervoor dat je een veilige key gebruikt in productie!
-    resave: false,
-    saveUninitialized: false
-}));
-
-// ✅ Verbinden met MongoDB
+// Database Connectie
 async function connectDB() {
     try {
-        await mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true });
-        console.log("✅ Verbonden met MongoDB");
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log('✅ Verbonden met MongoDB via Mongoose');
     } catch (err) {
-        console.error("❌ Kan niet verbinden met MongoDB:", err);
+        console.error('❌ Kan niet verbinden met MongoDB:', err);
         process.exit(1);
     }
 }
+
 connectDB();
 
-// ✅ Middleware
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'geheim',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false, httpOnly: true, sameSite: 'strict' }
-}));
-
-// ✅ Routes
+// Routes
 app.get('/', (req, res) => res.render('index'));
-app.get('/quizen', (req, res) => {
-    const quizzes = [
-        { title: 'Persoonlijkheid' },
-        { title: 'Spirit-Animal' },
-        { title: 'Historisch figuur' },
-        { title: 'Muzieksmaak' },
-    ];
-    res.render('quizen', { quizzes });
-});
-app.get('/feed', (req, res) => res.render('feed'));
-app.get('/login', (req, res) => res.render('login', { title: "Loginpagina", message: "Welkom op mijn website" }));
-app.get('/registreren', (req, res) => res.render('registreren', { title: "Registreer", message: "Maak een nieuw account aan" }));
-
-// ✅ Registratie Route
-app.post('/registreren', async (req, res) => {
-    const { username, email, password } = req.body;
-    try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) return res.status(400).send("❌ Gebruiker bestaat al");
-        
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        const newUser = new User({ username, email, password: hashedPassword });
-        await newUser.save();
-        req.session.userId = newUser._id;
-        res.redirect('/profiel');
-    } catch (err) {
-        res.status(500).send("❌ Fout bij registratie: " + err.message);
+app.get('/quiz', (req, res) => res.render('quiz'));
+app.get('/profiel', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login');
     }
-});
+    try {
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            return res.redirect('/login');
+        }
+        res.render('profiel', { username: user.username, email: user.email });
+    } catch (err) {
+        console.error('❌ Fout bij ophalen profiel:', err);
+        res.status(500).send('Er is een fout opgetreden.');
 
 // ✅ Login Route
 app.post('/login', async (req, res) => {
@@ -145,19 +89,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-// ✅ Profielpagina (beveiligd)
-app.get('/profiel', async (req, res) => {
-    if (!req.session.userId) return res.redirect('/login');
-    try {
-        const user = await User.findById(req.session.userId);
-        if (!user) return res.redirect('/login');
-        res.render('profiel', { username: user.username, email: user.email });
-    } catch (err) {
-        res.status(500).send('❌ Fout bij ophalen van profiel');
-    }
-});
 
-// ✅ Zoekfunctionaliteit (API)
 app.get('/search', async (req, res) => {
     const query = req.query.query;
 
@@ -204,17 +136,31 @@ app.get('/search', async (req, res) => {
         console.error('API error:', error.message);
         res.status(500).send('Er ging iets mis bij het ophalen van de bieren...');
     }
-    
-    
-
 });
 
+app.get('/feed', (req, res) => res.render('feed'));
+app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
+app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
 
-// ✅ Start de server
+// Registratie Route
+app.post('/registreren', async (req, res) => {
+    const { username, email, password } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const newUser = new User({ username, email, password: hashedPassword });
+        await newUser.save();
+        req.session.userId = newUser._id;
+        res.redirect('/profiel');
+    } catch (err) {
+        console.error('❌ Fout bij registratie:', err);
+        res.status(500).send('❌ Fout bij registratie: ' + err.message);
+    }
+});
+
+// Server Start
 app.listen(port, () => {
-    console.log(`🚀 Server draait op http://localhost:${port}`);
+    console.log(`Server draait op http://localhost:${port}`);
 });
-// // ✅ Start de server
-// app.listen(port, () => {
-//     console.log(`🚀 Server draait op http://localhost:${port}`);
-// });
+
+
+
