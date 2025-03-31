@@ -46,5 +46,23 @@
     <footer>
         <%- include('partials/footer'); %>
     </footer>    
+    <script>
+        document.querySelector('.search-button').addEventListener('click', () => {
+            const query = document.querySelector('.search-input').value;
+            if (query.trim() !== "") {
+                window.location.href = `/search?query=${encodeURIComponent(query)}`;
+            }
+        });
+    
+        document.querySelector('.search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = e.target.value;
+                if (query.trim() !== "") {
+                    window.location.href = `/search?query=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+    </script>
+    
 </body>
 </html>
