@@ -73,10 +73,13 @@ app.get('/profiel', async (req, res) => {
     }
 });
 // ✅ Login Route
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+app.post('/login', async (req, res) => {  // Maak de functie async
+    console.log("✅ Ontvangen login poging!", req.body);
+    
+    const { username, password } = req.body; // Haal email en password uit req.body
+
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ username });
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).send("❌ Ongeldige inloggegevens");
         }
