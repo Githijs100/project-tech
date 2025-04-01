@@ -149,7 +149,11 @@ app.get('/search', async (req, res) => {
 
 app.get('/feed', (req, res) => res.render('feed'));
 app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
 app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
+
 
 // Registratie Route
 app.post('/registreren', async (req, res) => {
@@ -163,6 +167,36 @@ app.post('/registreren', async (req, res) => {
     } catch (err) {
         console.error('❌ Fout bij registratie:', err);
         res.status(500).send('❌ Fout bij registratie: ' + err.message);
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { name, password } = req.body;
+    console.log("📩 Ontvangen login request met:", req.body);
+
+    try {
+        const user = await User.findOne({ username: name });
+        if (!user) {
+            console.log("❌ Geen gebruiker gevonden voor username:", name);
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        console.log("✅ Gebruiker gevonden:", user.username);
+
+        const match = await bcrypt.compare(password, user.password);
+        console.log("🔑 Wachtwoord correct?", match);
+
+        if (!match) {
+            console.log("❌ Wachtwoord komt niet overeen.");
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        req.session.userId = user._id;
+        console.log("✅ Inloggen gelukt! Gebruiker ID:", user._id);
+        res.redirect('/profiel');
+    } catch (err) {
+        console.error("❌ Fout bij inloggen:", err);
+        res.status(500).send("Interne serverfout");
     }
 });
 
