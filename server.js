@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 // Database Connectie
 async function connectDB() {
     try {
-        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(uri);
         console.log('✅ Verbonden met MongoDB via Mongoose');
     } catch (err) {
         console.error('❌ Kan niet verbinden met MongoDB:', err);
@@ -56,7 +56,7 @@ connectDB();
 
 // Routes
 app.get('/', (req, res) => res.render('index'));
-app.get('/quiz', (req, res) => res.render('quiz'));
+app.get('/testquiz', (req, res) => res.render('testquiz'));
 app.get('/profiel', async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login');
@@ -170,4 +170,30 @@ app.post('/registreren', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
+
+app.post('/save-beer', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Je moet ingelogd zijn om een biertje op te slaan' });
+    }
+
+    const { name, country, abv, category, image } = req.body;
+
+    try {
+        const user = await User.findById(req.session.userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Gebruiker niet gevonden' });
+        }
+
+        // Voeg het biertje toe aan de savedBeers-array
+        user.savedBeers.push({ name, country, abv, category, image });
+        await user.save();
+
+        res.json({ message: 'Bier succesvol opgeslagen!' });
+    } catch (err) {
+        console.error('Fout bij opslaan van bier:', err);
+        res.status(500).json({ message: 'Interne serverfout' });
+    }
+});
+
 

@@ -74,7 +74,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (filteredBeers.length > 0) {
             const recommendedBeer = filteredBeers[Math.floor(Math.random() * filteredBeers.length)];
-            quizContainer.innerHTML += `<p>${recommendedBeer.name} uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_3}</p>`;
+        
+            quizContainer.innerHTML += `
+                <p>${recommendedBeer.name} uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_3}</p>
+                <img src="${recommendedBeer.image}" alt="${recommendedBeer.name}" width="200">
+                <br>
+                <button onclick="saveBeer('${recommendedBeer.name}', '${recommendedBeer.country}', '${recommendedBeer.abv}', '${recommendedBeer.sub_category_3}', '${recommendedBeer.image}')">
+                    Sla op
+                </button>
+            `;
         } else {
             quizContainer.innerHTML += "<p>Geen passende bieren gevonden. Probeer andere keuzes!</p>";
         }
@@ -82,3 +90,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadBeers();
 });
+
+async function saveBeer(name, country, abv, category, image) {
+    try {
+        const response = await fetch('/save-beer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, country, abv, category, image })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+    } catch (error) {
+        console.error("Fout bij opslaan:", error);
+    }
+}
