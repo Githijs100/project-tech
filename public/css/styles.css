@@ -507,13 +507,32 @@ a.active{
     position: relative; /* Needed for absolute positioning of icons/button */
 
 }
-.post-image i{
+.far.fa-bookmark{
     position: absolute;
     top: 15rem;
     right: 2rem; 
     font-size: 2em; 
     color: white; 
 }
+.fas.fa-bookmark{
+    position: absolute;
+    top: 15rem;
+    right: 2rem; 
+    font-size: 2em; 
+    color: gold; 
+    transition: transform .8s ease, opacity .1s ease; /* Smooth transition */
+    transform: translate(-2rem, 24rem) scale(0.5); /* Adjust values as needed */
+    opacity: 50%;
+}
+.fa-bookmark.fas.stationary {
+    position: absolute;
+    top: -10rem;
+    right: -.75rem;
+    font-size: 4rem;
+    color: gold;
+    opacity: 100%;
+}
+
 
 .post-image a{
     position: absolute;
