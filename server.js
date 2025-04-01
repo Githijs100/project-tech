@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 // Database Connectie
 async function connectDB() {
     try {
-        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(uri);
         console.log('✅ Verbonden met MongoDB via Mongoose');
     } catch (err) {
         console.error('❌ Kan niet verbinden met MongoDB:', err);
@@ -56,7 +56,7 @@ connectDB();
 
 // Routes
 app.get('/', (req, res) => res.render('index'));
-app.get('/quiz', (req, res) => res.render('quiz'));
+app.get('/testquiz', (req, res) => res.render('testquiz'));
 app.get('/profiel', async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login');
