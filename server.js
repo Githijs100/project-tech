@@ -74,9 +74,9 @@ app.get('/profiel', async (req, res) => {
 });
 // ✅ Login Route
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ username });
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).send("❌ Ongeldige inloggegevens");
         }
@@ -163,6 +163,36 @@ app.post('/registreren', async (req, res) => {
     } catch (err) {
         console.error('❌ Fout bij registratie:', err);
         res.status(500).send('❌ Fout bij registratie: ' + err.message);
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { name, password } = req.body;
+    console.log("📩 Ontvangen login request met:", req.body);
+
+    try {
+        const user = await User.findOne({ username: name });
+        if (!user) {
+            console.log("❌ Geen gebruiker gevonden voor username:", name);
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        console.log("✅ Gebruiker gevonden:", user.username);
+
+        const match = await bcrypt.compare(password, user.password);
+        console.log("🔑 Wachtwoord correct?", match);
+
+        if (!match) {
+            console.log("❌ Wachtwoord komt niet overeen.");
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        req.session.userId = user._id;
+        console.log("✅ Inloggen gelukt! Gebruiker ID:", user._id);
+        res.redirect('/profiel');
+    } catch (err) {
+        console.error("❌ Fout bij inloggen:", err);
+        res.status(500).send("Interne serverfout");
     }
 });
 
