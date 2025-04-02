@@ -74,9 +74,9 @@ app.get('/profiel', async (req, res) => {
 });
 // ✅ Login Route
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ username });
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).send("❌ Ongeldige inloggegevens");
         }
