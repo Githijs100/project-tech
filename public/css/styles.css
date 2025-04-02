@@ -625,7 +625,7 @@ a.active{
     position: relative; /* New - establishes positioning context */
     display: flex;
     justify-content: center;
-    align-items: flex-end;-
+    align-items: flex-end;
   }
     
   .glass {
