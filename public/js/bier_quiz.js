@@ -16,7 +16,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function showQuestion() {
         const quizContainer = document.getElementById("quiz");
         quizContainer.innerHTML = "";
-
+        const questionIndexEl = document.getElementById("question-index");
+        const innerElement = document.querySelector('.inner'); // Get inner element
+    
+        // Update question number and classes
+        questionIndexEl.textContent = `Vraag ${currentStep + 1}`;
+        
+        // Remove previous inner classes
+        innerElement.classList.remove("inner1", "inner2", "inner3", "inner4");
+        // Add current question class
+        innerElement.classList.add(`inner${currentStep + 1}`);
         const questionData = [
             {
                 text: "Wat voor eten heb je zin in?",
@@ -43,13 +52,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (currentStep < questionData.length) {
             const question = questionData[currentStep];
-            const questionEl = document.createElement("h3");
+            const questionEl = document.createElement("h2");
             questionEl.textContent = question.text;
             quizContainer.appendChild(questionEl);
 
-            question.options.forEach(option => {
+            question.options.forEach((option, index) => {
                 const button = document.createElement("button");
-                button.textContent = option;
+                const letter = String.fromCharCode(65 + index);
+                button.textContent = `${letter}. ${option}`;
                 button.onclick = () => {
                     userChoices[question.key] = option;
                     currentStep++;
