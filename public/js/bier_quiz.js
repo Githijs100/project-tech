@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const questionData = [
             {
                 text: "Wat voor eten heb je zin in?",
-                options: ["Spicy chicken wings", "Grilled shrimp tacos", "Margherita pizza"],
+                options: [...new Set(beerData.flatMap(beer => beer.food_pairing))],
                 key: "food_pairing"
             },
             {
@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 text: "Welke biersoort wil je proberen?",
-                options: [...new Set(beerData.map(beer => beer.sub_category_3))], 
+                options: [...new Set(beerData.map(beer => beer.sub_category_2))], 
                 
-                key: "sub_category_3"
+                key: "sub_category_2"
             }
         ];
 
