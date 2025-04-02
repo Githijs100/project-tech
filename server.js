@@ -73,10 +73,13 @@ app.get('/profiel', async (req, res) => {
     }
 });
 // ✅ Login Route
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+app.post('/login', async (req, res) => {  // Maak de functie async
+    console.log("✅ Ontvangen login poging!", req.body);
+    
+    const { username, password } = req.body; // Haal email en password uit req.body
+
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ username });
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).send("❌ Ongeldige inloggegevens");
         }
@@ -149,7 +152,11 @@ app.get('/search', async (req, res) => {
 
 app.get('/feed', (req, res) => res.render('feed'));
 app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
 app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
+
 
 // Registratie Route
 app.post('/registreren', async (req, res) => {
@@ -166,8 +173,64 @@ app.post('/registreren', async (req, res) => {
     }
 });
 
+app.post('/login', async (req, res) => {
+    const { name, password } = req.body;
+    console.log("📩 Ontvangen login request met:", req.body);
+
+    try {
+        const user = await User.findOne({ username: name });
+        if (!user) {
+            console.log("❌ Geen gebruiker gevonden voor username:", name);
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        console.log("✅ Gebruiker gevonden:", user.username);
+
+        const match = await bcrypt.compare(password, user.password);
+        console.log("🔑 Wachtwoord correct?", match);
+
+        if (!match) {
+            console.log("❌ Wachtwoord komt niet overeen.");
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        req.session.userId = user._id;
+        console.log("✅ Inloggen gelukt! Gebruiker ID:", user._id);
+        res.redirect('/profiel');
+    } catch (err) {
+        console.error("❌ Fout bij inloggen:", err);
+        res.status(500).send("Interne serverfout");
+    }
+});
+
 // Server Start
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
+
+app.post('/save-beer', async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Je moet ingelogd zijn om een biertje op te slaan' });
+    }
+
+    const { name, country, abv, category, image } = req.body;
+
+    try {
+        const user = await User.findById(req.session.userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Gebruiker niet gevonden' });
+        }
+
+        // Voeg het biertje toe aan de savedBeers-array
+        user.savedBeers.push({ name, country, abv, category, image });
+        await user.save();
+
+        res.json({ message: 'Bier succesvol opgeslagen!' });
+    } catch (err) {
+        console.error('Fout bij opslaan van bier:', err);
+        res.status(500).json({ message: 'Interne serverfout' });
+    }
+});
+
 
