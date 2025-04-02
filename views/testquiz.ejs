@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bier Quiz</title>
+    <%- include('partials/head'); %>
 </head>
 <body>
-    <h1>Welke bier past bij jou?</h1>
-    <div id="quiz">
-        <button onclick="startQuiz()">Laden...</button>
-    </div>
+    <header>
+        <%- include('partials/header'); %>
+    </header>
+    <main>
+        <h1>Bier quiz</h1>
+        <hr class="dunneLijn">    
+        <h3 id="question-index">Vraag 1</h3>
+        <div id="quiz">
+            <button onclick="startQuiz()">Laden...</button>
+        </div>
 
+    </main>
+    <footer>
+        <%- include('partials/footer'); %>
+        </footer>
+        <div class="glass-container">
+            <div class="glass">
+              <div class="inner"></div>
+            </div>
+            <div class="handle"></div> <!-- Moved outside .glass -->
+          </div>
+          
+          
     <script src="/js/bier_quiz.js"></script>  <!-- ✅ Correct pad naar JS-bestand -->
 </body>
 </html>
+
