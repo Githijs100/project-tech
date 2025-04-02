@@ -47,7 +47,6 @@ async function connectDB() {
         process.exit(1);
     }
 }
-
 connectDB();
 
 // Routes
