@@ -11,6 +11,12 @@ const UserSchema = new mongoose.Schema({
         abv: String,
         image: String 
     }]
+    password: { type: String, required: true },
+
+    savedBeers: [{
+        type: String, // De SKU van het bier
+        ref: 'Beer'   // Verwijst naar het Beer model (optioneel, afhankelijk van je implementatie)
+    }]
 });
 
 const User = mongoose.model('User', UserSchema);
