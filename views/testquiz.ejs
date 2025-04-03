@@ -11,23 +11,28 @@
         <h1>Bier quiz</h1>
         <hr class="dunneLijn">    
         <h3 id="question-index">Vraag 1</h3>
-        <div id="quiz">
-            <button onclick="startQuiz()">Laden...</button>
+        <div class="quizOverlay">
+            <div id="quiz">
+                <button onclick="startQuiz()">Laden...</button>
+            </div>
         </div>
 
     </main>
+    <div class="glass-container">
+            <div class="glass">
+                <div class="inner">
+                </div>
+            </div>
+        <div class="handle">
+            
+        </div>
+    </div>
     <footer>
         <%- include('partials/footer'); %>
         </footer>
-        <div class="glass-container">
-            <div class="glass">
-              <div class="inner"></div>
-            </div>
-            <div class="handle"></div> <!-- Moved outside .glass -->
-          </div>
-          
-          
     <script src="/js/bier_quiz.js"></script>  <!-- ✅ Correct pad naar JS-bestand -->
+    <script src="/js/index.js"></script>  <!-- ✅ Correct pad naar JS-bestand -->
+
 </body>
 </html>
 
