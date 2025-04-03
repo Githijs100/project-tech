@@ -87,6 +87,20 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// bookmark
+app.post('/save-beer', async (req, res) => {
+    const { beerId } = req.body;
+    try {
+      const collection = db.collection('saved_beers');
+      await collection.insertOne({ beerId, savedAt: new Date() });
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
+  });
+
+  
 // ✅ Uitlog Route
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {

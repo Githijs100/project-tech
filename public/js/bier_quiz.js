@@ -74,8 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showResult() {
         const quizContainer = document.getElementById("quiz");
-        quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3>";
-
+        quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3> ";
         //elke keer als de gebruiker een vraag beantwoord - wordt deze opgeslagen
         let filteredBeers = beerData.filter(beer =>
             (!userChoices.food_pairing || beer.food_pairing.includes(userChoices.food_pairing)) &&
@@ -89,7 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const recommendedBeer = filteredBeers[Math.floor(Math.random() * filteredBeers.length)];
             quizContainer.innerHTML += `
                 <p>${recommendedBeer.name} uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_3}</p>
-                <img src="${recommendedBeer.image}" alt="${recommendedBeer.name}" width="200">
+                <img src="${recommendedBeer.image}" alt="${recommendedBeer.name}" width="200"> <i class="far fa-bookmark" data-beer-id="<%= beer._id %>"></i>
+
             `;
         } else {
             quizContainer.innerHTML += "<p>Geen passende bieren gevonden. Probeer andere keuzes!</p>";
