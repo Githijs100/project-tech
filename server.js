@@ -92,27 +92,33 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// bookmark
+// routes voor opslaan van een bier in het profiel van de gebruiker
 app.post('/save-beer', async (req, res) => {
-    const { beerId } = req.body;
-    try {
-      const collection = db.collection('saved_beers');
-      await collection.insertOne({ beerId, savedAt: new Date() });
-      res.sendStatus(200);
-    } catch (err) {
-      console.error(err);
-      res.sendStatus(500);
-    }
-  });
+    const { beerId } = req.body; // Het bier dat we willen opslaan
 
-  app.get("/api/bieren", async (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).send("❌ Je moet ingelogd zijn om een bier op te slaan.");
+    }
+
     try {
-        const beers = await Beer.find(); // Haal alle bieren op uit MongoDB
-        res.json(beers);
-    } catch (error) {
-        res.status(500).json({ error: "Fout bij ophalen van bieren" });
+        // Zoek de gebruiker in de database
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            return res.status(404).send("❌ Gebruiker niet gevonden.");
+        }
+
+        // Voeg de SKU van het bier toe aan de lijst van opgeslagen bieren
+        user.savedBeers.push(beerId);
+
+        // Sla de gebruiker op met het bijgewerkte profiel
+        await user.save();
+        res.status(200).send({ message: "🍺 Biertje opgeslagen in favorieten!" });
+    } catch (err) {
+        console.error("❌ Fout bij opslaan van bier:", err);
+        res.status(500).send("❌ Er is een fout opgetreden bij het opslaan.");
     }
 });
+
 
 
   
@@ -237,6 +243,9 @@ app.get('/profiel', async (req, res) => {
         }
 
         console.log("✅ Gebruiker gevonden:", user.username, user.email); // Debug info
+
+         // Stuur de gebruiker naar het profiel en geef de opgeslagen bieren mee
+         res.render('profiel', { user, savedBeers: user.savedBeers });
 
         res.render('profiel', { user }); // Stuur user naar EJS
     } catch (err) {
