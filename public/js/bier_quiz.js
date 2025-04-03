@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3>";
 
         // Filter bieren op basis van de keuzes van de gebruiker
-        let filteredBeers = beerData.filter(beer =>
+        let filteredBeers = beerData.beers.filter(beer =>
             (!userChoices.food_pairing || beer.food_pairing.includes(userChoices.food_pairing)) &&
             (!userChoices.country || beer.country === userChoices.country) &&
             (!userChoices.alcohol || (userChoices.alcohol === "Mild" ? parseFloat(beer.abv) < 7 : parseFloat(beer.abv) >= 7)) &&
@@ -106,19 +106,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function saveBeerToFavorites(beerId) {
-        fetch("/api/favorites", {
+        fetch("/save-beer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ beerId }),
         })
-            .then(response => response.json())
-            .then(data => {
-                alert("🍺 Biertje opgeslagen in favorieten!");
-            })
-            .catch(error => console.error("❌ Fout bij opslaan:", error));
+        .then(response => response.json())
+        .then(data => {
+            alert("🍺 Biertje opgeslagen in favorieten!");
+        })
+        .catch(error => {
+            console.error("❌ Fout bij opslaan:", error);
+        });
     }
+    
 
     loadBeers();
 });
