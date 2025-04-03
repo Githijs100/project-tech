@@ -167,11 +167,11 @@ app.post('/registreren', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { name, password } = req.body;
+    const { username, password } = req.body;
     console.log("📩 Ontvangen login request met:", req.body);
 
     try {
-        const user = await User.findOne({ username: name });
+        const user = await User.findOne({ username });
         if (!user) {
             console.log("❌ Geen gebruiker gevonden voor username:", name);
             return res.status(401).send("Ongeldige inloggegevens");
@@ -195,6 +195,28 @@ app.post('/login', async (req, res) => {
         res.status(500).send("Interne serverfout");
     }
 });
+
+app.get('/profiel', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Stuur gebruiker naar login als hij niet is ingelogd
+    }
+
+    try {
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            return res.redirect('/login');
+        }
+
+        console.log("✅ Gebruiker gevonden:", user.username, user.email); // Debug info
+
+        res.render('profiel', { user }); // Stuur user naar EJS
+    } catch (err) {
+        console.error("❌ Fout bij ophalen profiel:", err);
+        res.status(500).send("Interne serverfout");
+    }
+});
+
+
 
 // Server Start
 app.listen(port, () => {
