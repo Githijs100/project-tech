@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3>";
 
         // Filter bieren op basis van de keuzes van de gebruiker
-        let filteredBeers = beerData.filter(beer =>
+        let filteredBeers = beerData.beers.filter(beer =>
             (!userChoices.food_pairing || beer.food_pairing.includes(userChoices.food_pairing)) &&
             (!userChoices.country || beer.country === userChoices.country) &&
             (!userChoices.alcohol || (userChoices.alcohol === "Mild" ? parseFloat(beer.abv) < 7 : parseFloat(beer.abv) >= 7)) &&
