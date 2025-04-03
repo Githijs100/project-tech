@@ -8,10 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch("bieren.json"); // ✅ Haalt bieren op uit MongoDB
             beerData = await response.json();
             console.log("📢 Bieren geladen:", beerData); // Debugging
+            // console.log("pairing:", beerData[0][food_pairing]);
             showQuestion();
         } catch (error) {
             console.error("❌ Fout bij laden van de bieren:", error);
         }
+
     }
 
     function showQuestion() {
@@ -26,15 +28,16 @@ document.addEventListener("DOMContentLoaded", function () {
         // Update class voor animatie
         innerElement.className = `inner inner${currentStep + 1}`;
 
+    
         const questionData = [
             {
                 text: "Wat voor eten heb je zin in?",
-                options: [...new Set(beerData.flatMap(beer => beer.food_pairing))],
+                options: [...new Set(beerData.beers.map(beer => beer.food_pairing))],
                 key: "food_pairing",
             },
             {
                 text: "Uit welk land wil je dat het biertje komt?",
-                options: [...new Set(beerData.map(beer => beer.country))],
+                options: [...new Set(beerData.beers.map(beer => beer.country))],
                 key: "country",
             },
             {
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             {
                 text: "Welke biersoort wil je proberen?",
-                options: [...new Set(beerData.map(beer => beer.sub_category_2))],
+                options: [...new Set(beerData.beers.map(beer => beer.sub_category_2))],
                 key: "sub_category_2",
             },
         ];
