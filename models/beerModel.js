@@ -28,3 +28,5 @@ const beerSchema = new mongoose.Schema({
 const Beer = mongoose.model("Beer", beerSchema);
 
 module.exports = Beer;
+
+
