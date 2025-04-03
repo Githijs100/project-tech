@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
     let userChoices = {};
 
+
+
     async function loadBeers() {
         try {
             const response = await fetch("bieren.json"); // ✅ Haalt bieren op uit MongoDB
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (filteredBeers.length > 0) {
             const recommendedBeer = filteredBeers[Math.floor(Math.random() * filteredBeers.length)];
             quizContainer.innerHTML += `
-                <p><strong>${recommendedBeer.name}</strong> uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_2}</p>
+                <p><strong>${recommendedBeer.name}</strong> uit: ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_2}</p>
                 <img src="${recommendedBeer.image}" alt="${recommendedBeer.name}" width="200">
                 <button class="bookmark-btn" data-beer-id="${recommendedBeer._id}">
                     <i class="far fa-bookmark"></i> Opslaan

@@ -1,13 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const beerSchema = new mongoose.Schema({
-    name: String,
-    country: String,
-    abv: Number,
-    food_pairing: String,
-    sub_category_2: String,
-    image: String
+const BeerSchema = new mongoose.Schema({
+    sku: { type: String, required: true, unique: true }, // Unieke identifier voor het bier
+    name: { type: String, required: true },             // Naam van het bier
 });
 
-module.exports = mongoose.model("Beer", beerSchema);
+const Beer = mongoose.model('Beer', BeerSchema);
+
+module.exports = Beer;
+
 

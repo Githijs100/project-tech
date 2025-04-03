@@ -6,8 +6,8 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
 
     savedBeers: [{
-        type: String, // De SKU van het bier
-        ref: 'Beer'   // Verwijst naar het Beer model (optioneel, afhankelijk van je implementatie)
+        type: mongoose.Schema.Types.ObjectId, // Verwijst naar een ander document
+        ref: 'Beer'                           // Verwijst naar het Beer-model
     }]
 });
 

@@ -9,6 +9,7 @@ const Beer = require("./models/beerModel"); // Zorg ervoor dat je een Beer-model
 
 
 
+
 dotenv.config();
 
 const app = express();
@@ -112,6 +113,7 @@ app.post('/save-beer', async (req, res) => {
 
         // Sla de gebruiker op met het bijgewerkte profiel
         await user.save();
+        $addToSet: { savedBeers: beerId } // Voorkomt dubbele opslag
         res.status(200).send({ message: "🍺 Biertje opgeslagen in favorieten!" });
     } catch (err) {
         console.error("❌ Fout bij opslaan van bier:", err);
@@ -119,9 +121,27 @@ app.post('/save-beer', async (req, res) => {
     }
 });
 
+async function getUserWithSavedBeers(userId) {
+    try {
+        const user = await User.findById(userId).populate('savedBeers'); // Populate haalt gegevens uit het Beer-model op
+        console.log(user);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function saveBeerToUser(userId, beerId) {
+    try {
+        const user = await User.findById(userId);
+        user.savedBeers.push(beerId); // Voeg het beerId toe aan savedBeers
+        await user.save();
+        console.log('Biertje opgeslagen!');
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 
-  
 // ✅ Uitlog Route
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
