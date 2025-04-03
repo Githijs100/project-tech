@@ -50,7 +50,8 @@
         "serving_temp_f": "45-50° F",
         "serving_temp_c": "7.2-10.0° C",
         "beer_type": "",
-        "features": ""
+        "features": "",
+        "image": "/images/golden_ale.jpeg"
       },
       {
         "sku": "100198",
@@ -74,7 +75,8 @@
         "serving_temp_f": "45-50° F",
         "serving_temp_c": "7.2-10.0° C",
         "beer_type": "Craft",
-        "features": ""
+        "features": "",
+        "image": "/images/golden_ale.jpeg"
       },
       {
         "sku": "100201",
@@ -98,7 +100,8 @@
         "serving_temp_f": "45-50° F",
         "serving_temp_c": "7.2-10.0° C",
         "beer_type": "Craft, Seasonal",
-        "features": ""
+        "features": "",
+        "image": "/images/golden_ale.jpeg"
       },
       {
         "sku": "100206",
@@ -122,7 +125,8 @@
         "serving_temp_f": "45-50° F",
         "serving_temp_c": "7.2-10.0° C",
         "beer_type": "",
-        "features": ""
+        "features": "",
+        "image": "/images/golden_ale.jpeg"
       },
   
       {
@@ -147,7 +151,8 @@
         "serving_temp_f": "45-50° F",
         "serving_temp_c": "7.2-10.0° C",
         "beer_type": "",
-        "features": ""
+        "features": "",
+        "image": "/images/golden_ale.jpeg"
       },
   
         {
@@ -172,7 +177,8 @@
           "serving_temp_f": "",
           "serving_temp_c": "",
           "beer_type": "",
-          "features": ""
+          "features": "",
+          "image": "/images/pilsner.jpeg"
         },
         {
           "sku": "134872",
@@ -196,7 +202,8 @@
           "serving_temp_f": "",
           "serving_temp_c": "",
           "beer_type": "",
-          "features": ""
+          "features": "",
+          "image": "/images/pilsner.jpeg"
         },
         {
           "sku": "134873",
@@ -220,7 +227,8 @@
           "serving_temp_f": "",
           "serving_temp_c": "",
           "beer_type": "",
-          "features": ""
+          "features": "",
+          "image": "/images/pilsner.jpeg"
         },
         {
           "sku": "134874",
@@ -244,7 +252,8 @@
           "serving_temp_f": "",
           "serving_temp_c": "",
           "beer_type": "",
-          "features": ""
+          "features": "",
+          "image": "/images/pilsner.jpeg"
         },
         {
           "sku": "134875",
@@ -268,7 +277,8 @@
           "serving_temp_f": "",
           "serving_temp_c": "",
           "beer_type": "",
-          "features": ""
+          "features": "",
+          "image": "/images/pilsner.jpeg"
         },
         {
           "sku": "134876",
@@ -292,7 +302,8 @@
           "serving_temp_f": "",
           "serving_temp_c": "",
           "beer_type": "",
-          "features": ""
+          "features": "",
+          "image": "/images/pilsner.jpeg"
         },
 
             {
@@ -317,7 +328,8 @@
               "serving_temp_f": "45-50° F",
               "serving_temp_c": "7.2-10.0° C",
               "beer_type": "",
-              "features": ""
+              "features": "",
+              "image": "/images/ipa.jpeg"
             },
             {
               "sku": "100090",
@@ -341,7 +353,8 @@
               "serving_temp_f": "45-50° F",
               "serving_temp_c": "7.2-10.0° C",
               "beer_type": "",
-              "features": ""
+              "features": "",
+              "image": "/images/ipa.jpeg"
             },
               {
                 "sku": "100091",
@@ -365,7 +378,8 @@
                 "serving_temp_f": "45-50° F",
                 "serving_temp_c": "7.2-10.0° C",
                 "beer_type": "",
-                "features": ""
+                "features": "",
+                "image": "/images/ipa.jpeg"
               },
               {
                 "sku": "100094",
@@ -389,7 +403,8 @@
                 "serving_temp_f": "45-50° F",
                 "serving_temp_c": "7.2-10.0° C",
                 "beer_type": "",
-                "features": ""
+                "features": "",
+                "image": "/images/ipa.jpeg"
               },
               {
                 "sku": "100095",
@@ -413,7 +428,8 @@
                 "serving_temp_f": "45-50° F",
                 "serving_temp_c": "7.2-10.0° C",
                 "beer_type": "",
-                "features": ""
+                "features": "",
+                "image": "/images/ipa.jpeg"
               },
               {
                 "sku": "100103",
@@ -437,7 +453,8 @@
                 "serving_temp_f": "45-50° F",
                 "serving_temp_c": "7.2-10.0° C",
                 "beer_type": "",
-                "features": ""
+                "features": "",
+                "image": "/images/ipa.jpeg"
               },
                 {
                   "sku": "112897",
@@ -461,7 +478,8 @@
                   "serving_temp_f": "45-50° F",
                   "serving_temp_c": "7.2-10.0° C",
                   "beer_type": "",
-                  "features": ""
+                  "features": "",
+                  "image": "/images/brown_ale.jpeg"
                 },
                 {
                   "sku": "112989",
@@ -485,7 +503,8 @@
                   "serving_temp_f": "",
                   "serving_temp_c": "",
                   "beer_type": "",
-                  "features": ""
+                  "features": "",
+                  "image": "/images/brown_ale.jpeg"
                 },
                 {
                   "sku": "113838",
@@ -509,7 +528,8 @@
                   "serving_temp_f": "45-50° F",
                   "serving_temp_c": "7.2-10.0° C",
                   "beer_type": "",
-                  "features": ""
+                  "features": "",
+                  "image": "/images/ipa.jpeg"
                 },
                 {
                   "sku": "114001",
@@ -533,7 +553,8 @@
                   "serving_temp_f": "45-50° F",
                   "serving_temp_c": "7.2-10.0° C",
                   "beer_type": "",
-                  "features": ""
+                  "features": "",
+                  "image": "/images/ipa.jpeg"
                 },
                 {
                   "sku": "114308",
@@ -557,7 +578,8 @@
                   "serving_temp_f": "45-50° F",
                   "serving_temp_c": "7.2-10.0° C",
                   "beer_type": "",
-                  "features": ""
+                  "features": "",
+                  "image": "/images/ipa.jpeg"
                 },
                 {
                   "sku": "114487",
@@ -581,7 +603,8 @@
                   "serving_temp_f": "45-50° F",
                   "serving_temp_c": "7.2-10.0° C",
                   "beer_type": "",
-                  "features": ""
+                  "features": "",
+                  "image": "/images/ipa.jpeg"
                 },
 
                   {
@@ -606,7 +629,8 @@
                     "serving_temp_f": "50-55° F",
                     "serving_temp_c": "10.0-12.8° C",
                     "beer_type": "Craft",
-                    "features": ""
+                    "features": "",
+                    "image": "/images/saison.jpeg"
                   },
                   {
                     "sku": "102102",
@@ -630,7 +654,8 @@
                     "serving_temp_f": "50-55° F",
                     "serving_temp_c": "10.0-12.8° C",
                     "beer_type": "Craft",
-                    "features": ""
+                    "features": "",
+                    "image": "/images/saison.jpeg"
                   },
 
                   {
@@ -655,7 +680,8 @@
                     "serving_temp_f": "50-55° F",
                     "serving_temp_c": "10.0-12.8° C",
                     "beer_type": "Craft",
-                    "features": ""
+                    "features": "",
+                    "image": "/images/saison.jpeg"
                   },
                   {
                     "sku": "102150",
@@ -679,7 +705,8 @@
                     "serving_temp_f": "50-55° F",
                     "serving_temp_c": "10.0-12.8° C",
                     "beer_type": "Craft",
-                    "features": ""
+                    "features": "",
+                    "image": "/images/saison.jpeg"
                   },
                   {
                     "sku": "102168",
@@ -703,7 +730,8 @@
                     "serving_temp_f": "45-50° F",
                     "serving_temp_c": "7.2-10.0° C",
                     "beer_type": "",
-                    "features": ""
+                    "features": "",
+                    "image": "/images/saison.jpeg"
                   },
                   {
                     "sku": "102321",
@@ -727,7 +755,8 @@
                     "serving_temp_f": "45-50° F",
                     "serving_temp_c": "7.2-10.0° C",
                     "beer_type": "",
-                    "features": ""
+                    "features": "",
+                    "image": "/images/saison.jpeg"
                   },
 
                       {
@@ -752,7 +781,8 @@
                         "serving_temp_f": "",
                         "serving_temp_c": "",
                         "beer_type": "",
-                        "features": ""
+                        "features": "",
+                        "image": "/images/sour_ale.jpeg"
                       },
                       {
                         "sku": "121601",
@@ -776,7 +806,8 @@
                         "serving_temp_f": "",
                         "serving_temp_c": "",
                         "beer_type": "",
-                        "features": ""
+                        "features": "",
+                        "image": "/images/sour_ale.jpeg"
                       },
                       {
                         "sku": "121610",
@@ -800,7 +831,8 @@
                         "serving_temp_f": "",
                         "serving_temp_c": "",
                         "beer_type": "",
-                        "features": ""
+                        "features": "",
+                        "image": "/images/sour_ale.jpeg"
                       },
                       {
                         "sku": "121612",
@@ -824,7 +856,8 @@
                         "serving_temp_f": "",
                         "serving_temp_c": "",
                         "beer_type": "",
-                        "features": ""
+                        "features": "",
+                        "image": "/images/sour_ale.jpeg"
                       },
                       {
                         "sku": "121613",
@@ -848,7 +881,8 @@
                         "serving_temp_f": "",
                         "serving_temp_c": "",
                         "beer_type": "",
-                        "features": ""
+                        "features": "",
+                        "image": "/images/sour_ale.jpeg"
                       },
                       {
                         "sku": "121617",
@@ -872,7 +906,8 @@
                         "serving_temp_f": "",
                         "serving_temp_c": "",
                         "beer_type": "",
-                        "features": ""
+                        "features": "",
+                        "image": "/images/sour_ale.jpeg"
                       }
                     ]
                   }
