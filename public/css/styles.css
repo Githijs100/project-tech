@@ -575,52 +575,6 @@ a.active{
     justify-content: space-around;
 }
 
-
-/* .glass-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .glass {
-    position: relative;
-    width: 5rem;
-    height: 8rem;
-    background: rgba(150,150,150,0.5);
-    border: 10px solid lightgray;
-    border-top: none;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 18px 3px rgba(0,0,0,0.3);
-  }
-  
-  .inner {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0%;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(5px);
-    transition: height 0.3s;
-  }
-  
-  
-  
-  .glass2 {
-    position: relative;
-    width: 180px;
-    height: 245px;
-    background: rgba(150,150,150,0.5);
-    border: 10px solid lightgray;
-    border-top: none;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 18px 3px rgba(0,0,0,0.3);
-  }
-  
-
-  */
-
   .glass-container {
     position: relative; /* New - establishes positioning context */
     display: flex;
