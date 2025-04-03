@@ -106,19 +106,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function saveBeerToFavorites(beerId) {
-        fetch("/api/favorites", {
+        fetch("/save-beer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ beerId }),
         })
-            .then(response => response.json())
-            .then(data => {
-                alert("🍺 Biertje opgeslagen in favorieten!");
-            })
-            .catch(error => console.error("❌ Fout bij opslaan:", error));
+        .then(response => response.json())
+        .then(data => {
+            alert("🍺 Biertje opgeslagen in favorieten!");
+        })
+        .catch(error => {
+            console.error("❌ Fout bij opslaan:", error);
+        });
     }
+    
 
     loadBeers();
 });
