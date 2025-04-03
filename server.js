@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
+const Beer = require("./models/beerModel"); // Zorg ervoor dat je een Beer-model hebt
+
+
 
 
 dotenv.config();
@@ -20,6 +23,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 
 // Sessieconfiguratie
@@ -99,6 +104,16 @@ app.post('/save-beer', async (req, res) => {
       res.sendStatus(500);
     }
   });
+
+  app.get("/api/bieren", async (req, res) => {
+    try {
+        const beers = await Beer.find(); // Haal alle bieren op uit MongoDB
+        res.json(beers);
+    } catch (error) {
+        res.status(500).json({ error: "Fout bij ophalen van bieren" });
+    }
+});
+
 
   
 // ✅ Uitlog Route
@@ -229,8 +244,6 @@ app.get('/profiel', async (req, res) => {
         res.status(500).send("Interne serverfout");
     }
 });
-
-
 
 // Server Start
 app.listen(port, () => {

@@ -5,11 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadBeers() {
         try {
-            const response = await fetch("bieren.json");
+            const response = await fetch("bieren.json"); // ✅ Haalt bieren op uit MongoDB
             beerData = await response.json();
+            console.log("📢 Bieren geladen:", beerData); // Debugging
             showQuestion();
         } catch (error) {
-            console.error("Fout bij laden van de bieren:", error);
+            console.error("❌ Fout bij laden van de bieren:", error);
         }
     }
 
@@ -17,37 +18,35 @@ document.addEventListener("DOMContentLoaded", function () {
         const quizContainer = document.getElementById("quiz");
         quizContainer.innerHTML = "";
         const questionIndexEl = document.getElementById("question-index");
-        const innerElement = document.querySelector('.inner'); // Get inner element
-    
-        // Update question number and classes
+        const innerElement = document.querySelector(".inner");
+
+        // Update vraagnummer
         questionIndexEl.textContent = `Vraag ${currentStep + 1}`;
-        
-        // Remove previous inner classes
-        innerElement.classList.remove("inner1", "inner2", "inner3", "inner4");
-        // Add current question class
-        innerElement.classList.add(`inner${currentStep + 1}`);
+
+        // Update class voor animatie
+        innerElement.className = `inner inner${currentStep + 1}`;
+
         const questionData = [
             {
                 text: "Wat voor eten heb je zin in?",
                 options: [...new Set(beerData.flatMap(beer => beer.food_pairing))],
-                key: "food_pairing"
+                key: "food_pairing",
             },
             {
                 text: "Uit welk land wil je dat het biertje komt?",
-                options: [...new Set(beerData.map(beer => beer.country))], 
-                key: "country"
+                options: [...new Set(beerData.map(beer => beer.country))],
+                key: "country",
             },
             {
                 text: "Wil je een mild (<7%) of een sterk biertje (>7%)?",
                 options: ["Mild", "Sterk"],
-                key: "alcohol"
+                key: "alcohol",
             },
             {
                 text: "Welke biersoort wil je proberen?",
-                options: [...new Set(beerData.map(beer => beer.sub_category_2))], 
-                
-                key: "sub_category_2"
-            }
+                options: [...new Set(beerData.map(beer => beer.sub_category_2))],
+                key: "sub_category_2",
+            },
         ];
 
         if (currentStep < questionData.length) {
@@ -74,26 +73,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showResult() {
         const quizContainer = document.getElementById("quiz");
-        quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3> ";
-        //elke keer als de gebruiker een vraag beantwoord - wordt deze opgeslagen
+        quizContainer.innerHTML = "<h3>Jouw aanbevolen bier:</h3>";
+
+        // Filter bieren op basis van de keuzes van de gebruiker
         let filteredBeers = beerData.filter(beer =>
             (!userChoices.food_pairing || beer.food_pairing.includes(userChoices.food_pairing)) &&
             (!userChoices.country || beer.country === userChoices.country) &&
-            (!userChoices.alcohol || (userChoices.alcohol === "Mild" ? parseFloat(beer.abv) < 7 : parseFloat(beer.abv) >= 7)) && 
-            (!userChoices.sub_category_3 || beer.sub_category_3 === userChoices.sub_category_3)
+            (!userChoices.alcohol || (userChoices.alcohol === "Mild" ? parseFloat(beer.abv) < 7 : parseFloat(beer.abv) >= 7)) &&
+            (!userChoices.sub_category_2 || beer.sub_category_2 === userChoices.sub_category_2)
         );
-
 
         if (filteredBeers.length > 0) {
             const recommendedBeer = filteredBeers[Math.floor(Math.random() * filteredBeers.length)];
             quizContainer.innerHTML += `
-                <p>${recommendedBeer.name} uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_3}</p>
-                <img src="${recommendedBeer.image}" alt="${recommendedBeer.name}" width="200"> <i class="far fa-bookmark" data-beer-id="<%= beer._id %>"></i>
-
+                <p><strong>${recommendedBeer.name}</strong> uit ${recommendedBeer.country} - ${recommendedBeer.abv}% - ${recommendedBeer.sub_category_2}</p>
+                <img src="${recommendedBeer.image}" alt="${recommendedBeer.name}" width="200">
+                <button class="bookmark-btn" data-beer-id="${recommendedBeer._id}">
+                    <i class="far fa-bookmark"></i> Opslaan
+                </button>
             `;
         } else {
             quizContainer.innerHTML += "<p>Geen passende bieren gevonden. Probeer andere keuzes!</p>";
         }
+
+        // Bookmark functionaliteit
+        document.querySelector(".bookmark-btn")?.addEventListener("click", function () {
+            saveBeerToFavorites(this.getAttribute("data-beer-id"));
+        });
+    }
+
+    function saveBeerToFavorites(beerId) {
+        fetch("/api/favorites", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ beerId }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert("🍺 Biertje opgeslagen in favorieten!");
+            })
+            .catch(error => console.error("❌ Fout bij opslaan:", error));
     }
 
     loadBeers();
