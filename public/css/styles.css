@@ -588,7 +588,16 @@ a.active{
     overflow: hidden;
     box-shadow: 0 0 18px 3px rgba(0,0,0,0.3);
   }
-  
+
+.foutmelding {
+    background-color: #ffe0e0;
+    color: #b00020;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #b00020;
+    font-weight: bold;
+}
 
   .handle {
     position: absolute;

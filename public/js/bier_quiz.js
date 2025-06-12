@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadBeers() {
         try {
-            const response = await fetch("bieren.json"); // ✅ Haalt bieren op uit MongoDB
+            const response = await fetch("bieren.json"); 
             beerData = await response.json();
             console.log("📢 Bieren geladen:", beerData); // Debugging
             // console.log("pairing:", beerData[0][food_pairing]);

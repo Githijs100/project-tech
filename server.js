@@ -83,14 +83,19 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).send("❌ Ongeldige inloggegevens");
+            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens,<br> biertje teveel op?🥴" });
         }
         req.session.userId = user._id;
         res.redirect('/profiel');
     } catch (err) {
-        res.status(500).send("❌ Fout bij inloggen: " + err.message);
+        res.status(500).render('login', { foutmelding: "❌ Fout bij inloggen: " + err.message });
     }
 });
+
+app.get('/login', (req, res) => {
+    res.render('login', { foutmelding: null });
+});
+
 
 // routes voor opslaan van een bier in het profiel van de gebruiker
 app.post('/save-beer', async (req, res) => {
@@ -107,7 +112,6 @@ app.post('/save-beer', async (req, res) => {
             return res.status(404).send("❌ Gebruiker niet gevonden.");
         }
 
-        // Voeg de SKU van het bier toe aan de lijst van opgeslagen bieren
         user.savedBeers.push(beerId);
 
         // Sla de gebruiker op met het bijgewerkte profiel
