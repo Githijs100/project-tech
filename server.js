@@ -35,6 +35,17 @@ const sslOptions = {
   cert: fs.readFileSync('./ssl/cert.pem')
 };
 
+import fs from 'fs';
+import https from 'https';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const options = {
+  key: process.env.SSL_KEY.replace(/\\n/g, '\n'),
+  cert: process.env.SSL_CERT.replace(/\\n/g, '\n')
+};
+
 https.createServer(sslOptions, app).listen(8443, () => {
   console.log('✅ HTTPS server draait op https://localhost:8443');
 });
