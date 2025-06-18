@@ -9,7 +9,10 @@
 <body>
 
 <div class="login.container">
-    <h2>Inloggen</h2>
+    <% if (foutmelding) { %>
+        <div class="foutmelding"><%- foutmelding %></div>
+        <% } %>    
+    
     <form action="/login" method="POST">
         <input type="text" name="username" placeholder="Gebruikersnaam" required>
         <input type="password" name="password" placeholder="Wachtwoord" required>

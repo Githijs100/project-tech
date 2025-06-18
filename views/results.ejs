@@ -9,9 +9,11 @@
     </header>
     <main>
         <h1>Zoekresultaten voor "<%= query %>"</h1>
+        
         <div class="results-container">
             <% if (beers && beers.length > 0) { %>
                 <% beers.forEach(beer => { %>
+
                     <div class="beer-item">
                         <h2><%= beer.name %></h2>
                         <p><%= beer.style %></p>

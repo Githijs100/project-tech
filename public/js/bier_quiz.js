@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadBeers() {
         try {
-            const response = await fetch("bieren.json"); // ✅ Haalt bieren op uit MongoDB
+            const response = await fetch("bieren.json"); 
             beerData = await response.json();
             console.log("📢 Bieren geladen:", beerData); // Debugging
             // console.log("pairing:", beerData[0][food_pairing]);
@@ -113,14 +113,39 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify({ beerId }),
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(async (response) => {
+            if (response.status === 401) {
+                const errorText = await response.text(); // <-- Tekst uit server.js
+                alert(` ${errorText}`);
+                return;
+            }
+    
+            if (!response.ok) {
+                throw new Error("Er ging iets anders fout bij het opslaan.");
+            }
+    
+            const data = await response.json();
             alert("🍺 Biertje opgeslagen in favorieten!");
         })
         .catch(error => {
             console.error("❌ Fout bij opslaan:", error);
+            alert("❌ Er ging iets mis bij het opslaan van het biertje.");
         });
-    }
+    }    
+
+    function showPopup(message) {
+        const popup = document.getElementById("popup");
+        const popupMessage = document.getElementById("popup-message");
+      
+        popupMessage.textContent = message;
+        popup.style.display = "block";
+      
+        // Automatisch verbergen na 4 seconden
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 4000);
+      }
+      
     
 
     loadBeers();
