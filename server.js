@@ -27,7 +27,6 @@ app.use(express.json());
 
 const https = require('https');
 const fs = require('fs');
-const express = require('express');
 
 // Jouw routes en middleware hier...
 
