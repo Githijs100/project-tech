@@ -25,6 +25,20 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const https = require('https');
+const fs = require('fs');
+const express = require('express');
+
+// Jouw routes en middleware hier...
+
+const sslOptions = {
+  key: fs.readFileSync('./ssl/key.pem'),
+  cert: fs.readFileSync('./ssl/cert.pem')
+};
+
+https.createServer(sslOptions, app).listen(8443, () => {
+  console.log('✅ HTTPS server draait op https://localhost:8443');
+});
 
 
 // Sessieconfiguratie
