@@ -132,6 +132,20 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("❌ Er ging iets mis bij het opslaan van het biertje.");
         });
     }    
+
+    function showPopup(message) {
+        const popup = document.getElementById("popup");
+        const popupMessage = document.getElementById("popup-message");
+      
+        popupMessage.textContent = message;
+        popup.style.display = "block";
+      
+        // Automatisch verbergen na 4 seconden
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 4000);
+      }
+      
     
 
     loadBeers();
