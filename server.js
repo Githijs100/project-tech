@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
-const Beer = require("./models/beerModel"); // Zorg ervoor dat je een Beer-model hebt
-
+// const Beer = require("./models/beerModel");
+// Voor schrijver, regel  7 uitgecomment wegens error gegeven door linter:  "7:7  error  'Beer' is assigned a value but never used  no-unused-vars"
 
 
 
