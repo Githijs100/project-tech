@@ -1,617 +1,620 @@
 :root {
-    --background-color: #F8F5F0;
+  --background-color: #f8f5f0;
 
-    --h1-color: #3B3B3B;
-    --header-color: #E8E5E0;
-    --footer-color: #333333;
-    --footer-stroke: #A1A1A1;
-    --h3-color: #474747;
-    --button-color: #ED9B40;
-    --border-color: #C9C9C9;
-    --subtext: #B3B3B3;
-    --stats-background: #E1E1E1;
+  --h1-color: #3b3b3b;
+  --header-color: #e8e5e0;
+  --footer-color: #333333;
+  --footer-stroke: #a1a1a1;
+  --h3-color: #474747;
+  --button-color: #ed9b40;
+  --border-color: #c9c9c9;
+  --subtext: #b3b3b3;
+  --stats-background: #e1e1e1;
 
-    --star-color: yellow;
-    --white: white;
-    --black: black; 
-    
+  --star-color: yellow;
+  --white: white;
+  --black: black;
 }
-body{
-    margin: 0px;
-    font-family: 'Roboto', sans-serif; 
-    background-color: var(--background-color); 
+body {
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
 }
-main{
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: 4.086875rem;
-    margin-bottom: 3.75rem;
-
+main {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 4.086875rem;
+  margin-bottom: 3.75rem;
 }
 
-h1{
-    font-size: 1.4rem;
-    font-family: "Inter", sans-serif;
-    font-weight: 700;
-    margin-bottom: .3rem;
+h1 {
+  font-size: 1.4rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
 }
-.navbarHeader h1{
-    font-size: 1.7rem;
-    color: var(--h3-color);
-    font-family: "Just Another Hand", cursive;
-    font-weight: 100;
-    margin: 0;
+.navbarHeader h1 {
+  font-size: 1.7rem;
+  color: var(--h3-color);
+  font-family: "Just Another Hand", cursive;
+  font-weight: 100;
+  margin: 0;
 }
-h2{
-    font-size: 1.1rem;
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
+h2 {
+  font-size: 1.1rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
 }
-h3{
-    font-size: 1.5rem;
-    color: var(--h3-color);
-    font-family: "Jaini Purva", system-ui;
-    font-weight: 100;
-
+h3 {
+  font-size: 1.5rem;
+  color: var(--h3-color);
+  font-family: "Jaini Purva", system-ui;
+  font-weight: 100;
 }
-p{
-    font-size: 12px;
+p {
+  font-size: 12px;
 }
-button{
-    background-color: var(--button-color);
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: var(--border-color);
-    color: var(--white);
-    font-size: small;
-    padding: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    border-style: solid;
+button {
+  background-color: var(--button-color);
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: var(--border-color);
+  color: var(--white);
+  font-size: small;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-style: solid;
 }
-hr{
-    border-style: solid;
-    border-color: var(--border-color);
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-top: 0;
-}
-
-.navbarHeader{
-    background-color: var(--header-color);
-    padding: .7rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    position: fixed;
-    top: 0;    
-    width: 100%;
-
+hr {
+  border-style: solid;
+  border-color: var(--border-color);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: 0;
 }
 
+.navbarHeader {
+  background-color: var(--header-color);
+  padding: 0.7rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 
-.navbarFooter{
-position: fixed;
-  bottom: 0;      
+.navbarFooter {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 3.5rem;
   background-color: var(--footer-color);
   border-top: solid;
   border-color: var(--footer-stroke);
-  border-width: .25rem;
+  border-width: 0.25rem;
 }
-.navbarFooter ul{
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
- 
-    overflow: hidden;
-    display: flex;
-    justify-content: space-around;
+.navbarFooter ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
 }
 
-.navbarFooter li{
-    padding-top: .3rem;
-    padding-bottom: .5rem;
+.navbarFooter li {
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
 }
 
-.navbarFooter img{
-    width: 2rem;
+.navbarFooter img {
+  width: 2rem;
 }
 
-.navbarFooter li a{
-    position: fixed; /* Fix the footer to the viewport */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-style: none;
-    border-color: var(--footer-stroke);
-    width: 3rem;
-    height: 3rem;
-    border-width: .25rem;
-    border-radius: 100%;
+.navbarFooter li a {
+  position: fixed; /* Fix the footer to the viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-color: var(--footer-stroke);
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25rem;
+  border-radius: 100%;
 }
-.navbarFooter li a.active{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-style: solid;
-    border-color: var(--footer-stroke);
-    width: 3rem;
-    height: 3rem;
-    border-width: .25rem;
-    border-radius: 100%;
-    background-color: var(--h3-color);
-    position: fixed; /* Fix the footer to the viewport */
-    bottom: 1rem;       /* Align it to the bottom */
+.navbarFooter li a.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: var(--footer-stroke);
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25rem;
+  border-radius: 100%;
+  background-color: var(--h3-color);
+  position: fixed; /* Fix the footer to the viewport */
+  bottom: 1rem; /* Align it to the bottom */
 }
 .navbarFooter li:first-of-type a {
-    left: 10%;
+  left: 10%;
 }
-a.active{
-    display: flex; 
-    justify-content: center;
-    align-items: center;  
-    border-style: solid;   
-    border-color: var(--footer-stroke);
-    border-width: .25rem; 
-    border-radius: 100%; 
-    background-color: var(--h3-color);
-    position: fixed; /* Fix the footer to the viewport */
-    padding: .6rem;
-    }
-    
-    .navbarFooter li a.active img{
-    width: 2.5rem;
-    }
-    .navbarFooter li:first-of-type a { 
-    left: 10%;
-    }   
-
-    .navbarFooter li:first-of-type a.active { 
-        left: 7%;
-        }   
-    .navbarFooter li:nth-of-type(2) a {  
-    left: 50%; /* Position the left edge at the horizontal center */ 
-    transform: translateX(-50%); /* Move the element back by half its width */
-    }
-        
-    .navbarFooter li:last-of-type a {
-    transform: translateX(-90%); /* Move the element back by half its width */ 
-    }
-    .navbarFooter li:last-of-type a.active {
-        transform: translateX(-75%); /* Move the element back by half its width */ 
-        }
-    
-
-
-
-
-.quiz-container{    
-    background-image: url(/images/flessen-bg.png);
-    background-size: 70%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: var(--header-color);
-    border-radius: .5rem .5rem 0 0;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: flex; 
-    flex-direction: column;
-    align-items: center; 
-}
-.quiz-container a{
-    background-color: var(--button-color);
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: var(--border-color);
-    color: var(--white);
-    font-size: small;
-    padding: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    border-style: solid;
-    text-decoration: none;
-    font-family: "Jaini Purva", system-ui;
-    font-size: 1.5rem;
-  }
-.quiz-container button{
-    width: 9rem;
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 2rem;
+a.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: var(--footer-stroke);
+  border-width: 0.25rem;
+  border-radius: 100%;
+  background-color: var(--h3-color);
+  position: fixed; /* Fix the footer to the viewport */
+  padding: 0.6rem;
 }
 
+.navbarFooter li a.active img {
+  width: 2.5rem;
+}
+.navbarFooter li:first-of-type a {
+  left: 10%;
+}
+
+.navbarFooter li:first-of-type a.active {
+  left: 7%;
+}
+.navbarFooter li:nth-of-type(2) a {
+  left: 50%; /* Position the left edge at the horizontal center */
+  transform: translateX(-50%); /* Move the element back by half its width */
+}
+
+.navbarFooter li:last-of-type a {
+  transform: translateX(-90%); /* Move the element back by half its width */
+}
+.navbarFooter li:last-of-type a.active {
+  transform: translateX(-75%); /* Move the element back by half its width */
+}
+
+.quiz-container {
+  background-image: url(/images/flessen-bg.png);
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--header-color);
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quiz-container a {
+  background-color: var(--button-color);
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: var(--border-color);
+  color: var(--white);
+  font-size: small;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-style: solid;
+  text-decoration: none;
+  font-family: "Jaini Purva", system-ui;
+  font-size: 1.5rem;
+}
+.quiz-container button {
+  width: 9rem;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
 
 .carousel {
-    overflow: hidden;
+  overflow: hidden;
 }
-.carousel h3{
-    margin: .2rem;
+.carousel h3 {
+  margin: 0.2rem;
 }
-.carouselText{
-    display: flex;
-    align-items: center;
+.carouselText {
+  display: flex;
+  align-items: center;
 }
-.carouselText i{
-    color: var(--subtext);
-    margin: .2rem;
-    margin-bottom: 0;
+.carouselText i {
+  color: var(--subtext);
+  margin: 0.2rem;
+  margin-bottom: 0;
 }
 .featured-beers {
-    display: flex; 
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; 
-    scroll-snap-type: x mandatory; 
-    padding: 1rem;
-    background-color: var(--header-color);
-    border-radius: .5rem .5rem 0 0;
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+  background-color: var(--header-color);
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 .featured-beers img {
-    padding-left: 1rem;
-    width: 8rem;
-    height: auto;
-    scroll-snap-align: start; 
+  padding-left: 1rem;
+  width: 8rem;
+  height: auto;
+  scroll-snap-align: start;
 }
 
 .featured-beersProfile {
-    display: flex; 
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch; 
-    scroll-snap-type: x mandatory; 
-    padding: 1rem;
-    background-color: var(--header-color);
-    border-radius: .5rem .5rem 0 0;
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+  background-color: var(--header-color);
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 .featured-beersProfile img {
-    padding-left: 1rem;
-    width: 5rem;
-    height: auto;
-    scroll-snap-align: start; 
+  padding-left: 1rem;
+  width: 5rem;
+  height: auto;
+  scroll-snap-align: start;
 }
 
-
-
-
 .search-container {
-    display: flex; 
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .search-input {
-    flex-grow: 1; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.quiz{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.quiz {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
-.quiz img{
-    margin-top: 3rem;
-    width: 6rem;
+.quiz img {
+  margin-top: 3rem;
+  width: 6rem;
 }
-.quiz div:first-child div:last-child{
-    display: flex;
-    justify-content: space-around;
-}
-
-.quiz div:first-child{
-    background-color: var(--border-color);
-    border-radius: 10px;
-    padding: 0rem 1rem 1rem 1rem;
-}
-.quiz div:first-child div:first-child{
-    display: flex;
-    justify-content: center;
-}
-.quiz .answer-option{
-    background-color: rgb(226, 226, 226);
-    margin-bottom: 1rem;
-    border-radius: 10px;
+.quiz div:first-child div:last-child {
+  display: flex;
+  justify-content: space-around;
 }
 
-.quiz div:first-child div:last-child button{
-    background-color: var(--white);
+.quiz div:first-child {
+  background-color: var(--border-color);
+  border-radius: 10px;
+  padding: 0rem 1rem 1rem 1rem;
+}
+.quiz div:first-child div:first-child {
+  display: flex;
+  justify-content: center;
+}
+.quiz .answer-option {
+  background-color: rgb(226, 226, 226);
+  margin-bottom: 1rem;
+  border-radius: 10px;
 }
 
-.arrow{
-    border:#2D2D2A;
-    border-style: solid;
-    border-radius: 100%;
-    padding-top: .25rem;
-    padding-bottom: .35rem;
-    padding-left: .55rem;
-    padding-right: .55rem;
-    background-color: var(--white);
-
+.quiz div:first-child div:last-child button {
+  background-color: var(--white);
 }
 
-.quiz-selection{
-    background-color: rgba(255, 255, 255, 0.492);
-    border-style: solid;
-    border-color: var(--border-color);
-    border-radius: 5px;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    height: 11.5rem;
-    overflow-x: auto; 
-    -webkit-overflow-scrolling: touch; 
-    white-space: nowrap; 
+.arrow {
+  border: #2d2d2a;
+  border-style: solid;
+  border-radius: 100%;
+  padding-top: 0.25rem;
+  padding-bottom: 0.35rem;
+  padding-left: 0.55rem;
+  padding-right: 0.55rem;
+  background-color: var(--white);
 }
 
-.quiz-container h2{
-    margin-left: 2rem;
-    margin-right: 2rem;
-
+.quiz-selection {
+  background-color: rgba(255, 255, 255, 0.492);
+  border-style: solid;
+  border-color: var(--border-color);
+  border-radius: 5px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: 11.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
 }
 
-.profile{
-    border-style: solid;
-    border-color: rgb(201, 201, 201);
-    margin-left: -1rem;
-    margin-right: -1rem;
-    border-left: 0;
-    border-right: 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.quiz-container h2 {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
-.profile img{
-    width: 3.5rem;
+
+.profile {
+  border-style: solid;
+  border-color: rgb(201, 201, 201);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border-left: 0;
+  border-right: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
-.profile div:first-child{
-    display: flex;
-    align-items: center;
+.profile img {
+  width: 3.5rem;
 }
-.profile p{
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0;
+.profile div:first-child {
+  display: flex;
+  align-items: center;
+}
+.profile p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
 }
 .profile > div:first-child > div > p:nth-child(2) {
-    font-size: .8rem;  
+  font-size: 0.8rem;
 }
-.stats{
-    background-color: var(--stats-background);
-    border-radius: .7rem;
-    margin: 1rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-.stats p{
-    font-size: 1rem;
-    margin: 0;
-}
-.stats p:nth-child(2){
-    font-size: .8rem;
-}
-
-
-.striped{
-    border-style: dashed;
-    border-color: rgb(170, 170, 170);
-    margin: 0;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
-}
-.dunneLijn{
-    border-style: solid;
-    border-color: var(--border-color);
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-top: 0;
-    border-width: .01rem;
-}
-
-.stats > div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
-
-}
-.stats span{
-    background-color: var(--white);
-    width: 3rem;
-    height: 3rem;
-    border-radius: 100%;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-}
-
-.vraag {
-    display: none;
-}
-
-.vraag.actief {
-    display: block;
-}  
-
-
-
-.user{
-    display: flex;
-    padding-top: 1rem;
-}
-.user i{
-    color: var(--stats-background);
-    background-color: var(--subtext);
-    border-radius: 100%;
-    padding: .8rem;
-    font-size: 1.5rem;
-}
-.user div{
-    display: flex;
-    flex-direction: column;
-    margin-left: 1rem;
-}
-.user div p{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
-.user div p:first-of-type{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-.user div p:last-of-type{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: lighter;
-}
-
-.post div:first-of-type{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: -.5rem;
-}
-.post p:first-of-type{
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-.post-subtext{
-    margin-left: .4rem;
-    margin-right: .4rem;
-
-}
-.post-subtext p{
-    font-weight: lighter;
-    font-size: .9rem;
-    margin-top: .3rem;
-}
-.post-subtext i{
-    font-size: 1.5rem;
-    color: var(--subtext);
-    margin-top: .4rem;
-    margin-right: .5rem;
-    
-}
-.post .rating i{
-    color: gold;
-}
-.post img{
-    width: 100%;
-    border-radius: 1rem;
-    position: relative; /* Needed for absolute positioning of icons/button */
-
-}
-.post-image i{
-    position: absolute;
-    top: 15rem;
-    right: 2rem; 
-    font-size: 2em; 
-    color: var(--white);
-}
-
-.post-image a{
-    position: absolute;
-    top: 24rem; /* Example positioning from the top */
-    right: 2rem; /* Example positioning from the right */
-    background-color: var(--button-color);
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: var(--border-color);
-    color: var(--white);
-    font-size: small;
-    padding-left: .5rem;
-    padding-right: .5rem;
-    border-style: solid;
-    text-decoration: none;
-    font-family: "Jaini Purva", system-ui;
-    font-size: 1.5rem;
-}
-
-
-.bordered-star {
-    font-size: 1rem;
-    color: var(--white);
-    text-shadow:
-      -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
-  }
-  .bordered-half-star {
-    font-size: 1rem;
-    color: var(--star-color);
-    text-shadow:
-      -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;  
-  }.bordered-star-filled {
-    font-size: 1rem; 
-    color: var(--star-color);
-    text-shadow:
-      -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
-  }
-
-#quiz{
+.stats {
+  background-color: var(--stats-background);
+  border-radius: 0.7rem;
+  margin: 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 }
-#quiz button{
-    background-color: var(--white);
-    border-color: var(--border-color);
-    color: var(--black);
-    margin-bottom: .5rem;
-    border-radius: .7rem;
-    display: flex;
-    justify-content: space-around;
+.stats p {
+  font-size: 1rem;
+  margin: 0;
+}
+.stats p:nth-child(2) {
+  font-size: 0.8rem;
 }
 
-  .glass-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-    
-  .glass {
-    position: relative;
-    width: 5rem;
-    height: 8rem;
-    background: rgba(150,150,150,0.5);
-    border: 10px solid lightgray;
-    border-top: none;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 18px 3px rgba(0,0,0,0.3);
-  }
-  
+.striped {
+  border-style: dashed;
+  border-color: rgb(170, 170, 170);
+  margin: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.dunneLijn {
+  border-style: solid;
+  border-color: var(--border-color);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-top: 0;
+  border-width: 0.01rem;
+}
 
-  .handle {
-    position: absolute;
-    top: 25px;
-    right: 6.8rem; /* Positions handle outside container */
-    width: 1rem;
-    height: 3rem;
-    border: .7rem solid lightgray;
-    border-radius: .8rem;
-  }
-  
-  .inner {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 33.33%; 
-    background: var(--button-color); 
-    backdrop-filter: blur(5px);
-    transition: height 0.3s;
-  }
-  .inner1 { height: 0%;  background: var(--button-color); }
-  .inner2 { height: 20%;  background: var(--button-color); }
-  .inner3 { height: 40%;  background: var(--button-color); }
-  .inner4 { height: 60%;  background: var(--button-color); }
-  .inner5 { height: 80%;  background: var(--button-color); }
-  .inner6 { height: 100%;  background: var(--button-color); }
+.stats > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.stats span {
+  background-color: var(--white);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vraag {
+  display: none;
+}
+
+.vraag.actief {
+  display: block;
+}
+
+.user {
+  display: flex;
+  padding-top: 1rem;
+}
+.user i {
+  color: var(--stats-background);
+  background-color: var(--subtext);
+  border-radius: 100%;
+  padding: 0.8rem;
+  font-size: 1.5rem;
+}
+.user div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+.user div p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.user div p:first-of-type {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.user div p:last-of-type {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+.post div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -0.5rem;
+}
+.post p:first-of-type {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.post-subtext {
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+}
+.post-subtext p {
+  font-weight: lighter;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.post-subtext i {
+  font-size: 1.5rem;
+  color: var(--subtext);
+  margin-top: 0.4rem;
+  margin-right: 0.5rem;
+}
+.post .rating i {
+  color: gold;
+}
+.post img {
+  width: 100%;
+  border-radius: 1rem;
+  position: relative; /* Needed for absolute positioning of icons/button */
+}
+.post-image i {
+  position: absolute;
+  top: 15rem;
+  right: 2rem;
+  font-size: 2em;
+  color: var(--white);
+}
+
+.post-image a {
+  position: absolute;
+  top: 24rem; /* Example positioning from the top */
+  right: 2rem; /* Example positioning from the right */
+  background-color: var(--button-color);
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: var(--border-color);
+  color: var(--white);
+  font-size: small;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-style: solid;
+  text-decoration: none;
+  font-family: "Jaini Purva", system-ui;
+  font-size: 1.5rem;
+}
+
+.bordered-star {
+  font-size: 1rem;
+  color: var(--white);
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+}
+.bordered-half-star {
+  font-size: 1rem;
+  color: var(--star-color);
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+}
+.bordered-star-filled {
+  font-size: 1rem;
+  color: var(--star-color);
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+#quiz {
+  display: flex;
+  flex-direction: column;
+}
+#quiz button {
+  background-color: var(--white);
+  border-color: var(--border-color);
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  border-radius: 0.7rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.glass-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.glass {
+  position: relative;
+  width: 5rem;
+  height: 8rem;
+  background: rgba(150, 150, 150, 0.5);
+  border: 10px solid lightgray;
+  border-top: none;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 18px 3px rgba(0, 0, 0, 0.3);
+}
+
+.handle {
+  position: absolute;
+  top: 25px;
+  right: 6.8rem; /* Positions handle outside container */
+  width: 1rem;
+  height: 3rem;
+  border: 0.7rem solid lightgray;
+  border-radius: 0.8rem;
+}
+
+.inner {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 33.33%;
+  background: var(--button-color);
+  backdrop-filter: blur(5px);
+  transition: height 0.3s;
+}
+.inner1 {
+  height: 0%;
+  background: var(--button-color);
+}
+.inner2 {
+  height: 20%;
+  background: var(--button-color);
+}
+.inner3 {
+  height: 40%;
+  background: var(--button-color);
+}
+.inner4 {
+  height: 60%;
+  background: var(--button-color);
+}
+.inner5 {
+  height: 80%;
+  background: var(--button-color);
+}
+.inner6 {
+  height: 100%;
+  background: var(--button-color);
+}
