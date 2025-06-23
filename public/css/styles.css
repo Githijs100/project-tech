@@ -570,48 +570,74 @@ a.active{
     justify-content: space-around;
 }
 
-  .glass-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-    
-  .glass {
-    position: relative;
-    width: 5rem;
-    height: 8rem;
-    background: rgba(150,150,150,0.5);
-    border: 10px solid lightgray;
-    border-top: none;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 18px 3px rgba(0,0,0,0.3);
-  }
-  
+.glass-container {
+position: relative;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+}
 
-  .handle {
-    position: absolute;
-    top: 25px;
-    right: 6.8rem; /* Positions handle outside container */
-    width: 1rem;
-    height: 3rem;
-    border: .7rem solid lightgray;
-    border-radius: .8rem;
-  }
-  
-  .inner {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 33.33%; 
-    background: var(--button-color); 
-    backdrop-filter: blur(5px);
-    transition: height 0.3s;
-  }
-  .inner1 { height: 0%;  background: var(--button-color); }
-  .inner2 { height: 20%;  background: var(--button-color); }
-  .inner3 { height: 40%;  background: var(--button-color); }
-  .inner4 { height: 60%;  background: var(--button-color); }
-  .inner5 { height: 80%;  background: var(--button-color); }
-  .inner6 { height: 100%;  background: var(--button-color); }
+.glass {
+position: relative;
+width: 5rem;
+height: 8rem;
+background: rgba(150,150,150,0.5);
+border: 10px solid lightgray;
+border-top: none;
+border-radius: 5px;
+overflow: hidden;
+box-shadow: 0 0 18px 3px rgba(0,0,0,0.3);
+}
+
+
+.handle {
+position: absolute;
+top: 25px;
+right: 6.8rem; /* Positions handle outside container */
+width: 1rem;
+height: 3rem;
+border: .7rem solid lightgray;
+border-radius: .8rem;
+}
+
+.inner {
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 33.33%; 
+background: var(--button-color); 
+backdrop-filter: blur(5px);
+transition: height 0.3s;
+}
+.inner1 { height: 0%;  background: var(--button-color); }
+.inner2 { height: 20%;  background: var(--button-color); }
+.inner3 { height: 40%;  background: var(--button-color); }
+.inner4 { height: 60%;  background: var(--button-color); }
+.inner5 { height: 80%;  background: var(--button-color); }
+.inner6 { height: 100%;  background: var(--button-color); }
+
+.loginContainer form{
+display: flex;
+flex-direction: column;
+margin-top: 7rem;
+}
+
+.loginContainer input{
+padding: .3rem; 
+margin-bottom: .7rem;
+
+}
+
+.registerForm form{
+    display: flex;
+flex-direction: column;
+margin-top: 7rem;
+
+}
+.registerForm input{
+    padding: .3rem; 
+    margin-bottom: -1.5rem;
+}
+.registerForm button, .loginContainer button{
+    margin-top: 1rem;
+}
