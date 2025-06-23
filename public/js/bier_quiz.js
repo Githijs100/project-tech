@@ -114,8 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify({ beerId }),
         })
         .then(response => response.json())
-        .then(data => {
+        .then(() => { 
             alert("🍺 Biertje opgeslagen in favorieten!");
+            //comment voor schrijver; aangepast van .then(data => { alert("🍺 Biertje opgeslagen in favorieten!"); })
         })
         .catch(error => {
             console.error("❌ Fout bij opslaan:", error);
