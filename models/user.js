@@ -4,9 +4,13 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    followers: { type: Number, default: 0 },
+    following: { type: Number, default: 0 },
+    beersPerDay: { type: Number, default: 0 },
+    beersDrank: { type: Number, default: 0 },
     savedBeers: [{
-        type: String, // De SKU van het bier
-        ref: 'Beer'   // Verwijst naar het Beer model (optioneel, afhankelijk van je implementatie)
+        type: String, 
+        ref: 'Beer'
     }]
 });
 

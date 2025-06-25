@@ -11,7 +11,7 @@
         <h1>Profiel</h1>
         <div class="profile">
             <div>
-                <img src="images/user2-logo.png" alt="profiel">
+                <img src="/images/user2-logo.png" alt="profiel">
                 <div>
                     <p> <%= username %></p>
                     <p> <%= email %></p>
@@ -19,8 +19,8 @@
                 
             </div>
             <div class="followers">
-                <p>Volgers: 0</p>
-                <p> Volgend: 0</p>
+                <p>Volgers: <%= followers %></p>
+                <p> Volgend: <%= following %></p>
             </div>
         </div>
         <div class="stats">
@@ -29,14 +29,14 @@
                     <p>Gemiddeld aantal bpd<p3>
                     <p>(bier per dag)</p>
                 </div>
-                <span>3</span>
+                <span><%= beersPerDay %></span>
             </div>
             <hr class="striped">
             <div> 
                 <div>
                     <p>Aantal gedronken biertjes</p>
                 </div>
-                <span>32</span>        
+                <span><%= beersDrank %></span>        
             </div>
         </div>
 
@@ -47,11 +47,13 @@
                 <h3>Opgeslagen biertjes</h3>
             </div>
             <div class="featured-beersProfile">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
-                <img src="images/grand-prestige.webp" alt="">
+                <% if (favoriteBeers && favoriteBeers.length > 0) { %>
+                    <% favoriteBeers.forEach(function(beer) { %>
+                        <img src="<%= beer.image %>" alt="<%= beer.name %>">
+                    <% }); %>
+                <% } else { %>
+                    <p>Geen opgeslagen biertjes gevonden.</p>
+                <% } %>
             </div>
         </div>
     </main>

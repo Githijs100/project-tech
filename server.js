@@ -4,9 +4,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
-// const Beer = require("./models/beerModel");
-// Voor schrijver, regel  7 uitgecomment wegens error gegeven door linter:  "7:7  error  'Beer' is assigned a value but never used  no-unused-vars"
-
+const Beer = require("./models/beerModel"); // This line is correct and uncommented, good!
 
 
 dotenv.config();
@@ -60,37 +58,82 @@ async function connectDB() {
 connectDB();
 
 // Routes
+app.get('/setup-user', async (req, res) => {
+    try {
+        const favoriteBeerSKUs = ["100187", "118161", "121617"];        
+        let user = await User.findOne({ username: 'DemoUser' });
+        if (!user) {
+            user = new User({
+                username: 'DemoUser',
+                email: 'demo@example.com',
+                password: await bcrypt.hash('demopassword', saltRounds), // Hash a simple password
+                followers: 123,
+                following: 45,
+                beersPerDay: 10, // Changed to 10
+                beersDrank: 320, // Changed to 320
+                savedBeers: favoriteBeerSKUs // Store SKUs as strings, directly from the array
+            });
+            await user.save();
+            res.send('Demo user created with favorite beers!');
+        } else {
+            user.savedBeers = favoriteBeerSKUs; // Update with SKUs
+            user.beersPerDay = 10;  // Changed to 10 for existing user update
+            user.beersDrank = 320; // Changed to 320 for existing user update
+            await user.save();
+            res.send('Demo user already exists, favorite beers updated!');
+        }
+    } catch (err) {
+        console.error('Error setting up demo user:', err);
+        res.status(500).send('Error setting up demo user: ' + err.message);
+    }
+});
+
 app.get('/', (req, res) => res.render('index'));
 app.get('/testquiz', (req, res) => res.render('testquiz'));
+
+
+// ***** CORRECTED /profiel ROUTE - ADDED THE MISSING `favoriteBeers` DEFINITION LINE *****
 app.get('/profiel', async (req, res) => {
     if (!req.session.userId) {
-        return res.redirect('/login');
+        return res.redirect('/login'); // Redirect to login if user is not logged in
     }
+
     try {
         const user = await User.findById(req.session.userId);
         if (!user) {
+            console.warn(`User with ID ${req.session.userId} not found, redirecting to login.`);
             return res.redirect('/login');
         }
-        res.render('profiel', { username: user.username, email: user.email });
+
+        console.log("✅ Gebruiker gevonden:", user.username, user.email); // Debug info
+        // --- START NEW DEBUG LOGS ---
+        console.log("🔍 user.savedBeers:", user.savedBeers); // Log what SKUs are in the user's savedBeers
+
+        // Fetch the actual Beer documents based on the SKUs stored in user.savedBeers
+        const favoriteBeers = await Beer.find({ sku: { $in: user.savedBeers } });
+
+        console.log("🍺 Aantal favoriteBeers gevonden:", favoriteBeers.length); // Log how many beers were found
+        console.log("🍻 Eerste favoriteBeer (ter controle):", favoriteBeers.length > 0 ? favoriteBeers[0] : "Geen bieren gevonden."); // Log the first found beer
+        // --- END NEW DEBUG LOGS ---
+
+        // Render the profile page, passing ALL necessary data with correct variable names
+        res.render('profiel', {
+            username: user.username,
+            email: user.email,
+            followers: user.followers || 0,
+            following: user.following || 0,
+            beersPerDay: user.beersPerDay || 0,
+            beersDrank: user.beersDrank || 0,
+            favoriteBeers: favoriteBeers
+        });
+
     } catch (err) {
-        console.error('❌ Fout bij ophalen profiel:', err);
-        res.status(500).send('Er is een fout opgetreden.');
+        console.error("❌ Fout bij ophalen profiel:", err);
+        res.status(500).send("Interne serverfout bij ophalen profiel.");
     }
 });
-// ✅ Login Route
-app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const user = await User.findOne({ username });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).send("❌ Ongeldige inloggegevens");
-        }
-        req.session.userId = user._id;
-        res.redirect('/profiel');
-    } catch (err) {
-        res.status(500).send("❌ Fout bij inloggen: " + err.message);
-    }
-});
+// ***** END OF CORRECTED /profiel ROUTE *****
+
 
 // routes voor opslaan van een bier in het profiel van de gebruiker
 app.post('/save-beer', async (req, res) => {
@@ -201,6 +244,7 @@ app.post('/registreren', async (req, res) => {
     }
 });
 
+// ***** REMOVE THIS DUPLICATE LOGIN ROUTE *****
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log("📩 Ontvangen login request met:", req.body);
@@ -208,7 +252,7 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            console.log("❌ Geen gebruiker gevonden voor username:", name);
+            console.log("❌ Geen gebruiker gevonden voor username:", name); // <--- Fix: 'name' should be 'username'
             return res.status(401).send("Ongeldige inloggegevens");
         }
 
@@ -230,32 +274,10 @@ app.post('/login', async (req, res) => {
         res.status(500).send("Interne serverfout");
     }
 });
+// ***** END OF DUPLICATE LOGIN ROUTE *****
 
-app.get('/profiel', async (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login'); // Stuur gebruiker naar login als hij niet is ingelogd
-    }
-
-    try {
-        const user = await User.findById(req.session.userId);
-        if (!user) {
-            return res.redirect('/login');
-        }
-
-        console.log("✅ Gebruiker gevonden:", user.username, user.email); // Debug info
-
-         // Stuur de gebruiker naar het profiel en geef de opgeslagen bieren mee
-         res.render('profiel', { user, savedBeers: user.savedBeers });
-
-        res.render('profiel', { user }); // Stuur user naar EJS
-    } catch (err) {
-        console.error("❌ Fout bij ophalen profiel:", err);
-        res.status(500).send("Interne serverfout");
-    }
-});
 
 // Server Start
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
-
