@@ -60,31 +60,69 @@ connectDB();
 // Routes
 app.get('/setup-user', async (req, res) => {
     try {
-        const favoriteBeerSKUs = ["100187", "118161", "121617"];        
-        let user = await User.findOne({ username: 'DemoUser' });
-        if (!user) {
-            user = new User({
+        const favoriteBeerSKUs = ["100187", "118161", "100087"]; // Reusing your existing SKUs
+
+        // --- DemoUser 1 Setup ---
+        const demoUserProfileImagePath1 = '/images/demo-profile-pic.jpg'; // For DemoUser
+        let user1 = await User.findOne({ username: 'DemoUser' });
+        if (!user1) {
+            user1 = new User({
                 username: 'DemoUser',
                 email: 'demo@example.com',
-                password: await bcrypt.hash('demopassword', saltRounds), // Hash a simple password
+                password: await bcrypt.hash('demopassword', saltRounds),
                 followers: 123,
                 following: 45,
-                beersPerDay: 10, // Changed to 10
-                beersDrank: 320, // Changed to 320
-                savedBeers: favoriteBeerSKUs // Store SKUs as strings, directly from the array
+                beersPerDay: 10,
+                beersDrank: 320,
+                savedBeers: favoriteBeerSKUs,
+                profileImage: demoUserProfileImagePath1
             });
-            await user.save();
-            res.send('Demo user created with favorite beers!');
+            await user1.save();
+            console.log('✅ DemoUser created.');
         } else {
-            user.savedBeers = favoriteBeerSKUs; // Update with SKUs
-            user.beersPerDay = 10;  // Changed to 10 for existing user update
-            user.beersDrank = 320; // Changed to 320 for existing user update
-            await user.save();
-            res.send('Demo user already exists, favorite beers updated!');
+            user1.followers = 123;
+            user1.following = 45;
+            user1.beersPerDay = 10;
+            user1.beersDrank = 320;
+            user1.savedBeers = favoriteBeerSKUs;
+            user1.profileImage = demoUserProfileImagePath1; // Unconditionally set for existing
+            await user1.save();
+            console.log('✅ DemoUser updated.');
         }
+
+        // --- DemoUser 2 Setup ---
+        const demoUserProfileImagePath2 = '/images/demo2-profile-pic.jpg'; // For DemoUser2 (using the existing logo)
+        let user2 = await User.findOne({ username: 'DemoUser2' }); // Check for DemoUser2
+        if (!user2) {
+            user2 = new User({
+                username: 'DemoUser2',
+                email: 'demo2@example.com', // Unique email
+                password: await bcrypt.hash('demopassword2', saltRounds), // Unique password
+                followers: 50, // Different values for variety
+                following: 75,
+                beersPerDay: 12,
+                beersDrank: 400,
+                savedBeers: ["118161", "134872"], // A couple of beers for this user
+                profileImage: demoUserProfileImagePath2
+            });
+            await user2.save();
+            console.log('✅ DemoUser2 created.');
+        } else {
+            user2.followers = 50;
+            user2.following = 75;
+            user2.beersPerDay = 12;
+            user2.beersDrank = 400;
+            user2.savedBeers = ["118161", "134620", "100206"]; // Update saved beers if needed
+            user2.profileImage = demoUserProfileImagePath2; // Unconditionally set for existing
+            await user2.save();
+            console.log('✅ DemoUser2 updated.');
+        }
+
+        res.send('All demo users created/updated successfully!');
+
     } catch (err) {
-        console.error('Error setting up demo user:', err);
-        res.status(500).send('Error setting up demo user: ' + err.message);
+        console.error('Error setting up demo users:', err);
+        res.status(500).send('Error setting up demo users: ' + err.message);
     }
 });
 
@@ -124,7 +162,8 @@ app.get('/profiel', async (req, res) => {
             following: user.following || 0,
             beersPerDay: user.beersPerDay || 0,
             beersDrank: user.beersDrank || 0,
-            favoriteBeers: favoriteBeers
+            favoriteBeers: favoriteBeers,
+            profileImage: user.profileImage || '/images/user2-logo.png'
         });
 
     } catch (err) {

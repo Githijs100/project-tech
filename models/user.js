@@ -11,7 +11,11 @@ const UserSchema = new mongoose.Schema({
     savedBeers: [{
         type: String, 
         ref: 'Beer'
-    }]
+    }],
+    profileImage: {
+        type: String,
+        default: '/images/user2-logo.png' // Default image if none is set
+    }
 });
 
 const User = mongoose.model('User', UserSchema);
