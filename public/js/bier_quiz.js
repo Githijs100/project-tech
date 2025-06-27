@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch("bieren.json"); 
             beerData = await response.json();
-            console.log("📢 Bieren geladen:", beerData); // Debugging
-            // console.log("pairing:", beerData[0][food_pairing]);
+            console.log("📢 Bieren geladen:", beerData); 
             showQuestion();
         } catch (error) {
             console.error("❌ Fout bij laden van de bieren:", error);

@@ -96,13 +96,13 @@ app.post('/login', async (req, res) => {
         const user = await User.findOne({ username });
         if (!user) {
             console.log("❌ Geen gebruiker gevonden voor username:", username);
-            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens" });
+            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens <br> Biertje teveel op?  " });
         }
 
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
             console.log("❌ Wachtwoord komt niet overeen.");
-            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens" });
+            return res.status(401).render('login', { foutmelding: "❌ Wachtwoord komt niet overeen <br> Probeer het (als je nuchter bent) nog eens!" });
         }
 
         req.session.userId = user._id;
