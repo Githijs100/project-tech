@@ -521,10 +521,8 @@ a.active{
     color: var(--white);
 }
 
-.post-image a{
-    position: absolute;
-    top: 24rem; /* Example positioning from the top */
-    right: 2rem; /* Example positioning from the right */
+.post-subtext a{
+
     background-color: var(--button-color);
     border-radius: 5px;
     border-width: 2px;
@@ -537,6 +535,7 @@ a.active{
     text-decoration: none;
     font-family: "Jaini Purva", system-ui;
     font-size: 1.5rem;
+    margin-left: 1rem;
 }
 
 

@@ -4,7 +4,19 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
-const Beer = require("./models/beerModel"); // This line is correct and uncommented, good!
+const Beer = require("./models/beerModel");
+const User = require('./models/user');
+const Post = require('./models/postModel');
+
+// --- NEW: Import setup scripts ---
+const setupUsers = require('./scripts/setupUsers');
+const setupPosts = require('./scripts/setupPosts');
+// --- END NEW ---
+
+// --- NEW DEBUG LOG ---
+console.log('Type of setupUsers:', typeof setupUsers);
+console.log('Type of setupPosts:', typeof setupPosts);
+// --- END NEW DEBUG LOG ---
 
 
 dotenv.config();
@@ -13,7 +25,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 const uri = process.env.URI;
 const apiKey = process.env.API_KEY;
-const User = require('./models/user');
+
 const saltRounds = 10;
 
 // Middleware
@@ -22,7 +34,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 
 // Sessieconfiguratie
@@ -54,77 +65,32 @@ async function connectDB() {
         process.exit(1);
     }
 }
-
 connectDB();
 
 // Routes
-app.get('/setup-user', async (req, res) => {
+
+// --- NEW: Admin routes to trigger setup scripts ---
+app.get('/admin/setup-users', async (req, res) => {
     try {
-        const favoriteBeerSKUs = ["100187", "118161", "100087"]; // Reusing your existing SKUs
-
-        // --- DemoUser 1 Setup ---
-        const demoUserProfileImagePath1 = '/images/demo-profile-pic.jpg'; // For DemoUser
-        let user1 = await User.findOne({ username: 'DemoUser' });
-        if (!user1) {
-            user1 = new User({
-                username: 'DemoUser',
-                email: 'demo@example.com',
-                password: await bcrypt.hash('demopassword', saltRounds),
-                followers: 123,
-                following: 45,
-                beersPerDay: 10,
-                beersDrank: 320,
-                savedBeers: favoriteBeerSKUs,
-                profileImage: demoUserProfileImagePath1
-            });
-            await user1.save();
-            console.log('✅ DemoUser created.');
-        } else {
-            user1.followers = 123;
-            user1.following = 45;
-            user1.beersPerDay = 10;
-            user1.beersDrank = 320;
-            user1.savedBeers = favoriteBeerSKUs;
-            user1.profileImage = demoUserProfileImagePath1; // Unconditionally set for existing
-            await user1.save();
-            console.log('✅ DemoUser updated.');
-        }
-
-        // --- DemoUser 2 Setup ---
-        const demoUserProfileImagePath2 = '/images/demo2-profile-pic.jpg'; // For DemoUser2 (using the existing logo)
-        let user2 = await User.findOne({ username: 'DemoUser2' }); // Check for DemoUser2
-        if (!user2) {
-            user2 = new User({
-                username: 'DemoUser2',
-                email: 'demo2@example.com', // Unique email
-                password: await bcrypt.hash('demopassword2', saltRounds), // Unique password
-                followers: 50, // Different values for variety
-                following: 75,
-                beersPerDay: 12,
-                beersDrank: 400,
-                savedBeers: ["118161", "134872"], // A couple of beers for this user
-                profileImage: demoUserProfileImagePath2
-            });
-            await user2.save();
-            console.log('✅ DemoUser2 created.');
-        } else {
-            user2.followers = 50;
-            user2.following = 75;
-            user2.beersPerDay = 12;
-            user2.beersDrank = 400;
-            user2.savedBeers = ["118161", "134620", "100206"]; // Update saved beers if needed
-            user2.profileImage = demoUserProfileImagePath2; // Unconditionally set for existing
-            await user2.save();
-            console.log('✅ DemoUser2 updated.');
-        }
-
-        res.send('All demo users created/updated successfully!');
-
+        const message = await setupUsers(); // Call the function from your script
+        res.send(message);
     } catch (err) {
-        console.error('Error setting up demo users:', err);
+        console.error('❌ Error setting up demo users:', err);
         res.status(500).send('Error setting up demo users: ' + err.message);
     }
 });
+
+app.get('/admin/setup-posts', async (req, res) => {
+    try {
+        const message = await setupPosts(); // Call the function from your script
+        res.send(message);
+    } catch (err) {
+        console.error('❌ Error setting up posts:', err);
+        res.status(500).send('Error setting up posts: ' + err.message);
+    }
+});
+// --- END NEW: Admin routes ---
+
 
 app.get('/', (req, res) => res.render('index'));
 app.get('/testquiz', (req, res) => res.render('testquiz'));
@@ -202,8 +168,6 @@ app.post('/save-beer', async (req, res) => {
 });
 
 
-
-  
 // ✅ Uitlog Route
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
@@ -264,7 +228,29 @@ app.get('/search', async (req, res) => {
     }
 });
 
-app.get('/feed', (req, res) => res.render('feed'));
+// --- Update existing /feed route for randomization ---
+app.get('/feed', async (req, res) => {
+    try {
+        // Fetch all posts from the database
+        let posts = await Post.find(); // No sorting here initially
+
+        // --- NEW: Randomize the order of posts using Fisher-Yates (Knuth) shuffle algorithm ---
+        for (let i = posts.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [posts[i], posts[j]] = [posts[j], posts[i]]; // Swap elements
+        }
+        // --- END NEW ---
+
+        console.log(`✅ Fetched and randomized ${posts.length} posts for the feed.`);
+        res.render('feed', { posts: posts }); // Pass the randomized posts to the EJS template
+    } catch (err) {
+        console.error('❌ Error fetching posts for feed:', err);
+        res.status(500).send("Interne serverfout bij ophalen van de feed.");
+    }
+});
+// --- END Update existing /feed route ---
+
+
 app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
 app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
 
@@ -283,7 +269,6 @@ app.post('/registreren', async (req, res) => {
     }
 });
 
-// ***** REMOVE THIS DUPLICATE LOGIN ROUTE *****
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log("📩 Ontvangen login request met:", req.body);
@@ -291,7 +276,7 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            console.log("❌ Geen gebruiker gevonden voor username:", name); // <--- Fix: 'name' should be 'username'
+            console.log("❌ Geen gebruiker gevonden voor username:", username); // Fixed 'name' to 'username'
             return res.status(401).send("Ongeldige inloggegevens");
         }
 
@@ -313,7 +298,6 @@ app.post('/login', async (req, res) => {
         res.status(500).send("Interne serverfout");
     }
 });
-// ***** END OF DUPLICATE LOGIN ROUTE *****
 
 
 // Server Start

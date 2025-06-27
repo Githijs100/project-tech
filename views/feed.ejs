@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head'); %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header>
@@ -10,35 +11,54 @@
     <main>    
         <h1>Activiteit</h1>
         <hr class="dunneLijn">
-        <div class="user">
-            <i class="fas fa-user"></i>
-            <div>
-                <p>Rutger Biersma</p>
-                <p>Dronk 3 minuten geleden</p>
-            </div>
-        </div>
-        <div class="post">
-            <div>
-                <p>Triple Karmeliet</p>
-                <div class="rating">  
-                    <i class="fas fa-star bordered-star-filled"></i>
-                    <i class="fas fa-star bordered-star-filled"></i>
-                    <i class="fas fa-star bordered-star-filled"></i>
-                    <i class="fas fa-star bordered-star-filled"></i>
-                    <i class="fas fa-star-half-alt bordered-half-star"></i>            </div>
+
+        <% if (posts && posts.length > 0) { %>
+            <% posts.forEach(function(post) { %>
+                <div class="user">
+                    <!-- User Profile Image -->
+                    <img src="<%= post.userProfileImage %>" alt="<%= post.username %>" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
+                    <div>
+                        <p><b><%= post.username %></b></p>
+                        <p>Dronk <%= post.timeAgo %></p>
+                    </div>
                 </div>
-                <div class="post-image">
-                    <img src="images/post-voorbeeld.png" alt="">
-                    <i class="far fa-bookmark"></i>
-                    <a href="">Meer over dit biertje</a>
+                <div class="post">
+                    <div>
+                        <p><%= post.beerName %></p>
+                        <div class="rating">
+                            <% // Loop to display stars based on the rating number
+                                for (let i = 1; i <= 5; i++) {
+                                    if (post.rating >= i) { %>
+                                        <i class="fas fa-star bordered-star-filled"></i>
+                                    <% } else if (post.rating > (i - 1)) { %>
+                                        <i class="fas fa-star-half-alt bordered-half-star"></i>
+                                    <% } else { %>
+                                        <i class="far fa-star bordered-star"></i>
+                                    <% }
+                                }
+                            %>
+                        </div>
+                    </div>
+                    <div class="post-image">
+                        <img src="<%= post.postImage %>" alt="<%= post.beerName %>">
+                        <i class="far fa-bookmark"></i>
+                    </div>
                 </div>
-            </div>
-            <div class="post-subtext">
-                <i class="far fa-heart"></i>
-                <i class="far fa-comment"></i>    
-                <p><b>Rutger Biersma:</b> Wat een lekker biertje zeg! Zodra je de eerste slok naar binnen hebt voel je gelijk dat het weekend is.</p>        
-            </div>
-        </div>
+                <div class="post-subtext">
+                    <i class="fas fa-heart" style="color: red;"></i> <%= post.likesCount %>
+                    <i class="fas fa-comment" style="margin-left: 15px;"></i> <%= post.commentsCount %>
+                    <% if (post.beerSku) { %>
+                            <a href="/beer-details/<%= post.beerSku %>">Meer over dit biertje</a>
+                        <% } else { %>
+                            <a href="#">Meer over dit biertje</a>
+                        <% } %>
+                    <p><b><%= post.username %>:</b> <%= post.postText %></p>
+                </div>
+                <hr class="dunneLijn"> <!-- Separator between posts -->
+            <% }); %>
+        <% } else { %>
+            <p>Geen posts gevonden.</p>
+        <% } %>
     </main>
     <footer>
     <%- include('partials/footer'); %>
