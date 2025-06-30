@@ -560,6 +560,10 @@ a.active{
 #quiz{
   display: flex;
   flex-direction: column;
+  border: 2px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  background: #ffb25a;
 }
 #quiz button{
     background-color: var(--white);
@@ -571,6 +575,15 @@ a.active{
     justify-content: space-around;
 }
 
+#quiz img{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1em;
+}
+
+#quiz p{
+    font-size: 1em;
+}
 .glass-container {
 position: relative;
 display: flex;
