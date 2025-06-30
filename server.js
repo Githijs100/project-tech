@@ -269,36 +269,24 @@ app.post('/registreren', async (req, res) => {
     }
 });
 
+// ✅ Login Route
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log("📩 Ontvangen login request met:", req.body);
-
     try {
         const user = await User.findOne({ username });
-        if (!user) {
-            console.log("❌ Geen gebruiker gevonden voor username:", username); // Fixed 'name' to 'username'
-            return res.status(401).send("Ongeldige inloggegevens");
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens,<br> biertje teveel op?🥴" });
         }
-
-        console.log("✅ Gebruiker gevonden:", user.username);
-
-        const match = await bcrypt.compare(password, user.password);
-        console.log("🔑 Wachtwoord correct?", match);
-
-        if (!match) {
-            console.log("❌ Wachtwoord komt niet overeen.");
-            return res.status(401).send("Ongeldige inloggegevens");
-        }
-
         req.session.userId = user._id;
-        console.log("✅ Inloggen gelukt! Gebruiker ID:", user._id);
         res.redirect('/profiel');
     } catch (err) {
-        console.error("❌ Fout bij inloggen:", err);
-        res.status(500).send("Interne serverfout");
+        res.status(500).render('login', { foutmelding: "❌ Fout bij inloggen: " + err.message });
     }
 });
 
+app.get('/login', (req, res) => {
+    res.render('login', { foutmelding: null });
+});
 
 // Server Start
 app.listen(port, () => {
