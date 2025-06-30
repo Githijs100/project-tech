@@ -167,6 +167,36 @@ app.post('/save-beer', async (req, res) => {
     }
 });
 
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    console.log("📩 Ontvangen login request met:", req.body);
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            console.log("❌ Geen gebruiker gevonden voor username:", name);
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        console.log("✅ Gebruiker gevonden:", user.username);
+
+        const match = await bcrypt.compare(password, user.password);
+        console.log("🔑 Wachtwoord correct?", match);
+
+        if (!match) {
+            console.log("❌ Wachtwoord komt niet overeen.");
+            return res.status(401).send("Ongeldige inloggegevens");
+        }
+
+        req.session.userId = user._id;
+        console.log("✅ Inloggen gelukt! Gebruiker ID:", user._id);
+        res.redirect('/profiel');
+    } catch (err) {
+        console.error("❌ Fout bij inloggen:", err);
+        res.status(500).send("Interne serverfout");
+    }
+});
+
 
 // ✅ Uitlog Route
 app.get('/logout', (req, res) => {

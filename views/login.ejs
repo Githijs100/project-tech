@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="nl">
-    <%- include('partials/head'); %>
 <head>
+    <%- include('partials/head'); %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inloggen</title>
 </head>
 <body>
 
-<div class="login.container">
-    <% if (foutmelding) { %>
-        <div class="foutmelding"><%- foutmelding %></div>
-        <% } %>    
-    
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Gebruikersnaam" required>
-        <input type="password" name="password" placeholder="Wachtwoord" required>
-        <button type="submit">Inloggen</button>
-    </form>
-    <p>Nog geen account? <a href="http://localhost:8000/registreren">Registreren</a></p>
-</div>
-    
-<%- include('partials/footer'); %>
+    <div class="login-container">
+        <% if (foutmelding) { %>
+            <div class="foutmelding">
+                <%- foutmelding %>
+            </div>
+        <% } %>
+
+        <form action="/login" method="POST">
+            <input type="text" name="username" placeholder="Gebruikersnaam" required>
+            <input type="password" name="password" placeholder="Wachtwoord" required>
+            <button type="submit">Inloggen</button>
+        </form>
+
+        <p>Nog geen account? <a href="/registreren">Registreren</a></p>
+    </div>
+
+    <%- include('partials/footer'); %>
 </body>
 </html>
