@@ -155,7 +155,6 @@ app.post('/save-beer', async (req, res) => {
             return res.status(404).send("❌ Gebruiker niet gevonden.");
         }
 
-        // Voeg de SKU van het bier toe aan de lijst van opgeslagen bieren
         user.savedBeers.push(beerId);
 
         // Sla de gebruiker op met het bijgewerkte profiel
