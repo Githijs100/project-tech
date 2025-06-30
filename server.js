@@ -7,6 +7,9 @@ const path = require('path');
 const Beer = require("./models/beerModel");
 const User = require('./models/user');
 const Post = require('./models/postModel');
+const fs = require('fs');          
+const https = require('https'); 
+
 
 // --- NEW: Import setup scripts ---
 const setupUsers = require('./scripts/setupUsers');
@@ -18,6 +21,10 @@ console.log('Type of setupUsers:', typeof setupUsers);
 console.log('Type of setupPosts:', typeof setupPosts);
 // --- END NEW DEBUG LOG ---
 
+const sslOptions = {
+    key: fs.readFileSync('./ssl/key.pem'),
+    cert: fs.readFileSync('./ssl/cert.pem')
+  };
 
 dotenv.config();
 
@@ -155,7 +162,6 @@ app.post('/save-beer', async (req, res) => {
             return res.status(404).send("❌ Gebruiker niet gevonden.");
         }
 
-        // Voeg de SKU van het bier toe aan de lijst van opgeslagen bieren
         user.savedBeers.push(beerId);
 
         // Sla de gebruiker op met het bijgewerkte profiel
@@ -251,7 +257,6 @@ app.get('/feed', async (req, res) => {
 // --- END Update existing /feed route ---
 
 
-app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
 app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
 
 // Registratie Route
@@ -271,36 +276,28 @@ app.post('/registreren', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log("📩 Ontvangen login request met:", req.body);
-
     try {
         const user = await User.findOne({ username });
-        if (!user) {
-            console.log("❌ Geen gebruiker gevonden voor username:", username); // Fixed 'name' to 'username'
-            return res.status(401).send("Ongeldige inloggegevens");
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens <br> Biertje teveel op?🥴" });
         }
-
-        console.log("✅ Gebruiker gevonden:", user.username);
-
-        const match = await bcrypt.compare(password, user.password);
-        console.log("🔑 Wachtwoord correct?", match);
-
-        if (!match) {
-            console.log("❌ Wachtwoord komt niet overeen.");
-            return res.status(401).send("Ongeldige inloggegevens");
-        }
-
         req.session.userId = user._id;
-        console.log("✅ Inloggen gelukt! Gebruiker ID:", user._id);
         res.redirect('/profiel');
     } catch (err) {
-        console.error("❌ Fout bij inloggen:", err);
-        res.status(500).send("Interne serverfout");
+        res.status(500).render('login', { foutmelding: "❌ Fout bij inloggen: " + err.message });
     }
+
+});
+
+app.get('/login', (req, res) => {
+    res.render('login', { foutmelding: null });
 });
 
 
 // Server Start
-app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
-});
+//app.listen(port, () => {
+    //console.log(`Server draait op http://localhost:${port}`);
+    https.createServer(sslOptions, app).listen(8443, () => {
+        console.log('✅ HTTPS-server draait op https://localhost:8443');
+    });
+
