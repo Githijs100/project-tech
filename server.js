@@ -7,6 +7,9 @@ const path = require('path');
 const Beer = require("./models/beerModel");
 const User = require('./models/user');
 const Post = require('./models/postModel');
+const fs = require('fs');          
+const https = require('https'); 
+
 
 // --- NEW: Import setup scripts ---
 const setupUsers = require('./scripts/setupUsers');
@@ -18,6 +21,10 @@ console.log('Type of setupUsers:', typeof setupUsers);
 console.log('Type of setupPosts:', typeof setupPosts);
 // --- END NEW DEBUG LOG ---
 
+const sslOptions = {
+    key: fs.readFileSync('./ssl/key.pem'),
+    cert: fs.readFileSync('./ssl/cert.pem')
+  };
 
 dotenv.config();
 
@@ -300,6 +307,9 @@ app.post('/login', async (req, res) => {
 
 
 // Server Start
-app.listen(port, () => {
-    console.log(`Server draait op http://localhost:${port}`);
-});
+//app.listen(port, () => {
+    //console.log(`Server draait op http://localhost:${port}`);
+    https.createServer(sslOptions, app).listen(8443, () => {
+        console.log('✅ HTTPS-server draait op https://localhost:8443');
+    });
+
