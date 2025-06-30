@@ -279,7 +279,7 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens,<br> biertje teveel op?🥴" });
+            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens <br> Biertje teveel op?🥴" });
         }
         req.session.userId = user._id;
         res.redirect('/profiel');

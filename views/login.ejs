@@ -13,18 +13,20 @@
     <main>
 <div class="loginContainer">
     <h1>Inloggen</h2>
-        <% if (foutmelding) { %>
-            <div class="foutmelding"><%- foutmelding %></div>
-            <% } %>    
 
     <h2>Log in of maak een profiel aan om biertjes op te slaan!</h2>
+
+    <% if (foutmelding) { %>
+        <div class="foutmelding"><%- foutmelding %></div>
+        <% } %>    
+
     <form action="/login" method="POST">
         <input type="text" name="username" placeholder="Gebruikersnaam" required>
         <input type="password" name="password" placeholder="Wachtwoord" required>
         <button type="submit">Inloggen</button>
     </form>
 
-    <p>Nog geen account? <a href="http://localhost:8000/registreren">Registreren</a></p>
+    <p>Nog geen account? <a href="https://localhost:8443/registreren">Registreren</a></p>
 </div>
 </main>
 <footer>
