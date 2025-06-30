@@ -7,26 +7,20 @@
     <title>Inloggen</title>
 </head>
 <body>
-    </header>
-        <%- include('partials/header'); %>
-    </header>
-    <main>
-<div class="loginContainer">
-    <h1>Inloggen</h2>
-    <hr>
 
-    <h2>Log in of maak een profiel aan om biertjes op te slaan!</h2>
+<div class="login.container">
+    <% if (foutmelding) { %>
+        <div class="foutmelding"><%- foutmelding %></div>
+        <% } %>    
+    
     <form action="/login" method="POST">
         <input type="text" name="username" placeholder="Gebruikersnaam" required>
         <input type="password" name="password" placeholder="Wachtwoord" required>
         <button type="submit">Inloggen</button>
     </form>
-
     <p>Nog geen account? <a href="http://localhost:8000/registreren">Registreren</a></p>
 </div>
-</main>
-<footer>
+    
 <%- include('partials/footer'); %>
-</footer>
 </body>
 </html>
