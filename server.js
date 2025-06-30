@@ -4,9 +4,20 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
-const Beer = require("./models/beerModel"); // Zorg ervoor dat je een Beer-model hebt
-const https = require('https');
-const fs = require('fs');
+const Beer = require("./models/beerModel");
+const User = require('./models/user');
+const Post = require('./models/postModel');
+
+// --- NEW: Import setup scripts ---
+const setupUsers = require('./scripts/setupUsers');
+const setupPosts = require('./scripts/setupPosts');
+// --- END NEW ---
+
+// --- NEW DEBUG LOG ---
+console.log('Type of setupUsers:', typeof setupUsers);
+console.log('Type of setupPosts:', typeof setupPosts);
+// --- END NEW DEBUG LOG ---
+
 
 dotenv.config();
 
@@ -14,7 +25,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 const uri = process.env.URI;
 const apiKey = process.env.API_KEY;
-const User = require('./models/user');
+
 const saltRounds = 10;
 
 // Middleware
@@ -23,9 +34,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
-// Jouw routes en middleware hier...
 
 
 // Sessieconfiguratie
@@ -57,45 +65,79 @@ async function connectDB() {
         process.exit(1);
     }
 }
-
 connectDB();
 
 // Routes
-app.get('/', (req, res) => res.render('index'));
-app.get('/testquiz', (req, res) => res.render('testquiz'));
-app.get('/profiel', async (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login');
-    }
+
+// --- NEW: Admin routes to trigger setup scripts ---
+app.get('/admin/setup-users', async (req, res) => {
     try {
-        const user = await User.findById(req.session.userId);
-        if (!user) {
-            return res.redirect('/login');
-        }
-        res.render('profiel', { username: user.username, email: user.email });
+        const message = await setupUsers(); // Call the function from your script
+        res.send(message);
     } catch (err) {
-        console.error('❌ Fout bij ophalen profiel:', err);
-        res.status(500).send('Er is een fout opgetreden.');
-    }
-});
-// ✅ Login Route
-app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const user = await User.findOne({ username });
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).render('login', { foutmelding: "❌ Ongeldige inloggegevens,<br> biertje teveel op?🥴" });
-        }
-        req.session.userId = user._id;
-        res.redirect('/profiel');
-    } catch (err) {
-        res.status(500).render('login', { foutmelding: "❌ Fout bij inloggen: " + err.message });
+        console.error('❌ Error setting up demo users:', err);
+        res.status(500).send('Error setting up demo users: ' + err.message);
     }
 });
 
-app.get('/login', (req, res) => {
-    res.render('login', { foutmelding: null });
+app.get('/admin/setup-posts', async (req, res) => {
+    try {
+        const message = await setupPosts(); // Call the function from your script
+        res.send(message);
+    } catch (err) {
+        console.error('❌ Error setting up posts:', err);
+        res.status(500).send('Error setting up posts: ' + err.message);
+    }
 });
+// --- END NEW: Admin routes ---
+
+
+app.get('/', (req, res) => res.render('index'));
+app.get('/testquiz', (req, res) => res.render('testquiz'));
+
+
+// ***** CORRECTED /profiel ROUTE - ADDED THE MISSING `favoriteBeers` DEFINITION LINE *****
+app.get('/profiel', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Redirect to login if user is not logged in
+    }
+
+    try {
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            console.warn(`User with ID ${req.session.userId} not found, redirecting to login.`);
+            return res.redirect('/login');
+        }
+
+        console.log("✅ Gebruiker gevonden:", user.username, user.email); // Debug info
+        // --- START NEW DEBUG LOGS ---
+        console.log("🔍 user.savedBeers:", user.savedBeers); // Log what SKUs are in the user's savedBeers
+
+        // Fetch the actual Beer documents based on the SKUs stored in user.savedBeers
+        const favoriteBeers = await Beer.find({ sku: { $in: user.savedBeers } });
+
+        console.log("🍺 Aantal favoriteBeers gevonden:", favoriteBeers.length); // Log how many beers were found
+        console.log("🍻 Eerste favoriteBeer (ter controle):", favoriteBeers.length > 0 ? favoriteBeers[0] : "Geen bieren gevonden."); // Log the first found beer
+        // --- END NEW DEBUG LOGS ---
+
+        // Render the profile page, passing ALL necessary data with correct variable names
+        res.render('profiel', {
+            username: user.username,
+            email: user.email,
+            followers: user.followers || 0,
+            following: user.following || 0,
+            beersPerDay: user.beersPerDay || 0,
+            beersDrank: user.beersDrank || 0,
+            favoriteBeers: favoriteBeers,
+            profileImage: user.profileImage || '/images/user2-logo.png'
+        });
+
+    } catch (err) {
+        console.error("❌ Fout bij ophalen profiel:", err);
+        res.status(500).send("Interne serverfout bij ophalen profiel.");
+    }
+});
+// ***** END OF CORRECTED /profiel ROUTE *****
 
 
 // routes voor opslaan van een bier in het profiel van de gebruiker
@@ -113,6 +155,7 @@ app.post('/save-beer', async (req, res) => {
             return res.status(404).send("❌ Gebruiker niet gevonden.");
         }
 
+        // Voeg de SKU van het bier toe aan de lijst van opgeslagen bieren
         user.savedBeers.push(beerId);
 
         // Sla de gebruiker op met het bijgewerkte profiel
@@ -125,8 +168,6 @@ app.post('/save-beer', async (req, res) => {
 });
 
 
-
-  
 // ✅ Uitlog Route
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
@@ -187,7 +228,29 @@ app.get('/search', async (req, res) => {
     }
 });
 
-app.get('/feed', (req, res) => res.render('feed'));
+// --- Update existing /feed route for randomization ---
+app.get('/feed', async (req, res) => {
+    try {
+        // Fetch all posts from the database
+        let posts = await Post.find(); // No sorting here initially
+
+        // --- NEW: Randomize the order of posts using Fisher-Yates (Knuth) shuffle algorithm ---
+        for (let i = posts.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [posts[i], posts[j]] = [posts[j], posts[i]]; // Swap elements
+        }
+        // --- END NEW ---
+
+        console.log(`✅ Fetched and randomized ${posts.length} posts for the feed.`);
+        res.render('feed', { posts: posts }); // Pass the randomized posts to the EJS template
+    } catch (err) {
+        console.error('❌ Error fetching posts for feed:', err);
+        res.status(500).send("Interne serverfout bij ophalen van de feed.");
+    }
+});
+// --- END Update existing /feed route ---
+
+
 app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
 app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
 
@@ -213,7 +276,7 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            console.log("❌ Geen gebruiker gevonden voor username:", name);
+            console.log("❌ Geen gebruiker gevonden voor username:", username); // Fixed 'name' to 'username'
             return res.status(401).send("Ongeldige inloggegevens");
         }
 
@@ -236,31 +299,8 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/profiel', async (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login'); // Stuur gebruiker naar login als hij niet is ingelogd
-    }
-
-    try {
-        const user = await User.findById(req.session.userId);
-        if (!user) {
-            return res.redirect('/login');
-        }
-
-        console.log("✅ Gebruiker gevonden:", user.username, user.email); // Debug info
-
-         // Stuur de gebruiker naar het profiel en geef de opgeslagen bieren mee
-         res.render('profiel', { user, savedBeers: user.savedBeers });
-
-        res.render('profiel', { user }); // Stuur user naar EJS
-    } catch (err) {
-        console.error("❌ Fout bij ophalen profiel:", err);
-        res.status(500).send("Interne serverfout");
-    }
-});
 
 // Server Start
 app.listen(port, () => {
     console.log(`Server draait op http://localhost:${port}`);
 });
-
