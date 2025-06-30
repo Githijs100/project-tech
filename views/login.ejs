@@ -13,7 +13,9 @@
     <main>
 <div class="loginContainer">
     <h1>Inloggen</h2>
-    <hr>
+        <% if (foutmelding) { %>
+            <div class="foutmelding"><%- foutmelding %></div>
+            <% } %>    
 
     <h2>Log in of maak een profiel aan om biertjes op te slaan!</h2>
     <form action="/login" method="POST">

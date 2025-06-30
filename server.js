@@ -257,7 +257,6 @@ app.get('/feed', async (req, res) => {
 // --- END Update existing /feed route ---
 
 
-app.get('/login', (req, res) => res.render('login', { title: 'Loginpagina', message: 'Welkom op mijn website' }));
 app.get('/registreren', (req, res) => res.render('registreren', { title: 'Registreer', message: 'Maak een nieuw account aan' }));
 
 // Registratie Route
